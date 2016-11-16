@@ -55,6 +55,7 @@ the local search solution has at least one edge that connects two stars, formall
 $G_\text{conflict} = (V, E)$ 
 where $\{v_i : s_i \in M^* \}$ 
 and $E = \{(v_i, v_j) : \exists (u,v) \in M \land u \in s_i, v \in s_j \}$.
+Figure~\ref{fig:conflict} depicts this concept.
 Denote by $d^*_i$ the sum of the vertex degree of the optimal solution in $s_i$, 
 and by $d_i$ the sum of the vertex degree of the local search solution in $s_i$.
 
@@ -62,12 +63,13 @@ and by $d_i$ the sum of the vertex degree of the local search solution in $s_i$.
 \centering
 \input{fig-conflict}
 \caption[]{
-\label{fig:carpool}
-A carpool matching example: 
+\label{fig:conflict}
 \subref{subfloat:input} 
-a directed graph with capacities on the vertices and weights on the edges. 
+An optimal matching depicted by the dashed red edges,
+and another solution depicted by the solid green edges.  
 \subref{subfloat:output}
-a feasible matching with total weight of 26.
-$P$ is the set of blue vertices, and $D$ is the set of red, dashed vertices. 
+The conflict graph, the upper left vertex corresponds 
+to the star that contains the vertices a,b,c.
+The numbers inside the vertices corresponds to $d_i$.   
 }
 \end{figure}  
