@@ -43,17 +43,31 @@ Observed that in every iteration the algorithm either improves the value of the 
 by one or otherwise it terminates. 
 Thus, after a maximum of $n$ iterations the algorithm stops.
 In every iteration we examine all the subsets of edges of a fixed size and test for feasibility,
-both these operations can be done in polynomial time. 
+both these operations can be done in polynomial time - $O(n^{Ck + 1})$. 
 
 To analyze the approximation ratio achieved by the local search algorithm consider an 
 arbitrary but fixed optimal matching $M^* = \{s_1, \ldots, s_m\}$,
 where $s_1, \ldots, s_m$ are the stars induced by the optimal solution.
-Given the solution outputted by the local search algorithm, 
-define the following graph $L = (\{v_i : s_i \in M^* \}, E)$ 
-where $E = \{(v_i, v_j) : \exists (u,v) \in M \land u \in s_i, v \in s_j \}$.
-That is, each vertex in $L$ corresponds to a star in $M^*$ and there is an edge 
-between two vertices if and only if there is an edge $(u,v)$ in $M$ connecting the two 
-corresponded stars.
-Denote by $d^*_i$ the sum of the degrees in $s_i$, and by $d_i$ the sum of the degrees of 
-edges from $M$ intersected with $s_i$. \todo{better define this last line}
-\todo{add an illustration}
+Given the solution outputted by the local search algorithm,
+we build the \emph{conflict graph} of the two solutions in which each node
+represents a star from the optimal solution and edges exits between two nodes if
+the local search solution has at least one edge that connects two stars, formally 
+$G_\text{conflict} = (V, E)$ 
+where $\{v_i : s_i \in M^* \}$ 
+and $E = \{(v_i, v_j) : \exists (u,v) \in M \land u \in s_i, v \in s_j \}$.
+Denote by $d^*_i$ the sum of the vertex degree of the optimal solution in $s_i$, 
+and by $d_i$ the sum of the vertex degree of the local search solution in $s_i$.
+
+\begin{figure}[h]
+\centering
+\input{fig-conflict}
+\caption[]{
+\label{fig:carpool}
+A carpool matching example: 
+\subref{subfloat:input} 
+a directed graph with capacities on the vertices and weights on the edges. 
+\subref{subfloat:output}
+a feasible matching with total weight of 26.
+$P$ is the set of blue vertices, and $D$ is the set of red, dashed vertices. 
+}
+\end{figure}  
