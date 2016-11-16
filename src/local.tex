@@ -1,0 +1,46 @@
+In this section we consider the unweighted variants of the problem.
+We describe and analyze a local search algorithm, 
+and show that when the maximum possible capacity, $C$, is fixed, the algorithm achieves 
+a $\frac{C + 1}{2C}$ approximation ratio.
+Throughout this section we consider $C$ to be fixed, and $k$ to be a fixed parameter.  
+
+The local search algorithm maintains a feasible matching throughout its execution
+and operates in 
+iterative manner where in each iteration it tries to find a better solution by
+replacing a subset of the edges in the current solution with 
+another (larger) subset of edges not in the solution.
+The local search algorithm halts when no improvement can be done.
+The algorithm is described in Algorithm~\ref{alg:local} 
+
+\begin{algorithm}
+\SetKw{True}{true}
+\SetKw{False}{false}
+\KwIn{$G = (V, E)$, $c : V \rightarrow \N$, $k$}
+\KwOut{$M$}
+$M \leftarrow \emptyset$								\\
+\Repeat{done}{
+\label{line:outerloop}
+ 	$done \leftarrow{}$ \True							\\
+ 	\For{$M' \in M : |M'| \leq Ck$}{
+ 		\For{$V' \in V \setminus M : |V'| = |M'| + 1$}{
+			\If{$M \setminus M' \cup V'$ is feasible}{
+				$M \leftarrow{} M \setminus M' \cup V'$	\\
+				$done \leftarrow{}$ \False				\\
+			}
+		}
+ 	}
+}
+\Return{$M$}
+
+\caption{
+\label{alg:local}
+Local Search}
+\end{algorithm}
+
+
+We claim that the local search algorithm halts in polynomial time.
+Observed that in every iteration the algorithm either improves the value of the solution
+by one or otherwise it terminates. 
+Thus, after a maximum of $n$ iterations the algorithm stops.
+In every iteration we examine all the subsets of edges of a fixed size and test for feasibility,
+both these operations can be done in polynomial time. 
