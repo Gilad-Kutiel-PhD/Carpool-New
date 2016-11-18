@@ -1,26 +1,25 @@
-The \textsc{\CARPOOL{}} problem is a star packing problem in
-directed graphs.
-Formally, given a directed graph $G = (V, E)$,
+The \textsc{\CARPOOL{}} problem is a star packing problem in directed graphs.
+Formally, given a directed graph $G = (V, A)$,
 a capacity function $ c: V \rightarrow \N $,
-and a weight function $w : E \rightarrow \R $,
+and a weight function $w : A \rightarrow \R $,
 a feasible \emph{carpool matching} is a triple 
-$(P, D, M)$, where $P$ and $D$ form a partition of $V$, 
-and $M$ is a subset of $E \cap (P \times D)$,
+$(P, D, M)$, where $P$ (passengers) and $D$ (drivers) form a partition of $V$, 
+and $M$ is a subset of $A \cap (P \times D)$,
 under the constraints that for every vertex $d \in D$, 
 $\din(d) \leq c(d)$, 
 and for every vertex $p \in P$, $\dout(p) \leq 1$.
-In the \textsc{\CARPOOL{}} 
-problem we seek for a matching $(P, D, M)$ that maximizes the total weight of $M$.
+In the \textsc{\CARPOOL{}} problem we seek for a matching $(P, D, M)$ that maximizes the
+total weight of $M$.
 
 The problem arises when designing an online carpool service, 
 such as Zimride~\cite{zimride}, 
 that tries to connect between passengers and drivers based on (arbitrary) similarity function.
 The problem is known to be NP-hard, 
-even for undirected graphs, uniform weights and without capacity constraints.
+even for uniform weights and without capacity constraints.
 
-We present a $2$-approximation algorithm for the problem,
-the currnet best known approximation ratio.
-Also, when the maximum capacity, $C$, is constant we give a
-$\frac{C + 1}{2C}$-approximation algorithms for the 
-unweighted variant of the problem, 
-improving over the bset known approximation ratio for the special case where $C = 2$.
+we show that the problem can be formulated as
+unconstarints submodular maximization problem, 
+thus it has a 2-approximation algorithm.
+For the unweighted variant of the problem when the maximum possible capacity, $C$, is
+fixed, we give a $(\frac{C + 1}{2C} - \varepsilon)$-approximation algorithm
+for the any $\varepsilon > 0$.
