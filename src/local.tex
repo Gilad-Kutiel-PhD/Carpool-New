@@ -1,7 +1,8 @@
 In this section we consider the unweighted variants of the problem.
 We describe and analyze a local search algorithm, 
 and show that when the maximum possible capacity, $C$, is fixed, the algorithm achieves 
-a $\frac{C + 1}{2C}$ approximation ratio.
+a $\frac{C + 1}{2C} - \varepsilon$ 
+approximation ratio for any $\varepsilon > 0$.
 Throughout this section we consider $C$ to be fixed, and $k$ to be a fixed parameter.  
 
 The local search algorithm maintains a feasible matching throughout its execution
@@ -15,16 +16,16 @@ The algorithm is described in Algorithm~\ref{alg:local}
 \begin{algorithm}
 \SetKw{True}{true}
 \SetKw{False}{false}
-\KwIn{$G = (V, E)$, $c : V \rightarrow \N$, $k$}
+\KwIn{$G = (V, A)$, $c : V \rightarrow \N$, $k$}
 \KwOut{$M$}
 $M \leftarrow \emptyset$								\\
 \Repeat{done}{
 \label{line:outerloop}
  	$done \leftarrow{}$ \True							\\
- 	\For{$M' \in M : |M'| \leq Ck$}{
- 		\For{$V' \in V \setminus M : |V'| = |M'| + 1$}{
-			\If{$M \setminus M' \cup V'$ is feasible}{
-				$M \leftarrow{} M \setminus M' \cup V'$	\\
+ 	\For{$M' \in M : |M'| \leq k$}{
+ 		\For{$A' \in A \setminus M : |A'| = |M'| + 1$}{
+			\If{$M \setminus M' \cup A'$ is feasible}{
+				$M \leftarrow{} M \setminus M' \cup A'$	\\
 				$done \leftarrow{}$ \False				\\
 			}
 		}
@@ -43,7 +44,7 @@ Observed that in every iteration the algorithm either improves the value of the 
 by one or otherwise it terminates. 
 Thus, after a maximum of $n$ iterations the algorithm stops.
 In every iteration we examine all the subsets of edges of a fixed size and test for feasibility,
-both these operations can be done in polynomial time - $O(n^{Ck + 1})$. 
+both these operations can be done in polynomial time - $O(n^{k + 1})$. 
 
 To analyze the approximation ratio achieved by the local search algorithm consider an 
 arbitrary but fixed optimal matching $M^* = \{s_1, \ldots, s_m\}$,
@@ -58,6 +59,7 @@ and $E = \{(v_i, v_j) : \exists (u,v) \in M \land u \in s_i, v \in s_j \}$.
 Figure~\ref{fig:conflict} depicts this concept.
 Denote by $d^*_i$ the sum of the vertex degree of the optimal solution in $s_i$, 
 and by $d_i$ the sum of the vertex degree of the local search solution in $s_i$.
+\todo{define this well}
 
 \begin{figure}[h]
 \centering
@@ -73,3 +75,13 @@ to the star that contains the vertices a,b,c.
 The numbers inside the vertices corresponds to $d_i$.   
 }
 \end{figure}  
+
+
+\todo{can I state the observation for any component of size at most (least)
+$s$ ?? or does it have to be exavtly of size $s$ ?}
+\begin{observation}
+Let $U = \{v_1 \ldots v_s\}$ be the vertices of any connected component in
+$G^{M^*}_M$ then $\frac{w(U)}{w^*(U)}$
+\end{observation}
+
+
