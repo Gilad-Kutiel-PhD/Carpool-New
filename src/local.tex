@@ -10,7 +10,7 @@ iterative manner where in each iteration it tries to find a better solution by
 replacing a subset of the edges in the current solution with 
 another (larger) subset of edges not in the solution.
 The local search algorithm halts when no improvement can be done.
-The algorithm is described in Algorithm~\ref{alg:local} 
+The algorithm is described in Algorithm~\ref{alg:local}. 
 
 \begin{algorithm}
 \SetKw{True}{true}
@@ -38,38 +38,113 @@ Local Search}
 \end{algorithm}
 
 
-We claim that the local search algorithm halts in polynomial time.
+We claim that the local search algorithm terminates in polynomial time.
 Observed that in every iteration the algorithm either improves the value of the solution
-by one or otherwise it terminates. 
-Thus, after a maximum of $n$ iterations the algorithm stops.
-In every iteration we examine all the subsets of edges of a fixed size and test for feasibility,
-both these operations can be done in polynomial time - $O(n^{Ck + 1})$. 
+by one or otherwise it stops. 
+Thus the algorithm stops after $n$ iterations at most.
+Finally, 
+in every iteration we examine all the subsets of edges of a fixed size 
+and test for feasibility.
+Both these operations can be done in polynomial time - $O(n^{Ck + 1})$. 
 
-To analyze the approximation ratio achieved by the local search algorithm consider an 
-arbitrary but fixed optimal matching $M^* = \{s_1, \ldots, s_m\}$,
-where $s_1, \ldots, s_m$ are the stars induced by the optimal solution.
-Given the solution outputted by the local search algorithm,
-we build the \emph{conflict graph} of the two solutions in which each node
-represents a star from the optimal solution and edges exits between two nodes if
-the local search solution has at least one edge that connects two stars, formally 
-$G_\text{conflict} = (V, E)$ 
-where $\{v_i : s_i \in M^* \}$ 
-and $E = \{(v_i, v_j) : \exists (u,v) \in M \land u \in s_i, v \in s_j \}$.
-Figure~\ref{fig:conflict} depicts this concept.
-Denote by $d^*_i$ the sum of the vertex degree of the optimal solution in $s_i$, 
-and by $d_i$ the sum of the vertex degree of the local search solution in $s_i$.
+
+For two sets of stars $S^*, S$ on a common ground set of vertices $V(G)$,
+define the conflict graph $G^{S^*}_{S} = (V, E)$
+where $V = \{v_i : s_i \in S^*\}$, 
+and $E = \{(v_i, v_j) : 
+\exists s \in S : 
+\{v_i, v_j\} \subseteq V(s) 
+\}$.
+Let $w^*(v_i) = 2|E(s_i|$, 
+and let $w(v_i)$ be the sum of degrees (in and out) induced by $S$ on vertices in $s_i$. 
+That is, the stars in $S^*$ define the vertices in the conflict graph,
+and two vertices in the conflict graph are adjacent if there is a star in 
+$S$ that intersect the two corresponded stars in $G$.
+Figure~\ref{fig:conflict} depicts these concepts.
 
 \begin{figure}[h]
 \centering
-\input{fig-conflict}
+\subfloat[]{
+\label{subfloat:graph}
+\input{fig-sub-graph}
+}
+\subfloat[]{
+\label{subfloat:conflict}
+\input{fig-sub-conflict}
+}
 \caption[]{
 \label{fig:conflict}
-\subref{subfloat:input} 
-An optimal matching depicted by the dashed red edges,
-and another solution depicted by the solid green edges.  
-\subref{subfloat:output}
-The conflict graph, the upper left vertex corresponds 
-to the star that contains the vertices a,b,c.
-The numbers inside the vertices corresponds to $d_i$.   
+\subref{subfloat:graph}
+Two sets of stars, 
+$S^* = \{\{a,b,c\}, \{d,e,f\}, \{h,i,j\}, \{k,l\}\}$, 
+$S = \{\{a,h\}, \{c,j\}, \{b,e\}\}$ 
+\subref{subfloat:conflict}
+The conflict graph $G^{S^*}_{S}$, the upper left vertex corresponds 
+to the star \{a,b,c\}.
+The numbers on each vertex $v$ represent the value of $w(v)$.
 }
-\end{figure}  
+\end{figure}
+
+It is easy to verify the following observation regarding the conflict graph.
+
+\begin{observation}  
+The degree of every vertex $v \in V$ is at most $w(v)$.
+\end{observation}
+
+For a subset $U \subset V$ let $S^*(U)$ be the set of stars corresponds to 
+the vertices in $U$,
+$V_U = V(S^*(U))$,
+$\overline{V_U} = V(G) \setminus V_U$,
+$E^{S^*}_U = E(S^*) \cap V_U \times V_U$,
+and 
+$E^{S}_U = E(S) \cap V_U \times V_U$.
+When $U$ is the set of vertices of a maximal connected component of a conflict graph,
+then it is easy to verify that the following observations hold.
+
+\begin{observation}  
+$|E^{S}_U| = \frac{1}{2} \sum_{u \in U} w(u)$.
+\end{observation}
+
+\begin{observation}  
+$|E^{S^*}_U| = \frac{1}{2} \sum_{u \in U} w^*(u) \leq |U| \cdot C$.
+\end{observation}
+
+Let $M^*$ be an arbitrary but fixed optimal star family in $G$, 
+and let $M$ be the output of the local search algorithm,  
+and consider the conflict graph $G^{M^*}_M = (V,E)$,
+and let $U$ denote the vertices of a maximal connected component in $G^{M^*}_M$
+of size at most $|U| \leq k$ then the following holds:
+ 
+\begin{observation}
+$w^*(U) = w(U)$.
+\end{observation}
+
+\begin{proof}
+Clearly, $E(S) \cap  V_U \times \overline{V_U} = \emptyset$,
+or else this is not a maximal connected component in $G^{M^*}_M$.
+If $w^*(U) \neq w(U)$ 
+the local search algorithm can improve the solution by
+replacing the edges $E^{S}_U$ with the edges $E^{S^*}_U$. 
+\end{proof}
+
+Let $U$, now, represent the vertices of any connected subgraph of $G^{M^*}_M$
+of size $k$, then:
+
+\begin{observation}
+$w^*(U) = w(U)$.
+\end{observation}
+
+
+
+
+\begin{theorem}
+The local search is a $\frac{C + 1}{2C}$-approximation algorithm.
+\end{theorem}
+
+\begin{proof}
+Let $M^*$ be an arbitrary but fixed optimal matching and let $M$ be the matching from the 
+local search algorithm.
+Consider the conflict graph.
+\end{proof}
+
+
