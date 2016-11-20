@@ -93,6 +93,7 @@ induced by the underlying graph of the local search solution on this set, i.e.
 $\sum_{u \in U} \dinout(u)$.
 
 \begin{lemma}
+\label{lemma:r}
 If $k \geq something$ then in any connected induced graph of $G^{M^*}_M$, 
 $G'= G^{M^*}_M[U]$, 
 $
@@ -121,4 +122,34 @@ $
 \geq
 \frac{1}{2} + \frac{1}{2C} - \frac{1}{2C|U|}
 $
+\end{proof}
+
+
+\begin{lemma}
+\label{lemma:dec}
+Given a parameter $k$, a bounded degree connected graph $G$, with a maximum
+degree $d$ can be decomposed into connected components of size at least $k$, and at most
+$d(k-1) + 1$.
+\end{lemma}
+
+\begin{proof}
+We give a constructive proof.
+Start constructing a connected component by adding adjacent vertices
+one by one to the component and removing them from the graph.
+If at some point, removing a vertex disconnect the graph, add all the small
+components (of size less than $k$) to the constructed component and decompose
+the large components (of size at least $k$) recursively.
+Note that removing a vertex can break the graph to at most $d - 1$ additional
+components.
+\end{proof}
+
+\begin{theorem}
+The local search is ($\frac{1}{2} + \frac{1}{2c} - \varepsilon$)-approximation
+algorithm.
+\end{theorem}
+
+\begin{proof}
+Combine lemma~\ref{lemma:dec}, and lemma~\ref{lemma:r}, 
+and observe that the maximum degree in $G^{M^*}_M$ is $(C + 1)^C$ to
+get the desire result.
 \end{proof}
