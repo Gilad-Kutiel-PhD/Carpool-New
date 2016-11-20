@@ -47,18 +47,21 @@ In every iteration we examine all the subsets of edges of a fixed size and test 
 both these operations can be done in polynomial time - $O(n^{Ck + 1})$. 
 
 To analyze the approximation ratio achieved by the local search algorithm consider an 
-arbitrary but fixed optimal matching $M^* = \{s_1, \ldots, s_m\}$,
-where $s_1, \ldots, s_m$ are the stars induced by the optimal solution.
-Given the solution outputted by the local search algorithm,
-we build the \emph{conflict graph} of the two solutions in which each node
-represents a star from the optimal solution and edges exits between two nodes if
-the local search solution has at least one edge that connects two stars, formally 
-$G_\text{conflict} = (V, E)$ 
-where $\{v_i : s_i \in M^* \}$ 
-and $E = \{(v_i, v_j) : \exists (u,v) \in M \land u \in s_i, v \in s_j \}$.
-Figure~\ref{fig:conflict} depicts this concept.
-Denote by $d^*_i$ the sum of the vertex degree of the optimal solution in $s_i$, 
-and by $d_i$ the sum of the vertex degree of the local search solution in $s_i$.
+arbitrary but fixed optimal matching $M^*$.
+Given the solution outputted by the local search algorithm, 
+$M$, 
+we build the \emph{star graph} of the two solutions
+in which each node represents a star from the optimal solution 
+and edges exits between two nodes if
+there is a star in $S(M)$ that intersect the two
+corresponding stars of the optimal solution, 
+formally $G^{M^*}_M = (S, E)$ where $\{v_i : S^*_i \in S(M^*) \}$ 
+and 
+$E = \{(v_i, v_j) : 
+\exists S \in M,
+S \cap S^*_i \neq \emptyset \land S \cap S^*_j \neq \emptyset,
+\}$.
+Figure~\ref{fig:conflict} depicts a star graph.
 
 \begin{figure}[h]
 \centering
@@ -81,3 +84,41 @@ to the star that contains the vertices a,b,c.
 The numbers inside the vertices corresponds to $d_i$.   
 }
 \end{figure}  
+
+For a group of vertices, $U$, denote by $w^*(U)$ the sum of the degrees 
+induced by the underlying graph of the optimal solution on this set, i.e.
+$\sum_{u \in U} \dinout[M^*](u)$, 
+and let $w(S)$ be the sum of the degrees 
+induced by the underlying graph of the local search solution on this set, i.e.
+$\sum_{u \in U} \dinout(u)$.
+
+\begin{lemma}
+If $k \geq something$ then in any connected induced graph of $G^{M^*}_M$, 
+$G'= G^{M^*}_M[U]$, 
+$
+\frac{w(U)}{w^*(U)} 
+\geq \frac{1}{2} + \frac{1}{2C} - \frac{1}{2C|U|}
+$.
+\end{lemma}
+
+\begin{proof}
+Consider the solution obtained from the $M$ by removing all the edges from $M$
+that intersect the induced subgraph, and adding all the edges from $M^*$ that
+intersect the induced subgraph.
+It is easy to verify that this is a feasible solution.
+We now bound from below the difference in the value of the solution.
+The value decrease due to the removal of the edges by at most $w(U) - |U| + 1$,
+and increase by exactly $\frac{w^*(U)}{2} \leq C |U|$.
+We know that this difference can not be positive, or else, the local search
+algorithm would not have been terminated.
+Thus 
+$\frac{w^*(U)}{2} \leq w(U) - |U| + 1$ 
+and so
+$
+\frac{w(U)}{w^*(U)} 
+\geq 
+\frac{1}{2} + \frac{|U|}{w^*(U))} - \frac{1}{w^*(U))}  
+\geq
+\frac{1}{2} + \frac{1}{2C} - \frac{1}{2C|U|}
+$
+\end{proof}
