@@ -123,14 +123,26 @@ $M \leftarrow \emptyset$									\\
 }
 \end{algorithm}
 
-\textbf{Remarks:}
-We argue that determining if a vertex $v$ can be improved can be done efficiently,
+\begin{remark}
+Clearly, if the weights on the edges are integral and polynomial bounded the
+algorithm runs in polynomial time, this is because in each iteration the
+algorithm improves the value of the matching by at least one or otherwise it
+terminates.
+\end{remark}
+
+\begin{remark}
+When the weights are not integral nor polynomial bounded one can use scaling and
+rounding first to ensure polynomial runtime in the cost of $\varepsilon$ in the
+approximation ratio.
+\end{remark}
+
+\begin{remark}
+Determining if a vertex $v$ can be improved can be done efficiently
 by considering the incoming arcs to $v$ in a decreasing order of their $\delta$s,
 and only ones with positive value.
 Vertex $v$ can be improved, then, if the $\delta$s of the first $c(v)$ (or less) arcs
 sum up to more than $val_M(v)$.
-
-\todo[inline]{argue that the number of iteration is bounded}
+\end{remark}
 
 We now argue that, with respect to any matching, 
 the total value of all the vertices equals twice the value of the matching, 
