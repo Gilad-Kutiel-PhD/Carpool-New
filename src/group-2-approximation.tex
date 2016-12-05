@@ -124,8 +124,17 @@ $M \leftarrow \emptyset$									\\
 \end{algorithm}
 
 \begin{remark}
-Clearly, if the weights on the edges are integral and polynomial bounded the
-algorithm runs in polynomial time, this is because in each iteration the
+\label{rem:improve}
+Determining if a vertex $v$ can be improved can be done efficiently
+by considering the incoming arcs to $v$ in a decreasing order of their $\delta$s,
+and only ones with positive value.
+Vertex $v$ can be improved, then, if the $\delta$s of the first $c(v)$ (or less) arcs
+sum up to more than $val_M(v)$.
+\end{remark}
+
+\begin{remark}
+It is easy to see, if the weights on the edges are integral and polynomial
+bounded the algorithm runs in polynomial time, this is because in each iteration the
 algorithm improves the value of the matching by at least one or otherwise it
 terminates.
 \end{remark}
@@ -136,13 +145,6 @@ rounding first to ensure polynomial runtime in the cost of $\varepsilon$ in the
 approximation ratio.
 \end{remark}
 
-\begin{remark}
-Determining if a vertex $v$ can be improved can be done efficiently
-by considering the incoming arcs to $v$ in a decreasing order of their $\delta$s,
-and only ones with positive value.
-Vertex $v$ can be improved, then, if the $\delta$s of the first $c(v)$ (or less) arcs
-sum up to more than $val_M(v)$.
-\end{remark}
 
 We now argue that, with respect to any matching, 
 the total value of all the vertices equals twice the value of the matching, 
@@ -190,7 +192,7 @@ we load every vertex with amount of money equal to its value,
 we then show that this is enough to pay for every arc in an optimal matching.   
 
 \begin{theorem}
-Algorithm~\ref{alg:grd} is 2-approximation.
+Algorithm~\ref{alg:grd} is $\frac{1}{2}$-approximation.
 \end{theorem}
 
 \begin{proof}
@@ -203,6 +205,19 @@ By lemma~\ref{lm:no improve} we know that $w(S) \leq val_M(v) + val_M(\text{pass
 thus we can pay for $S$, using the money on $v$ and $\text{pass}_S(v)$.
 Clearly, these vertices will not be charged again.
 \end{proof}
+
+We now argue that this algorithm can be generalized to solve the group carpool
+matching problem.
+The main concern when trying to adopt the algorithm to the group carpool
+matching is how to determine if a vertex can be improved.
+Observe that Remark~\ref{rem:improve} does not hold anymore.
+If the maximum possible capacity is bounded, one can test for improvement of
+$v$ by considering all the subsets of edges intersecting $v$. 
+When the capacity is unbounded, however, it is easy to see that efficient
+way to test improvement implies a solution to the Knapsack problem.
+Indeed, if this is the case, one can test for improvement by using a known FPTAS
+for Knapsack, this is in the cost of additional $\varepsilon$ reduction in the
+approximation ratio of the algorithm.
 
 To conclude this section we show that our analysis is tight, 
 as depicts in Figure~\ref{fig:grd worst}.
