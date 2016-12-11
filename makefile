@@ -1,5 +1,5 @@
 zip:
-	rm src.zip;zip -r src.zip src
+	rm -f src.zip && zip -r src.zip src
 
 flat:
 	mkdir -p tmp;flat-latex.awk main.tex > tmp/main.tex; cp src/main.bib tmp/
