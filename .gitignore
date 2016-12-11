@@ -15,6 +15,7 @@
 *.tdo
 *.toc
 *.vtc
+*.zip
 *#
 /out/
 /tmp/
