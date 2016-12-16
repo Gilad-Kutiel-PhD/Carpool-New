@@ -1,5 +1,5 @@
 #TeXlipse project settings
-#Wed Nov 16 13:19:37 IST 2016
+#Fri Dec 16 22:14:10 IST 2016
 markTmpDer=true
 builderNum=2
 outputDir=out/
@@ -8,7 +8,7 @@ bibrefDir=
 outputFormat=pdf
 tempDir=tmp
 mainTexFile=main.tex
-outputFile=paper.pdf
+outputFile=carpool-new.pdf
 langSpell=en
 markDer=true
 srcDir=src/
