@@ -137,6 +137,7 @@ components.
 \end{proof}
 
 \begin{theorem}
+\label{theorem:local search}
 The local search is ($\frac{1}{2} + \frac{1}{2c} - \varepsilon$)-approximation
 algorithm.
 \end{theorem}
@@ -147,7 +148,25 @@ and observe that the maximum degree in $G^{M^*}_M$ is $(C + 1)^C$ to
 get the desire result.
 \end{proof}
 
-\todo{show that the analysis is tight}
+We now show that Theorem~\ref{theorem:local search} is tight.
+Consider the example in Figure~\ref{fig:local search tight},
+the example is for the special case when $k=11$ and $C=2$ but this example can
+be generalized in a straightforward manner.
+One can verify that as the graph in the example growth, 
+the ratio between the optimal solution and the local search solution approaches
+$\frac{3}{4}$.
+\begin{figure}
+\begin{center}
+\caption{
+\label{fig:local search tight}
+A tight example for Theorem~\ref{theorem:local search}. 
+The optimal solution is given by the red solid arcs while the local search
+solution is given by the green, dashed arcs.
+The solution can be improved by the local search algorithm only if it removes
+all the edges. 
+}
 \input{fig-local-tight}
+\end{center}
+\end{figure}
 
 
