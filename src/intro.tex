@@ -27,14 +27,14 @@ A weight function $w : A \rightarrow \R $ defines the amount of
 satisfaction $w(u, v)$,
 that user $u$ gains when riding with user $v$.
 
-A feasible \emph{carpool matching} (matching) is a triple 
-$(P, D, M)$, where $P$ and $D$ form a partition of $V$, 
-and $M$ is a subset of $A \cap (P \times D)$,
-under the constraints that for every driver $d \in D$, 
-$\din(d) \leq c(d)$, 
-and for every passenger $p \in P$, ${\dout(p) \leq 1}$.
-In the \textsc{\CARPOOL{}} problem we seek for a matching $(P, D, M)$ that maximizes the
-total weight of $M$.
+a feasible \emph{carpool matching} is a subset of arcs, 
+$M \subseteq A$, where
+$\forall v \in V, 
+\din[M](v) \cdot \dout[M](v) = 0, 
+\din[M] \leq c(v),
+\dout[M] \leq 1$. 
+In the \textsc{\CARPOOL{}} problem we seek for a matching $M$
+that maximizes the total profit of $M$.
 In other words, the \textsc{\CARPOOL{}} problem is about finding a set of 
 (directed toward the center) vertex disjoint stars 
 that maximizes the total weights on the arcs.
@@ -96,9 +96,19 @@ It is not clear, however, if any of the technique used to address the
 \textsc{spanning star forest} problem can be generalized to approximate the
 directed capacitated variant.
 
-In section~\ref{sec:sub} we show that the problem can be formulated as
-unconstarints submodular maximization problem, thus it has a 2-approximation
-algorithm.
-In section~\ref{sec:local} we consider the unweighted variant of the problem.
+In Section~\ref{sec:sub} we show that the problem can be formulated as
+unconstrained submodular maximization problem, thus it has a
+$\frac{1}{2}$-approximation algorithm.
+In Section~\ref{sec:local} we consider the unweighted variant of the problem.
 We show that when the maximum possible capacity, $C$, is fixed, there is a 
 $(\frac{C + 1}{2C} - \varepsilon)$-approximation algorithm for the any $\varepsilon > 0$.
+We also show that the problem remains APX-hard even if $C \leq 3$.
+In Section~\ref{sec:group} we consider a variant of the problem, the
+\textsc{group \CARPOOL} problem, where each edge has an integral size and 
+the constraint $\din[M] \leq c(v)$ is replaced with the constraint
+$\sum_{(u,v)}s(u,v) \leq c(v)$.
+We show that this variant of the problem can not be formulated as unconstrained
+submodular maximization problem as before.
+We show, however, that this variant of the problem still admits a
+$(\frac{1}{2} - \varepsilon)$-approximation algorithm, and argue that the local
+search algorithm generalized to this variant as well.
