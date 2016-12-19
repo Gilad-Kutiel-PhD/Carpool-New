@@ -1,15 +1,15 @@
 The \textsc{\CARPOOL{}} problem is a star packing problem in directed graphs.
 Formally, given a directed graph $G = (V, A)$,
-a capacity function $ c: V \rightarrow \N $,
-and a weight function $w : A \rightarrow \R $,
-a feasible \emph{carpool matching} is a triple 
-$(P, D, M)$, where $P$ (passengers) and $D$ (drivers) form a partition of $V$, 
-and $M$ is a subset of $A \cap (P \times D)$,
-under the constraints that for every vertex $d \in D$, 
-$\din(d) \leq c(d)$, 
-and for every vertex $p \in P$, $\dout(p) \leq 1$.
-In the \textsc{\CARPOOL{}} problem we seek for a matching $(P, D, M)$ that maximizes the
-total weight of $M$.
+a capacity function $c: V \rightarrow \N$,
+and a profit function $p : A \rightarrow \R $,
+a feasible \emph{carpool matching} is a subset of arcs, 
+$M \subseteq A$, where
+$\forall v \in V, 
+\din[M](v) \cdot \dout[M](v) = 0, 
+\din[M] \leq c(v),
+\dout[M] \leq 1$. 
+In the \textsc{\CARPOOL{}} problem we seek for a matching $M$
+that maximizes the total profit of $M$.
 
 The problem arises when designing an online carpool service, 
 such as Zimride~\cite{zimride}, 
@@ -23,3 +23,12 @@ thus it has a $\frac{1}{2}$-approximation algorithm.
 For the unweighted variant of the problem when the maximum possible capacity, $C$, is
 fixed, we give a $(\frac{C + 1}{2C} - \varepsilon)$-approximation algorithm
 for the any $\varepsilon > 0$.
+
+We also consider a variant of the \textsc{\CARPOOL{}} problem where every arc
+has also an integral weight $w:A \to \N$ and the constraint $\din[M] \leq c(v)$
+is replaced with the constraint $\sum_{(u,v)}w(u,v) \leq c(v)$.
+We show that this variant of the problem can not be formulated as an
+unconstarints submodular maximization as before.
+We give, however, a ($2 + \varepsilon$)-approximation algorithm for this
+variant, and argue that the local search algorithm can be generalized to this
+variant of the problem when $C$ is fixed.
