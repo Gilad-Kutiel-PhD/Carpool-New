@@ -1,34 +1,41 @@
-The \textsc{\CARPOOL{}} problem is a star packing problem in directed graphs.
-Formally, given a directed graph $G = (V, A)$,
-a capacity function $c: V \rightarrow \N$,
-and a weight function $w : A \rightarrow \R $,
-a feasible \emph{carpool matching} is a subset of arcs, 
-$M \subseteq A$, where
-$\forall v \in V, 
-\din[M](v) \cdot \dout[M](v) = 0, 
-\din[M] \leq c(v),
-\dout[M] \leq 1$. 
-In the \textsc{\CARPOOL{}} problem we seek for a matching $M$
-that maximizes the total weight of $M$.
+The \carpool problem is a star packing problem in directed graphs.
+Formally, given a directed graph $G = (V, A)$, a capacity function $c:
+V \rightarrow \N$, and a weight function $w : A \rightarrow \R $, a
+feasible \emph{carpool matching} is a subset of arcs, $M \subseteq A$,
+such that every $v \in V$ satisfies:%
+\begin{inparaenum}[(i)]
+\item $\din[M](v) \cdot \dout[M](v) = 0$,
+\item $\din[M](v) \leq c(v)$, and 
+\item $\dout[M](v) \leq 1$.
+\end{inparaenum}
+A vertex $v$ for which $\dout[M](v) = 1$ is a \emph{passenger}, and a
+vertex for which $\dout[M](v) = 0$ is a driver who has $\din[M](v)$
+passengers.  In the \carpool problem the goal is to find a matching
+$M$ of maximum total weight.
 
-The problem arises when designing an online carpool service, 
-such as Zimride~\cite{zimride}, 
-that tries to connect between passengers and drivers based on (arbitrary) similarity function.
-The problem is known to be NP-hard, 
-even for uniform weights and without capacity constraints.
+The problem arises when designing an online carpool service, such as
+Zimride~\cite{zimride}, which tries to connect between passengers and
+drivers based on (arbitrary) similarity function.  The problem is
+known to be NP-hard, even for uniform weights and infinite capacities.
+%without capacity constraints.
 
-we show that the problem can be formulated as
-unconstrained submodular maximization problem, 
-thus it has a $\frac{1}{2}$-approximation algorithm.
-For the unweighted variant of the problem when the maximum possible capacity, $C$, is
-fixed, we give a $(\frac{C + 1}{2C} - \varepsilon)$-approximation algorithm
-for the any $\varepsilon > 0$.
+We show that the problem can be formulated as an unconstrained
+submodular maximization problem, thus it admits a
+$\frac{1}{2}$-approximation algorithm.  For the unweighted variant of
+the problem when the maximum possible capacity, $C$, is fixed, we give
+a $(\frac{C + 1}{2C} - \varepsilon)$-approximation algorithm for the
+any $\varepsilon > 0$.
 
-We also consider a variant of the \textsc{\CARPOOL{}} problem where every arc
-has also an integral size $s:A \to \N$ and the constraint $\din[M] \leq c(v)$
-is replaced with the constraint $\sum_{(u,v)}s(u,v) \leq c(v)$.
-We show that this variant of the problem can not be formulated as an
-unconstrained submodular maximization as before.
-We give, however, a ($2 + \varepsilon$)-approximation algorithm for this
-variant, and argue that the local search algorithm can be generalized to this
-variant of the problem when $C$ is fixed.
+We also show that the
+problem remains APX-hard even if $C \leq 3$.
+
+We also consider an extension, called \gcp, in which each vertex
+represents a group of passengers.  Group sizes are non-uniform, and we
+consider the case where a group size may change as a function of the
+driver.  Formally, each arc $(u,v) \in A$ has a size $s(u,v) \in \N$,
+and the constraint $\din[M](v) \leq c(v)$ is replaced with
+$\sum_{u:(u,v) \in M} s(u,v) \leq c(v)$.  We show that \gcp cannot be
+formulated as an unconstrained submodular maximization problem.
+Nevertheless, we give a $(\frac{1}{2} - \varepsilon)$-approximation
+algorithm for this variant, and argue that the local search algorithm
+can be generalized to this variant of the problem when $C$ is fixed.

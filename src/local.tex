@@ -1,10 +1,15 @@
-The local search algorithm maintains a feasible matching throughout its execution
-and operates in 
-iterative manner where in each iteration it tries to find a better solution by
-replacing a subset of the edges in the current solution with 
-another (larger) subset of edges not in the solution.
-The local search algorithm halts when no improvement can be done.
-The algorithm is described in Algorithm~\ref{alg:local}. 
+
+In this section we present a $(\frac{2c_{\max}}{c_{\max} + 1}
++ \eps)$-approximation algoithm for unweighted \carpool whose running
+time is polynomial if $c_{\max} = O(1)$.
+
+Let $k$ be an integer to be determined later.  The local search
+algorithm maintains a feasible matching throughout its execution and
+operates in iterative manner where in each iteration it tries to find
+a better solution by replacing a subset of at most $k$ edges in the
+current solution with another (larger) subset of edges not in the
+solution.  The local search algorithm halts when no improvement can be
+done.  The algorithm is described in Algorithm~\ref{alg:local}.
 
 \begin{algorithm}
 \SetKw{True}{true}
@@ -15,8 +20,8 @@ $M \leftarrow \emptyset$								\\
 \Repeat{done}{
 \label{line:outerloop}
  	$done \leftarrow{}$ \True							\\
- 	\For{$M' \in M : |M'| \leq k$}{
- 		\For{$A' \in A \setminus M : |A'| = |M'| + 1$}{
+ 	\ForAll{$M' \subseteq M : |M'| \leq k$}{
+ 		\ForAll{$A' \subseteq A \setminus M : |A'| = |M'| + 1$}{
 			\If{$M \setminus M' \cup A'$ is feasible}{
 				$M \leftarrow{} M \setminus M' \cup A'$	\\
 				$done \leftarrow{}$ \False				\\
@@ -26,37 +31,49 @@ $M \leftarrow \emptyset$								\\
 }
 \Return{$M$}
 
-\caption{
+\caption{Local Search}
 \label{alg:local}
-Local Search}
 \end{algorithm}
 
+\todo[inline]{fix running time paragraph}
 
 We claim that the local search algorithm halts in polynomial time.
-Observed that in every iteration the algorithm either improves the value of the solution
-by one or otherwise it terminates. 
-Thus, after a maximum of $n$ iterations the algorithm stops.
-In every iteration we examine all the subsets of edges of a fixed size and test for feasibility,
-both these operations can be done in polynomial time - $O(n^{Ck + 1})$. 
+Observed that in every iteration the algorithm either improves the
+value of the solution by one or otherwise it terminates.  Thus, after
+a maximum of $n$ iterations the algorithm stops.  In every iteration
+we examine all the subsets of edges of a fixed size and test for
+feasibility, both these operations can be done in polynomial time.
 
-To analyze the approximation ratio achieved by the local search algorithm consider an 
-arbitrary but fixed optimal matching $M^*$.
-Given the solution outputted by the local search algorithm, 
-$M$, 
-we build the \emph{star graph} of the two solutions
-in which each node represents a star from the optimal solution 
-and edges exits between two nodes if
-there is a star in $S(M)$ that intersect the two
-corresponding stars of the optimal solution, 
-formally $G^{M^*}_M = (S, E)$ where $\{v_i : S^*_i \in S(M^*) \}$ 
-and 
-$E = \{(v_i, v_j) : 
-\exists S \in M,
-S \cap S^*_i \neq \emptyset \land S \cap S^*_j \neq \emptyset,
-\}$.
+Observe that a vertex $v \in D_M \cup Z_M$ is the center of
+a \emph{directed star} whose leaves are the passengers in the set
+$P_M(v) = \set{u : (u,v) \in M}$.  ($P_M(v) = \emptyset$, for $v \in
+Z_M$.)
+%
+Given a carpool matching $M$, we define $\calS(M)$ to be the set of
+stars that are induced by $M$.  Denote by $V(S)$ the set of vertices
+of a star, i.e., if $v$ is the center $S$, then $V(S) = \{v\} \cup
+P_M(v)$.  Also, for $\calT \subseteq \calS(M)$, define
+$V(\calT) \eqdf \bigcup_{S \in \calT} V(S)$.  Also, let $A(S)$ be the
+edges of $S$, and define $A(\calT) \eqdf \bigcup_{S \in \calT} A(S)$.
+
+To analyze the approximation ratio achieved by the local search
+algorithm consider an arbitrary but fixed optimal matching $M^*$.
+Given the solution outputted by the local search algorithm, $M$, we
+build the \emph{star graph} of the two solutions in which each node
+represents a star from the optimal solution, namely from $\calS(M^*)$,
+and an edge exists between two nodes if there is a star in $\calS(M)$
+that intersects the two corresponding stars of the optimal solution.
+%
+Formally $H = (\calS(M^*), E)$ where
+\[
+E = \set{(S^*_i, S^*_j) : \exists S \in \calS(M), 
+         V(S) \cap V(S^*_i) \neq \emptyset \land
+         V(S) \cap V(S^*_j) \neq \emptyset}
+~.
+\]
 Figure~\ref{fig:conflict} depicts a star graph.
 
-\begin{figure}[ht]
+\begin{figure}[t]
 \centering
 \subfloat[]{
 \label{subfloat:graph}
@@ -67,7 +84,6 @@ Figure~\ref{fig:conflict} depicts a star graph.
 \input{fig-sub-conflict}
 }
 \caption[]{
-\label{fig:conflict}
 \subref{subfloat:input} 
 An optimal matching depicted by the dashed red edges,
 and another solution depicted by the solid green edges.  
@@ -76,96 +92,160 @@ The conflict graph, the upper left vertex corresponds
 to the star that contains the vertices a,b,c.
 The numbers inside the vertices corresponds to $d_i$.   
 }
+\label{fig:conflict}
 \end{figure}  
 
-For a group of vertices, $U$, denote by $w^*(U)$ the sum of the degrees 
-induced by the underlying graph of the optimal solution on this set, i.e.
-$\sum_{u \in U} \dinout[M^*](u)$, 
-and let $w(S)$ be the sum of the degrees 
-induced by the underlying graph of the local search solution on this set, i.e.
-$\sum_{u \in U} \dinout(u)$.
 
 \begin{lemma}
 \label{lemma:r}
-If $k \geq \text{TODO}$ then in any connected induced graph of $G^{M^*}_M$, 
-$G'= G^{M^*}_M[U]$, 
-$
-\frac{w(U)}{w^*(U)} 
-\geq \frac{1}{2} + \frac{1}{2C} - \frac{1}{2C|U|}
-$.
+Let $\calT \subseteq \calS(M^*)$ that induces a connect subgraph of
+$H$.  If $\abs{A(\calT)} \leq k$, then
+\[
+\frac{\deg_M(V(\calT))}{\deg_{M^*}(V(\calT))} 
+\geq \half + \inv{2\cmax} - \inv{2\cmax\abs{\calT}}
+~.
+\]
 \end{lemma}
-
 \begin{proof}
-Consider the solution obtained from the $M$ by removing all the edges from $M$
-that intersect the induced subgraph, and adding all the edges from $M^*$ that
-intersect the induced subgraph.
-It is easy to verify that this is a feasible solution.
-We now bound from below the difference in the value of the solution.
-The value decrease due to the removal of the edges by at most $w(U) - |U| + 1$,
-and increase by exactly $\frac{w^*(U)}{2} \leq C |U|$.
-We know that this difference can not be positive, or else, the local search
-algorithm would not have been terminated.
-Thus 
-$\frac{w^*(U)}{2} \leq w(U) - |U| + 1$ 
+Consider the solution $M'$ obtained from the $M$ by removing all the
+edges from $M$ that intersect $V(\calT)$ and adding all the edges from
+$M^*$ that intersect $V(\calT)$.  Observe that if an edge $(u,v)$ in
+$M^*$ intersects $V(\calT)$, then $\set{u,v} \in V(\calT)$ by the
+definition of the graph $H$.  Hence, $M'$ is feasible carpool
+matching.
+
+Since $\calT$ induces a connected subgraph of $H$, the removal of
+edges in $M$ that intersect $V(\calT)$ decreased $\abs{M}$ by at most
+$\deg_M(V(\calT)) - \abs{\calT} + 1$.
+%
+On the other hand, the increase in size is exactly
+ $\half \deg_{M^*}(V(\calT)) \leq \cmax \abs{\calT}$.
+%
+Since $\abs{A(\calT)} \leq k$, we know that this difference can not be
+positive, or else, the local search algorithm would not have been
+terminated.  Thus 
+\(
+\half \deg_{M^*}(V(\calT)) \leq \deg_M(V(\calT)) - \abs{\calT} + 1
+\),
 and so
-$
-\frac{w(U)}{w^*(U)} 
-\geq 
-\frac{1}{2} + \frac{|U|}{w^*(U))} - \frac{1}{w^*(U))}  
-\geq
-\frac{1}{2} + \frac{1}{2C} - \frac{1}{2C|U|}
-$
+\[
+\frac{\deg_M(V(\calT))}{\deg_{M^*}(V(\calT))}
+\geq \half + \frac{\abs{\calT} - 1}{\deg_{M^*}(V(\calT))}
+\geq \half + \frac{\abs{\calT} - 1}{2\cmax \abs{\calT}}
+~,
+\]
+as required.
 \end{proof}
 
 
+
+\begin{lemma}
+If $k \geq 24\cmax$, then $\abs{M} \geq (\frac{\cmax+1}{2\cmax}
+- \frac{2}{k}) \cdot \abs{M^*}$.
+\end{lemma}
+\begin{proof}
+Consider a maximal (with respect to set inclusion) connected component
+of $H$ induced by the vertices in $\calT \subseteq \calS(M^*)$.
+%
+If $\abs{M \cap A(\calT)} \leq k$, then it must be that $\abs{M \cap
+A(\calT)} = \abs{M^* \cap A(\calT)}$, since otherwise $M \cap
+A(\calT)$ could be improved.
+
+It remains to consider a maximal component $\calT$ such that If
+$\abs{M \cap A(\calT)} > k$.  Observe that since the number of edges
+in a $S \in \calS(M^*)$ is at most $\cmax$, it must be that
+$\abs{V(\calT)} > \frac{k}{\cmax}$.
+%
+Given such a component $\calT$, we partition its vertex set into
+several sets, each of size at least $\frac{k}{4\cmax}$.  We do this as
+follows.  First construct any spanning tree of $\calT$ (say, by
+running DFS).  It is well known that a tree of $t$ vertices can be
+split into two subtrees each with at most $\floor{2t/3}+2$ vertices
+(see, e.g., \cite{???}).  Moreover, if $t \geq 24$, each such subtree
+contains at most $\frac{3}{4}t$.  Hence, we can decompose $\calT$
+recursively into vertex sets whose sizes is between $\frac{k}{\cmax}$
+and $\frac{k}{4\cmax}$, assuming that $\frac{k}{\cmax} \geq 24$.
+%
+Each such vertex set $\calX$ is connected and contains at most
+$\frac{k}{\cmax}$ stars.  Hence $\abs{A(\calX)} \leq k$.  Due to
+Lemma~\ref{lemma:r} and since $\abs{V(\calX)} \geq \frac{k}{4\cmax}$,
+we have that
+\[
+\frac{\deg_M(V(\calX))}{\deg_{M^*}(V(\calX))} 
+\geq \half + \inv{2\cmax} - \frac{2}{k}
+~.
+\]
+Since $\deg_{M^*}(V(\calT)) = \sum_{\calX} \deg_{M^*}(V(\calX))$ and
+$\deg_M(V(\calT)) = \sum_{\calX} \deg_M(V(\calX))$, it follows that
+\[
+\frac{\deg_M(V(\calT))}{\deg_{M^*}(V(\calT))}
+\geq \half + \inv{2\cmax} - \frac{2}{k}
+~,
+\]
+and thus $\abs{M \cap A(\calT)} \geq (\frac{\cmax + 1}{2\cmax}
+- \frac{2}{k}) \abs{M^* \cap A(\calT)}$.
+\end{proof}
+
+
+\begin{corollary}
+\label{cor:local}
+There exists a $(\frac{2\cmax}{\cmax+1} +\eps)$-approximation
+algorithm for \carpool, for every $\eps>0$.
+\end{corollary}
+
+
+\iffalse %%%%% Rmeoved
+
 \begin{lemma}
 \label{lemma:dec}
-Given a parameter $k$, a bounded degree connected graph $G$, with a maximum
-degree $d$ can be decomposed into connected components of size at least $k$, and at most
-$d(k-1) + 1$.
+Given a parameter $k$, a bounded degree connected graph $G$, with a
+maximum degree $d$ can be decomposed into connected components of size
+at least $k$, and at most $d(k-1) + 1$.
 \end{lemma}
 
 \begin{proof}
-We give a constructive proof.
-Start constructing a connected component by adding adjacent vertices
-one by one to the component and removing them from the graph.
-If at some point, removing a vertex disconnect the graph, add all the small
-components (of size less than $k$) to the constructed component and decompose
-the large components (of size at least $k$) recursively.
-Note that removing a vertex can break the graph to at most $d - 1$ additional
-components.
+We give a constructive proof.  Start constructing a connected
+component by adding adjacent vertices one by one to the component and
+removing them from the graph.  If at some point, removing a vertex
+disconnect the graph, add all the small components (of size less than
+$k$) to the constructed component and decompose the large components
+(of size at least $k$) recursively.  Note that removing a vertex can
+break the graph to at most $d - 1$ additional components.
 \end{proof}
 
 \begin{theorem}
 \label{theorem:local search}
-The local search is ($\frac{1}{2} + \frac{1}{2c} - \varepsilon$)-approximation
-algorithm.
+The local search is ($\frac{1}{2} + \frac{1}{2c}
+- \varepsilon$)-approximation algorithm.
 \end{theorem}
 
 \begin{proof}
-Combine lemma~\ref{lemma:dec}, and lemma~\ref{lemma:r}, 
-and observe that the maximum degree in $G^{M^*}_M$ is $(C + 1)^C$ to
-get the desire result.
+Combine lemma~\ref{lemma:dec}, and lemma~\ref{lemma:r}, and observe
+that the maximum degree in $G^{M^*}_M$ is $(C + 1)^C$ to get the
+desire result.
 \end{proof}
 
-We now show that Theorem~\ref{theorem:local search} is tight.
-Consider the example in Figure~\ref{fig:local search tight},
-the example is for the special case when $k=11$ and $C=2$ but this example can
-be generalized in a straightforward manner.
-One can verify that as the graph in the example growth, 
-the ratio between the optimal solution and the local search solution approaches
-$\frac{3}{4}$.
+\fi %%%%% End removed
+
+
+\todo[inline]{Add a proper theorem}
+
+We now show that Corollary~\ref{cor:local} is tight.  Consider the
+example in Figure~\ref{fig:local search tight}, the example is for the
+special case when $k=11$ and $C=2$ but this example can be generalized
+in a straightforward manner.  One can verify that as the graph in the
+example growth, the ratio between the optimal solution and the local
+search solution approaches $\frac{3}{4}$.
+
 \begin{figure}
 \begin{center}
-\caption{
-\label{fig:local search tight}
-A tight example for Theorem~\ref{theorem:local search}. 
-The optimal solution is given by the red solid arcs while the local search
-solution is given by the green, dashed arcs.
-The solution can be improved by the local search algorithm only if it removes
-all the edges. 
-}
 \input{fig-local-tight}
+\caption{A tight example for Theorem~\ref{theorem:local search}. 
+The optimal solution is given by the red solid arcs while the local
+search solution is given by the green, dashed arcs.  The solution can
+be improved by the local search algorithm only if it removes all the
+edges.}
+\label{fig:local search tight}
 \end{center}
 \end{figure}
 

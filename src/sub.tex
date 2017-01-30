@@ -1,5 +1,75 @@
-In this section we show that the problem can be formulated as unconstrainedsubmodular maximization problem, and thus, it has a 2-approximation algorithm.Consider the function $w : 2^V \to \R$ where $w(D)$ is the value of the optimalcarpool matching when the set of drivers is $D$.As we mention in the introduction, $w$ can be computed efficiently.\begin{theorem}$w$ is submodular.
-\end{theorem}\begin{proof}Consider two subsets $A,B \subseteq V$, we need to show that $w(A) + w(B) \geq w(A \cup B) + w(A \cap B)$.Let $E_{A \setminus B} = (V \setminus A) \times (A \setminus B)$, $E_{B \setminus A} = (V \setminus A) \times (B \setminus A)$,and $E_{B \cap A} = (V \setminus (A \cap B)) \times (B \cap A)$. Let $M_{A \cup B}$ and $M_{A \cap B}$ be the set of edges in an optimal
-matching when the set of drivers are $A \cup B$ and $A \cap B$ respectively.We argue that we can construct two (feasible) matchings $M_A$ and $M_B$ usingthe sets of drivers $A$ and $B$ respectively and $w(M_A) + w(M_B) = w(M_{A \cup B}) + w(M_{A \cap B})$.First, take all the edges from $M_{A \cup B} \cap E_{A \setminus B}$ and add them to $M_A$, add $M_{A \cup B} \cap E_{B \setminus A}$ to $M_B$.Clearly this can be done.Now, split the edges from $M_{A \cap B} \cup (M_{A \cup B} \cap E_{A \cap B})$
-between $M_A$ and $M_B$ in a way that does not violate the capacity constraints.One can verify that this can be done.
+
+In this section we show that the \carpool problem can be formulated as
+unconstrained submodular maximization problem, and thus it has a
+randomized $2$-approximation algorithm based on~\cite{BFNS15}.
+
+Given a \carpool instance $(G = (V,A), c, w)$, consider a subset
+$S \subseteq V$.  Let $M(S)$ be the maximum weight carpool matching
+that satisfies $D_{M(S)} \subseteq S \subseteq V \setminus P_{M(S)}$,
+namely $M(S)$ is the best carpool matching whose drivers belong to $S$
+and whose passengers belong to $V \setminus S$.  In other words,
+$M(S)$ is the maximum weight carpool matching that is contained in
+$A \cap (V \setminus S) \times S$.
+%
+Given $S$, the carpool matching $M(S)$ can be computed in polynomial
+time using maximum flow as shown in~\cite{??}.
+
+Consider the function $\barw: 2^V \to \R$, where $\barw(S) \eqdf
+w(M(S))$.  In the next lemma we prove that $\bar{w}$ is
+a \emph{submodular set function}.  Recall that a function $f$ is
+submdular if $f(S) + f(T) \geq f(S \cup T) + f(S \cap T)$ for every
+two sets $S$ and $T$ in the domain of $f$.
+
+\begin{lemma}
+$\barw$ is submodular.
+\end{lemma}
+\begin{proof}
+Consider any two subsets $S, T \subseteq V$.  We show that $\barw(S)
++ \barw(T) \geq \barw(S \cup T) + \barw(S \cap T)$.
+%
+Let $M(S \cup T)$ and $M(S \cap T)$ be the optimal carpool matchings
+with respect to $S \cup T$ and $S \cap T$, respectively.
+%
+To prove the lemma we construct two feasible carpool matchings $M_S$
+and $M_T$ such that $M_S \subseteq (V \setminus S) \times S$,
+$M_T \subseteq (V \setminus T) \times T$, and $M_S \cup M_T = M(S \cup
+T) \cup M(S \cap T)$.
+
+First, add all the edges in $M(S \cup T)$ entering $S \setminus T$ to
+$M_S$.  Similarly, add all the edges in $M(S \cup T)$ entering
+$T \setminus S$ to $M_T$.  Observe that $\din[M_S](v) = \din[M(S \cup
+T)](v) \leq c(v)$, for every $v \in S \setminus T$ and that
+$\din[M_T](v) = \din[M(S \cup T)](v) \leq c(v)$, for every $v \in
+T \setminus S$.
+
+Next, add the edges in $M(S \cap T)$ leaving $T \setminus S$ to $S$
+and add the edges in $M(S \cap T)$ leaving $S \setminus T$ to $T$.
+%
+It remains to distribute the edges leaving $V \setminus (S \cup T)$
+and entering $S \cap T$ in both $M(S \cup T)$ and $M(S \cap T)$.  Note
+that there may exist edges $(v,u)$, where $v \not\in S \cup T$, and
+$u \in S \cap T$ such that $(v,u) \in M(S \cup T)$ and $M(S \cap T)$.
+We refer to this edges as \emph{duplicate} edges.
+%
+We add all edges leaving $V \setminus (S \cup T)$ and entering $S \cap
+T$ in $M(S \cap T)$ to $M_S$.  Notice that this is possible, since
+after this addition we have that $\din[M_S](v) \leq \din[M(S \cap
+T)](v) \leq c(v)$, for every vertex $v \in S \cap T$.
+%
+Then we add all duplicate edges in $M(S \cup T)$ to $M_T$.
+%
+The remaining edges are distributed between $M_S$ and $M_T$ without
+violating capacities.  This can be done, since $\din[M(S \cup T)](v)
++ \din[M(S \cap T)](v) \leq 2c(v)$, for every $v \in S \cap T$.
+
+The lemma follows, since $\barw(S) \geq w(M_S)$ and $\barw(T) \geq
+w(M_T)$.
 \end{proof}
+
+Buchbinder et al.~\cite{BFNS15} presented a general randomized
+$2$-approximation algorithm for unconstrained submodular maximization.
+
+\begin{theorem}
+There exists a randomized polynomial time $2$-approximation algorithm
+for \carpool.
+\end{theorem}

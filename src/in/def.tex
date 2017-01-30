@@ -1,8 +1,12 @@
-\def\CARPOOL{maximum carpool matching}
 
-\newcommand{\din}[1][M]{deg^{#1}_{in}}
-\newcommand{\dout}[1][M]{deg^{#1}_{out}}
-\newcommand{\dinout}[1][M]{deg^{#1}}
+\newcommand{\set}[1]{\left\{ #1 \right\}}
+\newcommand{\abs}[1]{\left| #1 \right|}
+\newcommand{\ceil}[1]{\left\lceil #1 \right\rceil}
+\newcommand{\floor}[1]{\left\lfloor #1 \right\rfloor}
+\newcommand{\paren}[1]{\left( #1 \right)}
+\newcommand{\eqdf}{\triangleq}
+\newcommand{\half}{\frac{1}{2}}
+\newcommand{\inv}[1]{\frac{1}{#1}}
 
 \DeclareMathOperator*{\argmin}{arg\,min}
 \DeclareMathOperator*{\argmax}{arg\,max}
@@ -10,8 +14,32 @@
 \def\R{\mathbb{R}}
 \def\N{\mathbb{N}}
 
-\newtheorem{observation}{Observation}
-\newtheorem{lemma}{Lemma}
-\newtheorem{theorem}{Theorem}
-\newtheorem{definition}{Definition}
-\newtheorem{remark}{Remark}
+%\newtheorem{observation}{Observation}
+%\newtheorem{lemma}{Lemma}
+%\newtheorem{theorem}{Theorem}
+%\newtheorem{definition}{Definition}
+%\newtheorem{remark}{Remark}
+
+\theoremstyle{plain}
+\newtheorem{observation}[theorem]{Observation}
+
+%%%%%
+
+\def\CARPOOL{maximum carpool matching}
+
+\newcommand{\din}[1][M]{\deg^{-}_{#1}}
+\newcommand{\dout}[1][M]{\deg^{+}_{#1}}
+\newcommand{\dinout}[1][M]{\deg_{#1}}
+
+\newcommand{\carpool}{\textsc{Maximum Carpool Matching}\xspace}
+\newcommand{\gcp}{\textsc{Maximum Group Carpool Matching}\xspace}
+
+\newcommand{\cmax}{c_{\max}}
+\newcommand{\barw}{\bar{w}}
+\newcommand{\eps}{\varepsilon}
+\newcommand{\inc}{\Gamma}
+
+\newcommand{\calS}{\mathcal{S}}
+\newcommand{\calT}{\mathcal{T}}
+\newcommand{\calX}{\mathcal{X}}
+
