@@ -1,5 +1,5 @@
-\subfloat[]{
-\label{sub:can improved}
+\begin{subfigure}{.4\linewidth}
+\caption{\label{sub:can improved}}
 \begin{tikzpicture}[every node/.style={default node}]
 \node(1) at(0,0) {1};
 \node(2) at(2,0) {2};
@@ -16,10 +16,12 @@
 \draw[->] (2) -- (3) node[label above]{$8$};
 
 \end{tikzpicture}
-}
-\hspace{1cm}
-\subfloat[]{
-\label{sub:improved}
+\end{subfigure}
+%
+\hfill
+%
+\begin{subfigure}{.4\linewidth}
+\caption{\label{sub:improved}}
 \begin{tikzpicture}[every node/.style={default node}]
 \node(1) at(0,0) {1};
 \node(2) at(2,0) {2};
@@ -36,4 +38,4 @@
 \draw[m,->] (2) -- (3) node[label above]{$8$};
 
 \end{tikzpicture}
-}
+\end{subfigure}

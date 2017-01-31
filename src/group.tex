@@ -1,9 +1,9 @@
 
 We now consider a variant of the problem when, in addition to the
 capacity function $c:V \to \N$, and the weight (profit) function
-$w:A \to \R$, we also have a size function $s:A \to \N$, and the
+$w:A \to \R$, we also have a size function $s:V \to \N$, and the
 constraint $\din[M] \leq c(v)$ is replaced with the constraint
-$\sum_{(u,v)}s(u,v) \leq c(v)$.  The motivation for this variant of
+$\sum_{(u,v)}s(u) \leq c(v)$.  The motivation for this variant of
 the problem is when we want to allow a group of people to travel
 together in the same car, thus $s$ is the size of the group.  We start
 by showing that this variant of the problem does not fit the
@@ -17,9 +17,9 @@ approximation guarantees.
 
 \subsection{Submodular Maximization}
 
-To see why the group carpool problem can
-not be treated as a submodular maximization problem considered the
-instance given in Figure~\ref{fig:not submodular}.
+Consider the submodular maximization formulation given in Section~\ref{sec:sub}.
+Figure~\ref{fig:not submodular} shows that the function $w : 2^V \to \R$ is not
+submodular anymore.
 
 \begin{figure}
 \begin{center}
@@ -36,7 +36,7 @@ solution where $S$ is the set of drivers, then $f(A) + f(B) = 2 \leq 3
 
 %%%%%
 
-\subsection{A $(2+\eps)$-approximation Algorithm}
+\subsection{A $(\frac{1}{2} - \varepsilon)$-approximation Algorithm}
 
 \todo[inline]{write a theorem and a proof}
 

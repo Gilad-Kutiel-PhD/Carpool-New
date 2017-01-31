@@ -1,18 +1,18 @@
 
 In this section we show that the \carpool problem can be formulated as
 unconstrained submodular maximization problem, and thus it has a
-randomized $2$-approximation algorithm based on~\cite{BFNS15}.
+randomized $\frac{1}{2}$-approximation algorithm based on~\cite{BFNS15}.
 
 Given a \carpool instance $(G = (V,A), c, w)$, consider a subset
 $S \subseteq V$.  Let $M(S)$ be the maximum weight carpool matching
 that satisfies $D_{M(S)} \subseteq S \subseteq V \setminus P_{M(S)}$,
 namely $M(S)$ is the best carpool matching whose drivers belong to $S$
 and whose passengers belong to $V \setminus S$.  In other words,
-$M(S)$ is the maximum weight carpool matching that is contained in
+$M(S)$ is the maximum weight carpool matching that is a subset of
 $A \cap (V \setminus S) \times S$.
 %
 Given $S$, the carpool matching $M(S)$ can be computed in polynomial
-time using maximum flow as shown in~\cite{??}.
+time using maximum flow as shown in~\cite{kutiel2016}.
 
 Consider the function $\barw: 2^V \to \R$, where $\barw(S) \eqdf
 w(M(S))$.  In the next lemma we prove that $\bar{w}$ is
@@ -70,6 +70,5 @@ Buchbinder et al.~\cite{BFNS15} presented a general randomized
 $2$-approximation algorithm for unconstrained submodular maximization.
 
 \begin{theorem}
-There exists a randomized polynomial time $2$-approximation algorithm
-for \carpool.
+There exists a polynomial time $2$-approximation algorithm for \carpool.
 \end{theorem}

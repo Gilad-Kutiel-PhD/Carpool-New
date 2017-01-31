@@ -31,7 +31,7 @@ $\sum_{v \in V} w_M(v) = 2 \sum_{e \in M} w(e)$.
 \end{proof}
 
 Denote by $\delta(u,v)$ the difference between the weight of the arc
-and the value of its source vertex, that is:
+and the weight of its source vertex, that is:
 \[
 \delta_M(u, v) \eqdf w(u, v) - w_M(u)
 ~.
@@ -64,14 +64,14 @@ $(u, v)$, namely
 \]
 If $S$ is a set of arcs, then $\inc(S) \eqdf \bigcup_{(u,v) \in
 S} \inc(u,v)$.
-
+%
 Figure~\ref{fig:defs} depicts all the above definitions.
 
 \begin{figure}
 \centering
 \input{fig-val-delta}
 \caption{In this example $M$ is the set of the blue, dashed arcs.
-In this case $w_M(2) = 7$, $w_M(3) = 2$, and $w_M(6) = 0$.  Also,
+In this case $w_M(2) = 7$, $w_M(5) = 2$, and $w_M(6) = 0$.  Also,
 $\delta_M(2, 3) = 1$ and $\delta_M(6, 3) = 2$.  The set $\set{(2,3),
 (6,3)}$ is an \emph{improvement} to vertex 3 and $\inc(2,3)
 = \set{(1,2),(4,2),(3,5),(6,3)}$.}
@@ -88,8 +88,10 @@ vertex can be improved.  Figure~\ref{fig:improvement} depicts an
 improvement step.
 
 \begin{algorithm}
-\caption{Local Search}
-\label{alg:ls}
+\caption{
+\label{alg:grd}
+Local Search
+}
 $M \gets \emptyset$ \\
 \Repeat{$\text{done}$}{
 	$\text{done} \leftarrow \textsc{True}$ \\
@@ -141,7 +143,7 @@ To bound the approximation ratio of the algorithm, we use a charging
 scheme argument.
 
 \begin{lemma}
-If Algorithm~\ref{alg:ls} terminates, then the computed solution is a
+If Algorithm~\ref{alg:grd} terminates, then the computed solution is a
 $2$-approximation.
 \end{lemma}
 \begin{proof}
@@ -161,8 +163,6 @@ $N^-_S(v)$.  Clearly, these vertices will not be charged again.
 We show that our analysis is tight using in Figure~\ref{fig:grd
 worst}.
 
-\todo[inline]{fix figure: directed graph}
-
 \begin{figure}
 \centering
 \input{fig-2-tight}
@@ -181,7 +181,7 @@ It remains to consider the running time of the algorithm.
 
 \begin{theorem}
 \label{thm:ls}
-Algorithm~\ref{alg:ls} is a $2$-approximation algorithm for \carpool,
+Algorithm~\ref{alg:grd} is a $2$-approximation algorithm for \carpool,
 if edge weights are integral and polynomially bounded.
 \end{theorem}
 \begin{proof}
@@ -244,9 +244,3 @@ w(M)
 ~.
 \]
 \end{proof}
-
-
-
-
-
-\todo[inline]{what happen if we apply the rule on both directions ?}

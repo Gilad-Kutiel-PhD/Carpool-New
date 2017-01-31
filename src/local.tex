@@ -74,20 +74,24 @@ E = \set{(S^*_i, S^*_j) : \exists S \in \calS(M),
 Figure~\ref{fig:conflict} depicts a star graph.
 
 \begin{figure}[t]
-\centering
-\subfloat[]{
-\label{subfloat:graph}
+%
+\begin{subfigure}{.4\linewidth}
+\caption{\label{subfloat:graph}}
 \input{fig-sub-graph}
-}
-\subfloat[]{
-\label{subfloat:conflict}
+\end{subfigure}
+%
+\hfill
+%
+\begin{subfigure}{.4\linewidth}
+\caption{\label{subfloat:conflict}}
 \input{fig-sub-conflict}
-}
+\end{subfigure}
+%
 \caption[]{
-\subref{subfloat:input} 
+\subref{subfloat:graph} 
 An optimal matching depicted by the dashed red edges,
 and another solution depicted by the solid green edges.  
-\subref{subfloat:output}
+\subref{subfloat:conflict}
 The conflict graph, the upper left vertex corresponds 
 to the star that contains the vertices a,b,c.
 The numbers inside the vertices corresponds to $d_i$.   
