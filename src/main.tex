@@ -7,20 +7,11 @@
 \usepackage{amsmath,amssymb,mathtools,amsthm}
 \usepackage[linesnumbered, ruled]{algorithm2e}
 \usepackage{xspace}
-\usepackage{subfig}
+\usepackage{subcaption}
 \usepackage{paralist}
-%\usepackage{hyperref}
-%\hypersetup{final}
-%\usepackage[inline]{enumitem}
 
 % DEBUG
-%\usepackage{fullpage}
 \usepackage{todonotes}
-%\usepackage{lineno}
-%\linenumbers
-
-% EXTRA
-%\usepackage{authblk}
 
 \input{in/def}
 \input{in/tikz}
@@ -31,28 +22,7 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\title{Improved Approximation Algorithms for the
-Maximum Carpool Matching Problem}
-
-\titlerunning{Improved Approximation Algorithms for Maximum Carpool Matching}
-
-\author[1]{Gilad Kutiel}
-\author[2]{Dror Rawitz%
-\thanks{Supported in part by the Israel Science Foundation (grant no.~497/14).}}
-
-\affil[1]{Department of Computer Science, Technion, Haifa,
-  Israel. \\ \texttt{gkutiel@cs.technion.ac.il}}
-\affil[2]{Faculty of Engineering, Bar Ilan University, Ramat Gan,
-  Israel. \\ \texttt{dror.rawitz@biu.ac.il}}
-
-\authorrunning{G. Kutiel and D. Rawitz} 
-
-\Copyright{G. Kutiel and D. Rawitz}
-
-\subjclass{F.2.2 Nonnumerical Algorithms and Problems}
-
-\keywords{approximation algorithms, local search}
-
+\input{in/title}
 %Editor-only macros:: begin (do not touch as author)%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \EventEditors{John Q. Open and Joan R. Acces}
 \EventNoEds{2}
@@ -78,9 +48,7 @@ Maximum Carpool Matching Problem}
 We thank David Adjiashvili and Reuven Bar-Yehuda for helpful
 discussions.
 
-
-%\bibliographystyle{plain}
-\bibliographystyle{plainurl}% the recommended bibstyle
+\bibliographystyle{plainurl}
 \bibliography{main}
 
 \end{document}
