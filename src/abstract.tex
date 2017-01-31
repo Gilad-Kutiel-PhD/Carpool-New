@@ -2,7 +2,7 @@ The \carpool problem is a star packing problem in directed graphs.
 Formally, given a directed graph $G = (V, A)$, a capacity function $c:
 V \rightarrow \N$, and a weight function $w : A \rightarrow \R $, a
 feasible \emph{carpool matching} is a subset of arcs, $M \subseteq A$,
-such that every $v \in V$ satisfies:%
+such that every $v \in V$ satisfies:
 \begin{inparaenum}[(i)]
 \item $\din[M](v) \cdot \dout[M](v) = 0$,
 \item $\din[M](v) \leq c(v)$, and 
@@ -19,23 +19,20 @@ drivers based on (arbitrary) similarity function.  The problem is
 known to be NP-hard, even for uniform weights and infinite capacities.
 %without capacity constraints.
 
-We show that the problem can be formulated as an unconstrained
+The \gcp, is an extension of the \carpool where each vertex represents a
+(unsplittable) group of passengers.
+Each group might have a different size.  
+Formally, each vertex $u \in V$ has a size $s(u) \in \N$,
+and the constraint $\din(v) \leq c(v)$ is replaced with
+$\sum_{u:(u,v) \in M} s(u) \leq c(v)$.  
+
+We show that the \carpool can be formulated as an unconstrained
 submodular maximization problem, thus it admits a
-$\frac{1}{2}$-approximation algorithm.  For the unweighted variant of
-the problem when the maximum possible capacity, $C$, is fixed, we give
-a $(\frac{C + 1}{2C} - \varepsilon)$-approximation algorithm for the
-any $\varepsilon > 0$.
-
-We also show that the
-problem remains APX-hard even if $C \leq 3$.
-
-We also consider an extension, called \gcp, in which each vertex
-represents a group of passengers.  Group sizes are non-uniform, and we
-consider the case where a group size may change as a function of the
-driver.  Formally, each arc $(u,v) \in A$ has a size $s(u,v) \in \N$,
-and the constraint $\din[M](v) \leq c(v)$ is replaced with
-$\sum_{u:(u,v) \in M} s(u,v) \leq c(v)$.  We show that \gcp cannot be
-formulated as an unconstrained submodular maximization problem.
-Nevertheless, we give a $(\frac{1}{2} - \varepsilon)$-approximation
-algorithm for this variant, and argue that the local search algorithm
-can be generalized to this variant of the problem when $C$ is fixed.
+$\frac{1}{2}$-approximation algorithm.
+We show that the same formulation does not hold for the \gcp,
+nevertheless, we present a $\frac{1}{2} - \varepsilon$-approximation algorithm
+for the \gcp as well.
+For the unweighted variant of
+the problems when the maximum possible capacity, $C$, is fixed, we give
+a $(\frac{C + 1}{2C} - \varepsilon)$-approximation algorithm.
+We also show that the problem remains APX-hard even if $C \leq 3$.
