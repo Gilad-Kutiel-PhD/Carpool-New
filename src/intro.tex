@@ -59,8 +59,9 @@ A carpool matching example:
 \subref{carpool:input}
 a directed graph with capacities on the vertices and weights on the arcs. 
 \subref{carpool:output}
-a feasible matching with total weight of 26.
-$P$ is the set of blue vertices, and $D$ is the set of red, dashed vertices. 
+a feasible matching with total weight of 23.
+$P_M$ is the set of blue vertices, and $D_M$ is the set of red, dashed
+vertices, and $Z_M$ contains only the dotted, black vertex.
 }
 \end{figure}  
 
@@ -132,7 +133,7 @@ and unweighted variants of the problem respectively.
 
 For the general set packing problem, the best known approximation algorithm is
 due to Chandra et al.~\cite{chandra2001greedy} and it admits a 
-$\frac{2(k +1)}{3}$ approximation ratio where $k$ is the size of the sets.
+$\frac{3}{2(k +1)}$ approximation ratio where $k$ is the size of the sets.
 
 %%%%%
 
@@ -143,7 +144,7 @@ unconstrained submodular maximization problem, thus it has a
 $\frac{1}{2}$-approximation algorithm due to~\cite{BFNS15}.  
 
 In Section~\ref{sec:local} we consider the unweighted variant of the
-problem.  We provide a $(\frac{2\cmax}{\cmax+1} + \eps)$-approximation
+problem.  We provide a $(\frac{\cmax+1}{2\cmax} + \eps)$-approximation
 algorithm, for any $\eps>0$, where $\cmax$ is the maximum capacity.
 We also show that \carpool is APX-hard even if $\cmax \leq 3$.
 %
