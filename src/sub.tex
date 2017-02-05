@@ -12,12 +12,14 @@ $M(S)$ is the maximum weight carpool matching that is a subset of
 $A \cap (V \setminus S) \times S$.
 %
 Given $S$, the carpool matching $M(S)$ can be computed in polynomial
-time using maximum flow as shown in~\cite{kutiel2016}.
+time using a maximum b-matching in the bipartite graph 
+$B = (S \cup V \setminus S, A \cap (V \setminus S) \times S)$ or can be reduced
+to a max-cost flow problem as shown in~\cite{kutiel2016}.
 
 Consider the function $\barw: 2^V \to \R$, where $\barw(S) \eqdf
 w(M(S))$.  In the next lemma we prove that $\bar{w}$ is
 a \emph{submodular set function}.  Recall that a function $f$ is
-submdular if $f(S) + f(T) \geq f(S \cup T) + f(S \cap T)$ for every
+submodular if $f(S) + f(T) \geq f(S \cup T) + f(S \cap T)$ for every
 two sets $S$ and $T$ in the domain of $f$.
 
 \begin{lemma}
@@ -72,3 +74,20 @@ $2$-approximation algorithm for unconstrained submodular maximization.
 \begin{theorem}
 There exists a polynomial time $2$-approximation algorithm for \carpool.
 \end{theorem}
+
+\begin{figure}
+\centering
+\input{fig-submodular}
+\caption[]{
+\label{fig:defs}
+In this example, $M$ is the set of the blue, dashed arcs, then:
+$val_M(2) = 7$,
+$val_M(3) = 2$,
+$val_M(6) = 0$,
+$\delta_M(2, 3) = 1$,
+$\delta_M(6, 3) = 2$,
+the set $\{(2,3), (6,3)\}$ is an \emph{improvement} to vertex 3,
+$inc(2,3) = \{(1,2),(4,2),(3,5),(6,3)\}$,
+$\text{pass}_M(2) = \{1, 4\}$.
+}
+\end{figure}

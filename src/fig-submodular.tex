@@ -1,0 +1,19 @@
+\begin{tikzpicture}[]
+\draw (0,0) ellipse (2cm and 1cm) node(s) {$S$};
+\draw (3,0) ellipse (2cm and 1cm) node(t) {$T$};
+
+\node[above=1.5cm](as) at(s) {};
+\node[above=1.5cm](at) at(t) {};
+\node[above=1.5cm](ast) at(1.5,0) {};
+
+\draw[->] (as) -- (s);
+\draw[->] (at) -- (t);
+\draw[->] (ast) -- (1.5,0);
+\end{tikzpicture}
+
+\begin{tikzpicture}[]
+\begin{scope}
+	\clip (0,0) ellipse (2cm and 1cm);
+	\draw (3,0) ellipse (2cm and 1cm);
+\end{scope}
+\end{tikzpicture}

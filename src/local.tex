@@ -165,7 +165,8 @@ several sets, each of size at least $\frac{k}{4\cmax}$.  We do this as
 follows.  First construct any spanning tree of $\calT$ (say, by
 running DFS).  It is well known that a tree of $t$ vertices can be
 split into two subtrees each with at most $\floor{2t/3}+2$ vertices
-(see, e.g., \cite{???}).  Moreover, if $t \geq 24$, each such subtree
+% (see, e.g., \cite{???}).  
+Moreover, if $t \geq 24$, each such subtree
 contains at most $\frac{3}{4}t$.  Hence, we can decompose $\calT$
 recursively into vertex sets whose sizes is between $\frac{k}{\cmax}$
 and $\frac{k}{4\cmax}$, assuming that $\frac{k}{\cmax} \geq 24$.
