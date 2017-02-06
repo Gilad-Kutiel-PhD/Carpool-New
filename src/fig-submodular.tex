@@ -1,3 +1,5 @@
+\begin{subfigure}{.45\linewidth}
+\centering
 \begin{tikzpicture}[]
 
 \begin{scope}[every node/.style={inner sep=1cm}]
@@ -7,48 +9,123 @@
 \end{scope}
 
 \draw 
-(s.west) to[out=90, in=90] 
-(st.east) to[out=270, in=270]
+(s.west) to[out=90, in=172] 
+(st.north) to[out=-8, in=90] 
+(st.east) to[out=270, in=8]
+(st.south) to[out=188, in=270]
 (s.west)
 ;
 
 \draw 
-(t.east) to[out=90, in=90] 
-(st.west) to[out=270, in=270]
+(t.east) to[out=90, in=8] 
+(st.north) to[out=188, in=90] 
+(st.west) to[out=270, in=172]
+(st.south) to[out=-8, in=270]
 (t.east)
 ;
 
-\begin{scope}[every node/.style={above=1cm}]
-\node(as) at(s.north) {};
-\node(ast) at(st.north) {};
-\node(at) at(t.north) {};
-\end{scope}
-
-\begin{scope}[->]
-\draw[] (as) -- (-2, .5);
-\draw[] (ast) -- (0, .5);
-\draw[] (at) -- (2, .5);
-\end{scope}
-
+\end{tikzpicture}
+\end{subfigure}
+%
+\hfill
+%
+\begin{subfigure}{.45\linewidth}
+\centering
+\begin{tikzpicture}[]
 
 \begin{scope}[every node/.style={inner sep=1cm}]
-\node(st2) at(6,0) {$S \cap T$};
+\node(s) at(-2,0) {$S$};
+\node(st) at(0,0) {$S \cap T$};
+\node(t) at(2,0) {$T$};
+\end{scope}
+
+\draw[dotted] 
+(st.south) to[out=188, in=270]
+(s.west) to[out=90, in=172] 
+(st.north)
+;
+\draw 
+(st.north) to[out=-8, in=90] 
+(st.east) to[out=270, in=8]
+(st.south)
+;
+
+\draw[dotted] 
+(st.south) to[out=-8, in=270]
+(t.east) to[out=90, in=8] 
+(st.north)
+;
+\draw 
+(st.north) to[out=188, in=90] 
+(st.west) to[out=270, in=172]
+(st.south)
+;
+
+\end{tikzpicture}
+\end{subfigure}
+
+\begin{subfigure}{.45\linewidth}
+\centering
+\begin{tikzpicture}[]
+
+\begin{scope}[every node/.style={inner sep=1cm}]
+\node(s) at(-2,0) {$S$};
+\node(st) at(0,0) {$S \cap T$};
+\node(t) at(2,0) {$T$};
 \end{scope}
 
 \draw 
-(st2.north) to[out=-8, in=90] 
-(st2.east) to[out=270, in=8]
-(st2.south) to[out=172, in=270]
-(st2.west) to[out=90, in=188]
-(st2.north)  
+(s.west) to[out=90, in=172] 
+(st.north) to[out=-8, in=90] 
+(st.east) to[out=270, in=8]
+(st.south) to[out=188, in=270]
+(s.west)
 ;
 
-\begin{scope}[every node/.style={above=1cm}]
-\node(ast2) at(st2.north) {};
-\end{scope}
-
-\begin{scope}[->]
-\draw (ast2) -- (6, .5);
-\end{scope}
+\draw[dotted] 
+(st.south) to[out=-8, in=270]
+(t.east) to[out=90, in=8] 
+(st.north) 
+;
+\draw 
+(st.north) to[out=188, in=90] 
+(st.west) to[out=270, in=172]
+(st.south)
+;
 
 \end{tikzpicture}
+\end{subfigure}
+%
+\hfill
+%
+\begin{subfigure}{.45\linewidth}
+\centering
+\begin{tikzpicture}[]
+
+\begin{scope}[every node/.style={inner sep=1cm}]
+\node(s) at(-2,0) {$S$};
+\node(st) at(0,0) {$S \cap T$};
+\node(t) at(2,0) {$T$};
+\end{scope}
+
+\draw[dotted] 
+(st.south) to[out=188, in=270]
+(s.west) to[out=90, in=172] 
+(st.north)
+;
+\draw 
+(st.north) to[out=-8, in=90] 
+(st.east) to[out=270, in=8]
+(st.south)
+;
+
+\draw 
+(t.east) to[out=90, in=8] 
+(st.north) to[out=188, in=90] 
+(st.west) to[out=270, in=172]
+(st.south) to[out=-8, in=270]
+(t.east)
+;
+
+\end{tikzpicture}
+\end{subfigure}
