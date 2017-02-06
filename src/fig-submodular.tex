@@ -1,6 +1,15 @@
-\begin{subfigure}{.45\linewidth}
+\def \sst {\draw[cyan] (-2, -.9) -- (-.5, -.5);}
+\def \tst {\draw[orange] (2, -.9) -- (.5, -.5);}
+
+\def \os {\draw[blue, loosely dotted] (-2, 2) -- (-2, .5);}
+\def \cupst {\draw[loosely dashed] (-.5, 2) -- (-.5, .5);}
+\def \capst {\draw[red, loosely dashed] (.5, 2) -- (.5, .5);}
+\def \ot {\draw[orange, loosely dash dot] (2, 2) -- (2, .5);}
+
+\begin{subfigure}{.48\linewidth}
+\caption{\label{}}
 \centering
-\begin{tikzpicture}[]
+\begin{tikzpicture}[very thick]
 
 \begin{scope}[every node/.style={inner sep=1cm}]
 \node(s) at(-2,0) {$S$};
@@ -24,14 +33,21 @@
 (t.east)
 ;
 
+\begin{scope}[->]
+\os
+\cupst
+\ot
+\end{scope}
+
 \end{tikzpicture}
 \end{subfigure}
 %
 \hfill
 %
-\begin{subfigure}{.45\linewidth}
+\begin{subfigure}{.48\linewidth}
+\caption{\label{}}
 \centering
-\begin{tikzpicture}[]
+\begin{tikzpicture}[very thick]
 
 \begin{scope}[every node/.style={inner sep=1cm}]
 \node(s) at(-2,0) {$S$};
@@ -39,7 +55,7 @@
 \node(t) at(2,0) {$T$};
 \end{scope}
 
-\draw[dotted] 
+\draw[outline] 
 (st.south) to[out=188, in=270]
 (s.west) to[out=90, in=172] 
 (st.north)
@@ -50,7 +66,7 @@
 (st.south)
 ;
 
-\draw[dotted] 
+\draw[outline] 
 (st.south) to[out=-8, in=270]
 (t.east) to[out=90, in=8] 
 (st.north)
@@ -61,12 +77,20 @@
 (st.south)
 ;
 
+\begin{scope}[->]
+\sst
+\capst
+\tst
+\end{scope}
+
 \end{tikzpicture}
 \end{subfigure}
 
-\begin{subfigure}{.45\linewidth}
+
+\begin{subfigure}{.48\linewidth}
+\caption{\label{}}
 \centering
-\begin{tikzpicture}[]
+\begin{tikzpicture}[very thick]
 
 \begin{scope}[every node/.style={inner sep=1cm}]
 \node(s) at(-2,0) {$S$};
@@ -82,7 +106,7 @@
 (s.west)
 ;
 
-\draw[dotted] 
+\draw[outline] 
 (st.south) to[out=-8, in=270]
 (t.east) to[out=90, in=8] 
 (st.north) 
@@ -93,14 +117,21 @@
 (st.south)
 ;
 
+\begin{scope}[->]
+\os
+\cupst
+\tst
+\end{scope}
+
 \end{tikzpicture}
 \end{subfigure}
 %
 \hfill
 %
-\begin{subfigure}{.45\linewidth}
+\begin{subfigure}{.48\linewidth}
+\caption{\label{}}
 \centering
-\begin{tikzpicture}[]
+\begin{tikzpicture}[very thick]
 
 \begin{scope}[every node/.style={inner sep=1cm}]
 \node(s) at(-2,0) {$S$};
@@ -108,7 +139,7 @@
 \node(t) at(2,0) {$T$};
 \end{scope}
 
-\draw[dotted] 
+\draw[outline] 
 (st.south) to[out=188, in=270]
 (s.west) to[out=90, in=172] 
 (st.north)
@@ -126,6 +157,13 @@
 (st.south) to[out=-8, in=270]
 (t.east)
 ;
+
+\begin{scope}[->]
+\sst
+\capst
+\cupst
+\ot
+\end{scope}
 
 \end{tikzpicture}
 \end{subfigure}
