@@ -1,7 +1,4 @@
 
-In this section
-
-We use standard graph theoretic notation.
 
 $\nin[]$ and $\nout[]$.
 
@@ -22,16 +19,4 @@ and $w_{\max} \eqdf \max_{(v,u) \in E} w(v)$.
 Given a subset $A' \subseteq A$, we define
 $w(A') \eqdf \sum_{(v,u) \in A'} w(v,u)$.
 
-
-Given a directed graph $G = (V,A)$ and a feasible carpool matching
-$M \subseteq A$, we define a partition of $V$ as follows:
-\begin{align*}
-P_M & \eqdf \set{v : \dout[M](v) = 1} \\
-D_M & \eqdf \set{v : \din[M](v) \geq 1} \\
-Z_M & \eqdf \set{v : \dout[M](v) = \din[M](c) = 0}
-~.
-\end{align*}
-where $P_M$ is the set of \emph{passengers}, $D_M$ is the set of
-\emph{drivers}, and $Z_M$ is the set of \emph{singletons}
-see Figure~\ref{carpool:output}.
 
