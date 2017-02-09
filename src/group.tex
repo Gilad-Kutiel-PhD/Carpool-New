@@ -1,4 +1,3 @@
-
 We now consider a variant of the problem when, in addition to the
 capacity function $c:V \to \N$, and the weight (profit) function
 $w:A \to \R$, we also have a size function $s:V \to \N$, and the
@@ -12,59 +11,3 @@ the problem still has a $(2 +\eps)$-approximation algorithm.  Finally,
 we argue that the local search algorithm can be trivially generalized
 to handle the new variant of the problem while keeping the same
 approximation guarantees.
-
-%%%%%
-
-\subsection{Submodular Maximization}
-
-Consider the submodular maximization formulation given in Section~\ref{sec:sub}.
-Figure~\ref{fig:not submodular} shows that the function $w : 2^V \to \R$ is not
-submodular anymore.
-
-\begin{figure}
-\begin{center}
-\input{fig-not-submodular}
-\end{center}
-\caption{Consider the following instance where node capacity are
-written inside nodes, arcs are labeled with their size and all weights
-are equal to 1.  It is easy to see that if $f(S)$ is the optimal
-solution where $S$ is the set of drivers, then $f(A) + f(B) = 2 \leq 3
-= f(A \cup B) + f(A \cap B)$, thus, $f$ is not submodular.}
-\label{fig:not submodular}
-\end{figure}
-
-
-%%%%%
-
-\subsection{A $(\frac{1}{2} - \varepsilon)$-approximation Algorithm}
-
-%\todo[inline]{write a theorem and a proof}
-
-We now argue that this algorithm can be generalized to solve the group carpool
-matching problem.
-The main concern when trying to adopt the algorithm to the group carpool
-matching is how to determine if a vertex can be improved.
-Observe that Remark~\ref{rem:improve} does not hold anymore.
-If the maximum possible capacity is bounded, one can test for improvement of
-$v$ by considering all the subsets of edges intersecting $v$. 
-When the capacity is unbounded, however, it is easy to see that efficient
-way to test improvement implies a solution to the Knapsack problem.
-Indeed, if this is the case, one can test for improvement by using a known FPTAS
-for Knapsack, this is in the cost of additional $\varepsilon$ reduction in the
-approximation ratio of the algorithm.
-
-
-
-%%%%%
-
-\subsection{A $(\frac{2\cmax}{\cmax+1} + \eps)$-approximation Algorithm}
-
-%\todo[inline]{complete}
-
-We now argue that the local sear
-
-
-
-
-
-

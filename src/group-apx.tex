@@ -1,0 +1,12 @@
+We now argue that this algorithm can be generalized to solve the group carpool
+matching problem.
+The main concern when trying to adopt the algorithm to the group carpool
+matching is how to determine if a vertex can be improved.
+Observe that Remark~\ref{rem:improve} does not hold anymore.
+If the maximum possible capacity is bounded, one can test for improvement of
+$v$ by considering all the subsets of edges intersecting $v$. 
+When the capacity is unbounded, however, it is easy to see that efficient
+way to test improvement implies a solution to the Knapsack problem.
+Indeed, if this is the case, one can test for improvement by using a known FPTAS
+for Knapsack, this is in the cost of additional $\varepsilon$ reduction in the
+approximation ratio of the algorithm.

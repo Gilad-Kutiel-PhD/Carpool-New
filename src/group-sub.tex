@@ -1,0 +1,15 @@
+Consider the submodular maximization formulation given in Section~\ref{sec:sub}.
+Figure~\ref{fig:not submodular} shows that the function $w : 2^V \to \R$ is not
+submodular anymore.
+
+\begin{figure}
+\begin{center}
+\input{fig-not-submodular}
+\end{center}
+\caption{Consider the following instance where node capacity are
+written inside nodes, arcs are labeled with their size and all weights
+are equal to 1.  It is easy to see that if $f(S)$ is the optimal
+solution where $S$ is the set of drivers, then $f(A) + f(B) = 2 \leq 3
+= f(A \cup B) + f(A \cap B)$, thus, $f$ is not submodular.}
+\label{fig:not submodular}
+\end{figure}
