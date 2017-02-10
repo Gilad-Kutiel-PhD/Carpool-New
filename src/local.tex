@@ -1,6 +1,6 @@
 
-In this section we present a $(\frac{2c_{\max}}{c_{\max} + 1}
-+ \eps)$-approximation algoithm for unweighted \carpool whose running
+In this section we present a $(\half + \inv{2c_{\max}}
+- \eps)$-approximation algoithm for unweighted \carpool whose running
 time is polynomial if $c_{\max} = O(1)$.
 
 Let $k$ be an integer to be determined later.  The local search
@@ -99,6 +99,9 @@ The numbers inside the vertices corresponds to $d_i$.
 \label{fig:conflict}
 \end{figure}  
 
+Define $\deg_M(v) \eqdf \din[M](v) + \dout[M](v)$.  For a subset
+$U \subseteq V$ of vertices define $\deg_M(U) \eqdf \sum_{v \in
+U} \deg_M(u)$.
 
 \begin{lemma}
 \label{lemma:r}
@@ -142,6 +145,7 @@ as required.
 \end{proof}
 
 
+\dror{fix proof of next lemma}
 
 \begin{lemma}
 If $k \geq 24\cmax$, then $\abs{M} \geq (\frac{\cmax+1}{2\cmax}
@@ -194,8 +198,8 @@ and thus $\abs{M \cap A(\calT)} \geq (\frac{\cmax + 1}{2\cmax}
 
 \begin{corollary}
 \label{cor:local}
-There exists a $(\frac{2\cmax}{\cmax+1} +\eps)$-approximation
-algorithm for \carpool, for every $\eps>0$.
+There exists a $(\half + \inv{2\cmax} - \eps)$-approximation algorithm
+for \carpool, for every $\eps>0$.
 \end{corollary}
 
 
@@ -232,20 +236,20 @@ desire result.
 
 \fi %%%%% End removed
 
-
-%\todo[inline]{Add a proper theorem}
+\dror{make sure that example is aligned with the conditions of the
+previous lemma}
 
 We now show that Corollary~\ref{cor:local} is tight.  Consider the
 example in Figure~\ref{fig:local search tight}, the example is for the
-special case when $k=11$ and $C=2$ but this example can be generalized
-in a straightforward manner.  One can verify that as the graph in the
-example growth, the ratio between the optimal solution and the local
-search solution approaches $\frac{3}{4}$.
+special case when $k = 11$ and $\cmax = 2$ but this example can be
+generalized in a straightforward manner.  One can verify that as the
+graph in the example growth, the ratio between the optimal solution
+and the local search solution approaches $\frac{3}{4}$.
 
 \begin{figure}
 \begin{center}
 \input{fig-local-tight}
-\caption{A tight example for Theorem~\ref{theorem:local search}. 
+\caption{A tight example for Corollary~\ref{cor:local}. 
 The optimal solution is given by the red solid arcs while the local
 search solution is given by the green, dashed arcs.  The solution can
 be improved by the local search algorithm only if it removes all the
@@ -255,3 +259,4 @@ edges.}
 \end{figure}
 
 
+\dror{Mention [7]}

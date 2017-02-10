@@ -1,6 +1,12 @@
-Consider the submodular maximization formulation given in Section~\ref{sec:sub}.
-Figure~\ref{fig:not submodular} shows that the function $w : 2^V \to \R$ is not
-submodular anymore.
+
+Consider the submodular maximization formulation given in
+Section~\ref{sec:sub}, namely $\barw: 2^V \to \R$, where
+$\barw(S) \eqdf w(M(S))$ and $M(S)$ is the maximum weight carpool
+matching that satisfies $D_{M(S)} \subseteq S \subseteq V \setminus
+P_{M(S)}$.
+%
+Figure~\ref{fig:not submodular} contains an instance that shows that
+the function $\barw$ is not submodular anymore.
 
 \begin{figure}
 \begin{center}
@@ -8,8 +14,7 @@ submodular anymore.
 \end{center}
 \caption{Consider the following instance where node capacity are
 written inside nodes, arcs are labeled with their size and all weights
-are equal to 1.  It is easy to see that if $f(S)$ is the optimal
-solution where $S$ is the set of drivers, then $f(A) + f(B) = 2 \leq 3
-= f(A \cup B) + f(A \cap B)$, thus, $f$ is not submodular.}
+are equal to 1.  We have that $f(A) + f(B) = 2 < 3 = f(A \cup B) +
+f(A \cap B)$.}
 \label{fig:not submodular}
 \end{figure}

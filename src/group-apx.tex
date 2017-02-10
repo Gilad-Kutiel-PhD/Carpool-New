@@ -1,12 +1,29 @@
-We now argue that this algorithm can be generalized to solve the group carpool
-matching problem.
-The main concern when trying to adopt the algorithm to the group carpool
-matching is how to determine if a vertex can be improved.
-Observe that Remark~\ref{rem:improve} does not hold anymore.
-If the maximum possible capacity is bounded, one can test for improvement of
-$v$ by considering all the subsets of edges intersecting $v$. 
-When the capacity is unbounded, however, it is easy to see that efficient
-way to test improvement implies a solution to the Knapsack problem.
-Indeed, if this is the case, one can test for improvement by using a known FPTAS
-for Knapsack, this is in the cost of additional $\varepsilon$ reduction in the
-approximation ratio of the algorithm.
+
+We now argue that the local improvement algorithm from
+Section~\ref{sec:improve} can be generalized to solve \gcp.
+%
+The main concern when trying to adopt the algorithm to \gcp is how to
+determine if a vertex can be improved.
+%
+With \carpool, if weights are polynomially-bounded, it was enough to
+consider in the incoming arcs to a vertex $v$ in a non-increasing
+order of $\delta_M$ (See proof of Theorem~\ref{thm:improve-bounded}).
+This does not work anymore, since \gcp we have sizes.  In fact, given
+$v$, finding the best star with respect to $\delta_M$ is
+a \textsc{Knapsack} instance where the size of the knapsack is $c(v)$.
+%
+If weights are polynomially-bounded, then $\delta_M(e)$ is bounded for
+every arc $e \in A$, and therefore this instance of \textsc{Knapsack}
+can be solved in polynomial time using dynamic programming.
+
+\begin{theorem}
+Algorithm~\ref{alg:grd} is a $\half$-approximation algorithm for \gcp,
+if edge weights are integral and polynomially bounded.
+\end{theorem}
+
+Using stadard scaling and rounding we obtain the following result.
+
+\begin{theorem}
+There exists a $(\half-\eps)$-approximation algorithm for \gcp,
+for every $\eps \in (0,\half)$.
+\end{theorem}

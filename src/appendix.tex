@@ -1,0 +1,38 @@
+
+\section{Omitted Proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:improve}]
+Define the weight function $w'(e)
+= \floor{\frac{w(e)}{w_{\max}} \cdot \frac{m}{2\eps}}$, where
+$w_{\max} \eqdf \max_{e \in A} w(v)$.
+%
+Let $M^*$ and $M'$ be an optimal carpool matchings with respect to $w$
+and $w'$, resp.  We have that
+\[
+w'(M^*)
+=    \sum_{e \in M^*} \floor{\frac{w(e)}{w_{\max}} \cdot \frac{m}{2\eps}}
+>    \sum_{e \in M^*} \paren{ \frac{w(e)}{w_{\max}} \cdot \frac{m}{2\eps} } - m
+=    \frac{m}{2\eps w_{\max}} \cdot w(M^*) - m
+~.
+\]
+Since $w(M^*) \geq w_{\max}$, we have that 
+\[
+w'(M^*)
+>    \frac{m}{2\eps w_{\max}} \cdot (w(M^*) - 2\eps w_{\max})
+\geq \frac{m}{2\eps w_{\max}} \cdot (1 - 2\eps) w(M^*)
+~.
+\]
+By Theorem~\ref{thm:improve-bounded}, our local improvement algorithm computes a
+$\half$-approximate carpool matching $M$ on $(G, c, w')$, and this
+matching satisfies $w'(M) \geq w'(M')/2$.  Furthermore, since
+$w'(M') \geq w'(M^*)$, it follows that $w'(M) \geq w'(M^*)/2$.
+Therefore
+\[
+w(M)
+\geq \frac{2\eps w_{\max}}{m} w'(M) 
+\geq \frac{1}{2} \frac{2\eps w_{\max}}{m} w'(M^*)
+>    \frac{1-2\eps}{2} w(M^*)
+~,
+\]
+as required.
+\end{proof}

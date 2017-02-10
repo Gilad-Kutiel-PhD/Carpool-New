@@ -1,7 +1,8 @@
 
 In this section we show that the \carpool problem can be formulated as
 unconstrained submodular maximization problem, and thus it has a
-randomized $\frac{1}{2}$-approximation algorithm based on~\cite{BFNS15}.
+$\frac{1}{2}$-approximation algorithm based on Buchbinder et
+al.~\cite{BFNS15,buchbinder2016deterministic}.
 
 Given a \carpool instance $(G = (V,A), c, w)$, consider a subset
 $S \subseteq V$.  Let $M(S)$ be the maximum weight carpool matching
@@ -12,15 +13,19 @@ $M(S)$ is the maximum weight carpool matching that is a subset of
 $A \cap (V \setminus S) \times S$.
 %
 Given $S$, the carpool matching $M(S)$ can be computed in polynomial
-time using a maximum b-matching in the bipartite graph 
-$B = (S \cup V \setminus S, A \cap (V \setminus S) \times S)$ or can be reduced
-to a max-cost flow problem as shown in~\cite{kutiel2016}.
+time by computing a maximum $b$-matching in the bipartite graph $B =
+(S \cup V \setminus S, A \cap (V \setminus S) \times S)$ which can be
+done using an algorithm for \textsc{Minimum Cost Flow} as shown
+in~\cite{kutiel2016}.
 
 Consider the function $\barw: 2^V \to \R$, where $\barw(S) \eqdf
-w(M(S))$.  In the next lemma we prove that $\bar{w}$ is
-a \emph{submodular set function}.  Recall that a function $f$ is
-submodular if $f(S) + f(T) \geq f(S \cup T) + f(S \cap T)$ for every
-two sets $S$ and $T$ in the domain of $f$.
+w(M(S)) = \sum_{e \in M(S)} w(e)$.  Observe that $\barw(\emptyset)
+= \barw(V) = 0$, and that $\barw$ is not monotone.
+%
+In the next lemma we prove that $\bar{w}$ is a \emph{submodular set
+function}.  Recall that a function $f$ is submodular if $f(S) +
+f(T) \geq f(S \cup T) + f(S \cap T)$ for every two sets $S$ and $T$ in
+the domain of $f$.
 
 \begin{lemma}
 $\barw$ is submodular.
@@ -68,11 +73,13 @@ The lemma follows, since $\barw(S) \geq w(M_S)$ and $\barw(T) \geq
 w(M_T)$.
 \end{proof}
 
-Buchbinder et al.~\cite{BFNS15,buchbinder2016deterministic} presented a
-general randomized $2$-approximation algorithm for unconstrained submodular maximization.
+Buchbinder et al.~\cite{BFNS15,buchbinder2016deterministic} presented
+a general randomized $\half$-approximation algorithm for unconstrained
+submodular maximization.
 
 \begin{theorem}
-There exists a polynomial time $2$-approximation algorithm for \carpool.
+There exists a polynomial time $\half$-approximation algorithm
+for \carpool.
 \end{theorem}
 
 \begin{figure}

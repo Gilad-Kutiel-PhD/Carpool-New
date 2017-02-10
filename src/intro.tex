@@ -36,9 +36,10 @@ $a$ traveling in person's $b$ car will be satisfied by the trip.  This
 is done based on personal information and feedback from users on past
 rides.
 
-In this paper we assume that potential passenger satisfactions are
-given as input and the goal is to compute an assignment of passengers
-to driver so as to maximize the global satisfaction.
+%In this paper
+We assume that potential passenger satisfactions are given as input
+and the goal is to compute an assignment of passengers to driver so as
+to maximize the global satisfaction.
 %
 More formally, we are given a directed graph $G = (V, A)$, where each
 vertex $v \in V$ corresponds to a user of the service, and an arc $(u,
@@ -46,7 +47,7 @@ v)$ exists if the user corresponding to vertex $u$ is willing to
 commute with the user corresponding to vertex $v$.  We are given a
 capacity function $c: V \rightarrow \N$ which bound the number of
 passengers each user can drive if she was selected as a driver.  A
-non-negative weight function $w : A \rightarrow \R^*+$ is used to model
+non-negative weight function $w : A \rightarrow \R^+$ is used to model
 the amount of satisfaction $w(u,v)$ that user $u$ gains when riding
 with user $v$.
 %
@@ -67,7 +68,7 @@ A$, such that every $v \in V$ satisfies:%
 \item $\din[M](v) \leq c(v)$, and 
 \item $\dout[M](v) \leq 1$.
 \end{inparaenum}
-A feasible carpool matching $M$ partition of $V$ as follows:
+A feasible carpool matching $M$ partitions of $V$ as follows:
 \begin{align*}
 P_M & \eqdf \set{v : \dout[M](v) = 1} \\
 D_M & \eqdf \set{v : \din[M](v) \geq 1} \\
@@ -83,7 +84,7 @@ w(v,u)$.  In other words, the \carpool problem is about finding a set
 of (directed toward the center) vertex disjoint stars that maximizes
 the total weight of the arcs.  
 %
-Figure~\ref{fig:carpool} is an example of the \carpool problem.
+Figure~\ref{fig:carpool} contains an example of a \carpool instance.
 %
 Note that in the unweighted case the goal is to find a carpool
 matching $M$ that maximizes $\abs{P_M}$.
@@ -139,6 +140,11 @@ natural integer linear programs and showed that if the set of drivers
 is known, then an optimal assignment of passengers to drivers can be
 found in polynomial time using a reduction to \textsc{Network Flow}
 (see also Kutiel~\cite{kutiel2016}.)
+%
+Kutiel~\cite{kutiel2016} presented a $\frac{1}{3}$-approximation
+algorithm for \carpool and a $\half$-approximation algorithm for the
+unweighted variant of \carpool.
+
 
 Nguyen et al.~\cite{nguyen2008approximating} considered
 the \textsc{Spanning Star Forest} problem.  A \emph{star forest} is a
@@ -183,6 +189,18 @@ when such changes are no longer possible.  Athanassopoulos et
 al.~\cite{ACKK09} showed that such algorithms do not provide better
 than $(\inv{2} + \frac{1}{2(k+2)})$-approximate spanning star forests.
 
+Arkin et al.~\cite{arkin2004approximations} considered
+the \textsc{Maximum Capacitated Star Packing} problem.  In this
+problem the input consists of a complete undirected graph with
+non-negative edge weights and a capacity vector $c
+= \set{c_1,\ldots,c_p}$, where $\sum_{i=1}^p c_i = \abs{V} - p$.  The
+goal is to find a set of vertex-disjoint stars in $G$ of size
+$c_1,\ldots,c_p$ of maximum total weight.  Arkin et
+al.~\cite{arkin2004approximations} provided a local search algorithm
+whose approximation ratio is $\inv{3}$, and a matching-based
+$\half$-approximation algorithm for the case where edge weights
+satisfy the triangle inequality.
+
 Bar-Noy et al.~\cite{bar2015improved} considered the
 \textsc{Minimum $2$-Path Partition} problem.
 In this problem the input is a complete graph on $3k$ vertices with
@@ -193,56 +211,63 @@ They presented two approximation algorithms, one for the weighted case
 whose is ratio is $0.5833$, and another for the unweighted case whose
 ratio is $\frac{3}{4}$.
 
-Another related problem is \textsc{$k$-Set Packing}.  In this problem
-one is given a collection of weighted sets, each containing as most
-$k$ elements, and the goal is to find a maximum weight subcollection
-of disjoint sets.  Chandra and Halld\'orsson~\cite{chandra2001greedy}
+Another related problem is \textsc{$k$-Set Packing}, where one is
+given a collection of weighted sets, each containing as most $k$
+elements, and the goal is to find a maximum weight subcollection of
+disjoint sets.  Chandra and Halld\'orsson~\cite{chandra2001greedy}
 presented a $\frac{3}{2(k+1)}$-approximation algorithm for this
 problem.
-
-
-
-
-Consider a subset of
-nodes $U$ of size at most $k$.  Observe that each subset of nodes has
-an optimal internal assignment of passenger to drivers.  Let the
-weight of this assignment be the profit of $U$, denote $p(U)$.  If $k
-= O(1)$, then $p(U)$ can be computed for every $U$ of size at most $k$
-in polynomial time.  The outcome is a \textsc{Set Packing} instance.
-
-
-
-Arkin et al.~\cite{arkin2004approximations} considered other variants
-of capacitated star packing where a capacity vector is given as part
-of the input and capacities need to be assigned to vertices.
-
-
-
-Kutiel~\cite{kutiel2016} presented a $\frac{1}{3}$-approximation
-algorithm for the problem and $\frac{1}{2}$-approximation algorithm for the
-unweighted variant of the problem.
-
-
+%
+\carpool can be seen a special case of \textsc{$k$-Set Packing}
+with $k = \cmax + 1$.  Consider a subset of nodes $U$ of size at most
+$k$.  Observe that each subset of nodes has an optimal internal
+assignment of passenger to drivers.  Let the weight of this assignment
+be the profit of $U$, denote $p(U)$.  If $k = O(1)$, $p(U)$ can be
+computed for every $U$ of size at most $k$ in polynomial time.  The
+outcome is a \textsc{$k$-Set Packing} instance.  This leads to a
+$\frac{3}{2(\cmax+2)}$-approximation algorithm for the case where
+$\cmax = O(1)$.
 
 
 %%%%%
 
 \subparagraph{Our contribution.}
 %
-In Section~\ref{sec:sub} we show that the \carpool can be formulated
-as unconstrained submodular maximization problem, thus it has a
-$\frac{1}{2}$-approximation algorithm due
-to~\cite{BFNS15,buchbinder2016deterministic}.
-
-In Section~\ref{sec:local} we consider the unweighted variant of the
-problem.  We provide a $(\frac{\cmax+1}{2\cmax} - \eps)$-approximation
-algorithm, for any $\eps>0$, where $\cmax \eqdf \max_{v \in V} c(v)$
-is the maximum capacity.  We also show that \carpool is APX-hard even
-if $\cmax \leq 3$.
+Sections~\ref{sec:approx} contains approximation algorithms
+for \carpool.  First, in Section~\ref{sec:sub} we show that
+the \carpool can be formulated as unconstrained submodular
+maximization problem, thus it has a $\frac{1}{2}$-approximation
+algorithm due to~\cite{BFNS15,buchbinder2016deterministic}.
 %
-In Section~\ref{sec:group} we consider \gcp.  
-We first show that the unconstrained submodular maximization formulation for
-the \carpool does not follow for the \gcp.
-We show, however, that this problem still admits
-a $(\frac{1}{2} -\varepsilon)$-approximation algorithm, and argue that the local
-search algorithm generalizes to \gcp as well.
+We show a local improvement algorithm for \carpool%
+\footnote{We use the term \emph{local improvement} to differentiate
+this algorithm from the local search algorithm that is given in
+Section~\ref{sec:local}.}.
+%
+This algorithm repeatedly checks whether the current carpool matching
+can be improved by means of a star centered at a vertex, and it
+terminates when such a step is not possible.
+%
+The approximation ratio of this algorithm is $\half$ if weights are
+polynomially bounded, and its ratio is $\half-\eps$ in general.
+
+Section~\ref{sec:cmax} we consider \carpool with bounded maximum
+capacity.   Define $\cmax \eqdf \max_{v \in V} c(v)$.
+%
+In Section~\ref{sec:hardness} we show that \carpool is APX-hard even
+for undirected and unweighted instances with $\cmax \leq b$, for any
+$b \geq 3$.
+%
+In Section~\ref{sec:local} we consider the unweighted variant of the
+problem.  We provide a local search algorithm whose approximation
+ratio is $\half + \inv{2\cmax} - \eps$, for any $\eps>0$.
+
+\dror{Compare to [7]!}
+
+Finally, Section~\ref{sec:group} discusses \gcp.  We first show that
+the unconstrained submodular maximization formulation for the \carpool
+does not work for \gcp.  We show, however, that this problem still
+admits a $(\frac{1}{2} -\varepsilon)$-approximation algorithm by
+extending the local improvement algorithm.  In addition, we show that
+the local search algorithm generalizes to \gcp with the same
+approximation ratio.

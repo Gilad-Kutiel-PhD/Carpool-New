@@ -5,42 +5,41 @@
 \section{Introduction}
 \input{intro}
 
-\section{Preliminaries}
-\label{sec:pre}
-\input{preliminaries}
-
 \section{Approximation Algorithms}
 \label{sec:approx}
 \input{approx}
 
-\subsection{Submodular Maximization}
-\label{sec:sub}
-\input{sub}
+   \subsection{Submodular Maximization}
+   \label{sec:sub}
+   \input{sub}
 
-\subsection{A Local Search Algorithm}
-\input{local_search}
+   \subsection{A Local Improvement Algorithm}
+   \label{sec:improve}
+   \input{improve}
 
 \section{Constant Maximum Capacity}
+\label{sec:cmax}   
 \input{const}
-	\subsection{Hardness}
-	\label{sec:hardness}
-	\input{hardness}
 
-	\subsection{Local Search}
-	\label{sec:local}
-	\input{local}
+   \subsection{Hardness}
+   \label{sec:hardness}
+   \input{hardness}
+
+   \subsection{Local Search}
+   \label{sec:local}
+   \input{local}
 
 \section{Group Carpool}
 \label{sec:group}
 \input{group}
-	\subsection{Submodular Maximization}
-	\input{group-sub}
-	
-	\subsection{A \texorpdfstring{$(\frac{1}{2} - \varepsilon)$}--approximation
-	Algorithm}
-	\input{group-apx}
-	
-	\subsection{A \texorpdfstring{$(\frac{\cmax+1}{2\cmax} + \eps)$}--approximation
-	Algorithm}
-	\input{group-local}
 
+   \subsection{Submodular Maximization}
+   \input{group-sub}
+   
+   \subsection{A \texorpdfstring{$(\frac{1}{2} - \eps)$}--approximation
+	Algorithm}
+   \input{group-apx}
+   
+   \subsection{A \texorpdfstring{$(\half + \inv{2\cmax} + \eps)$}--approximation
+	Algorithm}
+   \input{group-local}
