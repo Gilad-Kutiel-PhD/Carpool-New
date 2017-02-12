@@ -1,5 +1,5 @@
 
-As traveling costs become higher and parking becomes sparse is it only
+As traveling costs become higher and parking becomes sparse it is only
 natural to share rides or to \emph{carpool}.  Originally, carpooling
 was an arrangement among a group of people by which they take turns
 driving the other to and from a designated location.  However, taking
@@ -68,7 +68,7 @@ A$, such that every $v \in V$ satisfies:%
 \item $\din[M](v) \leq c(v)$, and 
 \item $\dout[M](v) \leq 1$.
 \end{inparaenum}
-A feasible carpool matching $M$ partitions of $V$ as follows:
+A feasible carpool matching $M$ partitions $V$ as follows:
 \begin{align*}
 P_M & \eqdf \set{v : \dout[M](v) = 1} \\
 D_M & \eqdf \set{v : \din[M](v) \geq 1} \\
@@ -92,7 +92,7 @@ matching $M$ that maximizes $\abs{P_M}$.
 Moreover, observe that if $G$ is undirected, $D_M \cup Z_M$ is
 a \emph{dominating set}.  Hence, in this case, an optimal carpool
 matching induces an optimal dominating set and vice versa.
-Since \textsc{Minimum Dominating Set} is NP-hard, if follows
+Since \textsc{Minimum Dominating Set} is NP-hard, it follows
 that \carpool is NP-hard even if the instance is undirected,
 unweigthed, and uncapacitated.
 
@@ -159,7 +159,7 @@ Nguyen et al.~\cite{nguyen2008approximating} provided a PTAS for
 unweighted planner graphs and a polynomial-time
 $\frac{3}{5}$-approximation algorithm for unweighted graphs.  They
 gave an exact optimization algorithm for weighted trees, and used it
-on a minimum spanning tree of the input graph to obtain a
+on a maximum spanning tree of the input graph to obtain a
 $\frac{1}{2}$-approximation algorithm for weighted graphs.  They also
 shows that it is NP-hard to approximate problem \textsc{Spanning Star
 Forest} within a ratio of $\frac{259}{260}+\eps$, for any $\eps>0$.
@@ -167,9 +167,10 @@ Forest} within a ratio of $\frac{259}{260}+\eps$, for any $\eps>0$.
 %They also showed how to apply the spanning star forest model to
 %aligning multiple genomic sequences over a tandem duplication region.
 %
-Chen et al.~\cite{CENRRS13} improved the approximation ratios from
-$\frac{3}{5}$ and $\inv{2}$ to $0.71$ and $0.64$, resp.  They also
-showed that the problem can not be approximated to within a factor of
+Chen et al.~\cite{CENRRS13} improved the approximation ratio for unweighted
+graphs from $\frac{3}{5}$ to $0.71$ and and gave a $0.64$-approximation
+algorithm for node weighted graphs.
+They also showed that the problem can not be approximated to within a factor of
 $\frac{31}{32} + \eps$, for any $\eps > 0$ assuming that
 $\text{P} \neq \text{NP}$.
 %
@@ -186,8 +187,12 @@ to turn $t \leq k$ from leaves to centers and $t+1$ centers to leaves.
 A change is made if it results in a feasible solution, namely if each
 leave is adjacent to at least one center.  The algorithm terminates
 when such changes are no longer possible.  Athanassopoulos et
-al.~\cite{ACKK09} showed that such algorithms do not provide better
-than $(\inv{2} + \frac{1}{2(k+2)})$-approximate spanning star forests.
+al.~\cite{ACKK09} showed that for any $k$ and $\varepsilon$ there exists an
+instance $G$ and a local optima $M$ such that 
+$\frac{|M|}{|OPT|} \leq \inv(2) + \varepsilon$, where $|OPT|$ is the number of
+edges in an optimal spanning star forest \footnote{Note that this lower bound
+does not contradict our result regarding approximation ratio of our local
+search algorithm where the maximum possible capacity is constant.}.
 
 Arkin et al.~\cite{arkin2004approximations} considered
 the \textsc{Maximum Capacitated Star Packing} problem.  In this
@@ -211,14 +216,14 @@ They presented two approximation algorithms, one for the weighted case
 whose is ratio is $0.5833$, and another for the unweighted case whose
 ratio is $\frac{3}{4}$.
 
-Another related problem is \textsc{$k$-Set Packing}, where one is
+Another related problem is the \textsc{$k$-Set Packing}, where one is
 given a collection of weighted sets, each containing as most $k$
 elements, and the goal is to find a maximum weight subcollection of
 disjoint sets.  Chandra and Halld\'orsson~\cite{chandra2001greedy}
 presented a $\frac{3}{2(k+1)}$-approximation algorithm for this
 problem.
 %
-\carpool can be seen a special case of \textsc{$k$-Set Packing}
+\carpool can be seen as a special case of \textsc{$k$-Set Packing}
 with $k = \cmax + 1$.  Consider a subset of nodes $U$ of size at most
 $k$.  Observe that each subset of nodes has an optimal internal
 assignment of passenger to drivers.  Let the weight of this assignment
@@ -233,7 +238,7 @@ $\cmax = O(1)$.
 
 \subparagraph{Our contribution.}
 %
-Sections~\ref{sec:approx} contains approximation algorithms
+In Sections~\ref{sec:approx} contains approximation algorithms
 for \carpool.  First, in Section~\ref{sec:sub} we show that
 the \carpool can be formulated as unconstrained submodular
 maximization problem, thus it has a $\frac{1}{2}$-approximation
@@ -264,7 +269,7 @@ ratio is $\half + \inv{2\cmax} - \eps$, for any $\eps>0$.
 
 \dror{Compare to [7]!}
 
-Finally, Section~\ref{sec:group} discusses \gcp.  We first show that
+Finally, Section~\ref{sec:group} discusses the \gcp.  We first show that
 the unconstrained submodular maximization formulation for the \carpool
 does not work for \gcp.  We show, however, that this problem still
 admits a $(\frac{1}{2} -\varepsilon)$-approximation algorithm by

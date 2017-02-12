@@ -6,9 +6,9 @@ The main concern when trying to adopt the algorithm to \gcp is how to
 determine if a vertex can be improved.
 %
 With \carpool, if weights are polynomially-bounded, it was enough to
-consider in the incoming arcs to a vertex $v$ in a non-increasing
+consider the incoming arcs to a vertex $v$ in a non-increasing
 order of $\delta_M$ (See proof of Theorem~\ref{thm:improve-bounded}).
-This does not work anymore, since \gcp we have sizes.  In fact, given
+This does not work anymore, since in the \gcp we have sizes.  In fact, given
 $v$, finding the best star with respect to $\delta_M$ is
 a \textsc{Knapsack} instance where the size of the knapsack is $c(v)$.
 %
