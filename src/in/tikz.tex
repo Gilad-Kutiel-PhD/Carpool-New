@@ -1,6 +1,5 @@
 \usepackage{tikz}
 \usetikzlibrary{
-	arrows,
 	arrows.meta,
 	calc,
 	graphs,
@@ -11,44 +10,21 @@
 	math,
 }
 
+% NODE
+\tikzset{default node/.style={draw,circle,inner sep=0mm,minimum size=5mm,very thick,font=\small,black!70,}}
+
+% LABELS
+\tikzset{label/.style={draw=none,sloped,}}
+\tikzset{label above/.style={label,midway,above=-1mm,}}
+\tikzset{label below/.style={label,midway,below=-1mm,}}
+\tikzset{outline/.style={loosely dashed, ultra thin, lightgray}}
+\tikzset{m/.style={blue, dashed}}
+
 %DEFAULT STYLE
-\tikzset{default style/.style={
-	>=Stealth, 
+\tikzset{
+	>=Triangle[], 
 	on grid, 
 	auto, 
 	thick,
-}}
+}
 
-% NODE
-\tikzset{default node/.style={
-	draw, 
-	circle,
-	inner sep=0mm,
-	minimum size=5mm,
-	very thick,
-	font=\small,
-	black!70,
-}}
-
-% LABELS
-\tikzset{label/.style={
-	draw=none,
-	sloped,
-}}
-
-\tikzset{label above/.style={
-	label,
-	midway,
-	above=-1mm,
-}}
-
-\tikzset{label below/.style={
-	label,
-	midway,
-	below=-1mm,
-}}
-
-
-\tikzset{m/.style={blue, dashed}}
-
-\tikzset{outline/.style={loosely dashed, ultra thin, lightgray}}

@@ -1,6 +1,4 @@
-
 \section{Omitted Proof}
-
 \begin{proof}[Proof of Theorem~\ref{thm:improve}]
 Define the weight function $w'(e)
 = \floor{\frac{w(e)}{w_{\max}} \cdot \frac{m}{2\eps}}$, where
@@ -36,3 +34,24 @@ w(M)
 \]
 as required.
 \end{proof}
+
+\section{Tight Analysis}
+We now show that Corollary~\ref{cor:local} is tight.  Consider the
+example in Figure~\ref{fig:local search tight}, the example is for the
+special case when $k = 11$ and $\cmax = 2$ but this example can be
+generalized in a straightforward manner.  One can verify that as the
+graph in the example growth, the ratio between the optimal solution
+and the local search solution approaches $\frac{3}{4}$.
+
+\begin{figure}
+\begin{center}
+\scalebox{.85}{\input{fig-local-tight}}
+\caption{A tight example for Corollary~\ref{cor:local}. 
+The optimal solution is given by the red solid arcs while the local
+search solution is given by the green, dashed arcs.  The solution can
+be improved by the local search algorithm only if it removes all the
+edges.}
+\label{fig:local search tight}
+\end{center}
+\end{figure}
+

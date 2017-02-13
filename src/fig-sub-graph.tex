@@ -13,11 +13,37 @@
 \node(6) at(2.5,0) {f};
 
 \node(7) at(0,-1.5) {h};
-\node(8) at(0,-3) {i};
+\node(8) at(-1.5,-1.5) {i};
 \node(9) at(1.5,-1.5) {j};
 
 \node(10) at(4,-1.5) {k};
-\node(11) at(4,-3) {l};
+\node(11) at(2.5,-1.5) {l};
+
+\draw[outline]
+(1.south) to[out=180,in=180] 
+(2.north) to[out=0,in=90]
+(3.east) to[out=-90,in=0]
+(1.south)
+;
+
+\draw[outline]
+(8.west) to[out=90,in=90,looseness=.6] 
+(9.east) to[out=-90,in=-90,looseness=.6]
+(8.west)
+;
+
+\draw[outline]
+(6.south) to[out=180,in=180] 
+(5.north) to[out=0,in=90]
+(4.east) to[out=-90,in=180]
+(6.south)  
+;
+
+\draw[outline]
+(10.east) to[out=90,in=90] 
+(11.west) to[out=-90,in=-90]
+(10.east)  
+;
 
 \begin{scope}[dashed, red]
 \edge{2}{1}

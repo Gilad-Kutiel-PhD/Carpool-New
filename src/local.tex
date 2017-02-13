@@ -66,24 +66,23 @@ and an edge exists between two nodes if there is a star in $\calS(M)$
 that intersects the two corresponding stars of the optimal solution.
 %
 Formally $H = (\calS(M^*), E)$ where
-\[
-E = \set{(S^*_i, S^*_j) : \exists S \in \calS(M), 
+$
+{E = \set{(S^*_i, S^*_j) : \exists S \in \calS(M), 
          V(S) \cap V(S^*_i) \neq \emptyset \land
-         V(S) \cap V(S^*_j) \neq \emptyset}
-~.
-\]
+         V(S) \cap V(S^*_j) \neq \emptyset}}
+$.
 Figure~\ref{fig:conflict} depicts a star graph.
 
 \begin{figure}[t]
 %
-\begin{subfigure}{.4\linewidth}
+\begin{subfigure}[t]{.4\linewidth}
 \caption{\label{subfloat:graph}}
 \input{fig-sub-graph}
 \end{subfigure}
 %
 \hfill
 %
-\begin{subfigure}{.4\linewidth}
+\begin{subfigure}[t]{.4\linewidth}
 \caption{\label{subfloat:conflict}}
 \input{fig-sub-conflict}
 \end{subfigure}
@@ -91,10 +90,11 @@ Figure~\ref{fig:conflict} depicts a star graph.
 \caption[]{
 \subref{subfloat:graph} 
 An optimal matching depicted by the dashed red edges,
-and another solution depicted by the solid green edges.  
+and another solution depicted by the solid green edges.
+The optimal stars are outlined.  
 \subref{subfloat:conflict}
-The conflict graph, the upper left vertex corresponds 
-to the star that contains the vertices a,b,c.
+The star graph, each vertex corresponded to a star in the original graph. 
+The upper left vertex corresponds to the star that contains the vertices a,b,c.
 The numbers inside the vertices corresponds to $d_i$.   
 }
 \label{fig:conflict}
@@ -266,22 +266,4 @@ There exists a $(\half + \inv{2\cmax} - \eps)$-approximation algorithm
 for \carpool, for every $\eps>0$.
 \end{corollary}
 
-We now show that Corollary~\ref{cor:local} is tight.  Consider the
-example in Figure~\ref{fig:local search tight}, the example is for the
-special case when $k = 11$ and $\cmax = 2$ but this example can be
-generalized in a straightforward manner.  One can verify that as the
-graph in the example growth, the ratio between the optimal solution
-and the local search solution approaches $\frac{3}{4}$.
-
-\begin{figure}
-\begin{center}
-\input{fig-local-tight}
-\caption{A tight example for Corollary~\ref{cor:local}. 
-The optimal solution is given by the red solid arcs while the local
-search solution is given by the green, dashed arcs.  The solution can
-be improved by the local search algorithm only if it removes all the
-edges.}
-\label{fig:local search tight}
-\end{center}
-\end{figure}
-
+In the appendix we show that our analysis is tight.
