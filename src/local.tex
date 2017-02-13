@@ -52,9 +52,10 @@ Z_M$.)
 Given a carpool matching $M$, we define $\calS(M)$ to be the set of
 stars that are induced by $M$.  Denote by $V(S)$ the set of vertices
 of a star, i.e., if $v$ is the center $S$, then $V(S) = \{v\} \cup
-P_M(v)$.  Also, for $\calT \subseteq \calS(M)$, define
-$V(\calT) \eqdf \bigcup_{S \in \calT} V(S)$.  Also, let $A(S)$ be the
-edges of $S$, and define $A(\calT) \eqdf \bigcup_{S \in \calT} A(S)$.
+P_M(v)$.  Also, let $A(S)$ be the arcs of $S$.  For
+$\calT \subseteq \calS(M)$, define
+$V(\calT) \eqdf \bigcup_{S \in \calT} V(S)$ and
+$A(\calT) \eqdf \bigcup_{S \in \calT} A(S)$.
 
 To analyze the approximation ratio achieved by the local search
 algorithm consider an arbitrary but fixed optimal matching $M^*$.
@@ -99,13 +100,24 @@ The numbers inside the vertices corresponds to $d_i$.
 \label{fig:conflict}
 \end{figure}  
 
+\begin{lemma}
+The maximum degree of $H$ is $\cmax(\cmax+1)$.
+\end{lemma}
+\begin{proof}
+Each star in $\calS(M^*)$ consists of at most $\cmax+1$ vertices and
+each such vertex can belong to a star in $\calS(M)$ containing
+additional $\cmax$ vertices, each of which is located in a different
+star in $\calS(M^*)$.
+\end{proof}
+
+
 Define $\deg_M(v) \eqdf \din[M](v) + \dout[M](v)$.  For a subset
 $U \subseteq V$ of vertices define $\deg_M(U) \eqdf \sum_{v \in
 U} \deg_M(u)$.
 
 \begin{lemma}
 \label{lemma:r}
-Let $\calT \subseteq \calS(M^*)$ that induces a connect subgraph of
+Let $\calT \subseteq \calS(M^*)$ that induces a connected subgraph of
 $H$.  If $\abs{A(\calT)} \leq k$, then
 \[
 \frac{\deg_M(V(\calT))}{\deg_{M^*}(V(\calT))} 
@@ -139,78 +151,50 @@ and so
 \frac{\deg_M(V(\calT))}{\deg_{M^*}(V(\calT))}
 \geq \half + \frac{\abs{\calT} - 1}{\deg_{M^*}(V(\calT))}
 \geq \half + \frac{\abs{\calT} - 1}{2\cmax \abs{\calT}}
+=    \half + \inv{2\cmax} - \inv{2\cmax \abs{\calT}}
 ~,
 \]
 as required.
 \end{proof}
 
-
-\dror{fix proof of next lemma}
-
-\iffalse %%%%% Rmeoved
-
-\begin{lemma}
-If $k \geq 24\cmax$, then $\abs{M} \geq (\frac{\cmax+1}{2\cmax}
-- \frac{2}{k}) \cdot \abs{M^*}$.
-\end{lemma}
-\begin{proof}
-Consider a maximal (with respect to set inclusion) connected component
-of $H$ induced by the vertices in $\calT \subseteq \calS(M^*)$.
-%
-If $\abs{M \cap A(\calT)} \leq k$, then it must be that $\abs{M \cap
-A(\calT)} = \abs{M^* \cap A(\calT)}$, since otherwise $M \cap
-A(\calT)$ could be improved.
-
-It remains to consider a maximal component $\calT$ such that If
-$\abs{M \cap A(\calT)} > k$.  Observe that since the number of edges
-in a $S \in \calS(M^*)$ is at most $\cmax$, it must be that
-$\abs{V(\calT)} > \frac{k}{\cmax}$.
-%
-Given such a component $\calT$, we partition its vertex set into
-several sets, each of size at least $\frac{k}{4\cmax}$.  We do this as
-follows.  First construct any spanning tree of $\calT$ (say, by
-running DFS).  It is well known that a tree of $t$ vertices can be
-split into two subtrees each with at most $\floor{2t/3}+2$ vertices
-% (see, e.g., \cite{???}).  
-Moreover, if $t \geq 24$, each such subtree
-contains at most $\frac{3}{4}t$.  Hence, we can decompose $\calT$
-recursively into vertex sets whose sizes is between $\frac{k}{\cmax}$
-and $\frac{k}{4\cmax}$, assuming that $\frac{k}{\cmax} \geq 24$.
-%
-Each such vertex set $\calX$ is connected and contains at most
-$\frac{k}{\cmax}$ stars.  Hence $\abs{A(\calX)} \leq k$.  Due to
-Lemma~\ref{lemma:r} and since $\abs{V(\calX)} \geq \frac{k}{4\cmax}$,
-we have that
-\[
-\frac{\deg_M(V(\calX))}{\deg_{M^*}(V(\calX))} 
-\geq \half + \inv{2\cmax} - \frac{2}{k}
-~.
-\]
-Since $\deg_{M^*}(V(\calT)) = \sum_{\calX} \deg_{M^*}(V(\calX))$ and
-$\deg_M(V(\calT)) = \sum_{\calX} \deg_M(V(\calX))$, it follows that
-\[
-\frac{\deg_M(V(\calT))}{\deg_{M^*}(V(\calT))}
-\geq \half + \inv{2\cmax} - \frac{2}{k}
-~,
-\]
-and thus $\abs{M \cap A(\calT)} \geq (\frac{\cmax + 1}{2\cmax}
-- \frac{2}{k}) \abs{M^* \cap A(\calT)}$.
-\end{proof}
-
-
-\begin{corollary}
-\label{cor:local}
-There exists a $(\half + \inv{2\cmax} - \eps)$-approximation algorithm
-for \carpool, for every $\eps>0$.
-\end{corollary}
-
-\fi %%%%% End removed
-
 \begin{lemma}
 \label{lemma:dec}
-Given a parameter $k$, a bounded degree connected graph $G$, with a
-maximum degree $d$ can be decomposed into connected components of size
-at least $k$, and at most $d(k-1) + 1$.
+Let $G = (V,E)$ be an undirected connected graph with maximum degree
+$\Delta$, and let $\ell < \abs{V}/\Delta$.  Then $G$ can be decomposed
+into connected components of size at least $\ell$, and at most
+$\Delta \ell$.
+\end{lemma}
+\begin{proof}
+Let $T$ be any spanning tree of $G$ and let $r$ be an arbitrary root.
+Starting with $r$, repeatedly choose a child whose subtree is strictly
+larger than $\frac{\Delta-1}{\Delta} \abs{V}$, until this is not
+possible.  Hence, we have reached a vertex $v$ whose subtree contains
+more than $\frac{\Delta-1}{\Delta} \abs{V}$ vertices, but the subtrees
+of its children contain at most $\frac{\Delta-1}{\Delta} \abs{V}$
+vertices.
+%
+If $v = r$, then $v$ has a child $u$ with at least $\inv{\Delta}
+(\abs{V}-1) \geq \ell$ vertices.  Otherwise, there exists a child $u$
+of $v$ whose subtree is of size at least
+$\inv{\Delta} \abs{V} \geq \ell$.  Disconnect $u$ and the vertices in
+its subtree from the graph.
+%
+In both cases $u$'s subtree contains at most
+$\frac{\Delta-1}{\Delta} \abs{V}$ vertices, and thus at least
+$\inv{\Delta} \abs{V} \geq \ell$ vertices remain in the graph.  Hence
+we obtain two connected subgraphs of size at least $\ell$.
+%
+We repeat this procedure recursively on any component of size
+strictly larger $\Delta\ell$.
+\end{proof}
+
+\iffalse %%%%% Removed
+
+\begin{lemma}
+%\label{lemma:dec}
+Given a parameter $k$, a connected graph $G$ with a maximum degree $d$
+can be decomposed into connected components of size at least $k$, and
+at most $d(k-1) + 1$.
 \end{lemma}
 
 \begin{proof}
@@ -223,21 +207,64 @@ $k$) to the constructed component and decompose the large components
 break the graph to at most $d - 1$ additional components.
 \end{proof}
 
-\begin{theorem}
-\label{theorem:local search}
-The local search is ($\frac{1}{2} + \frac{1}{2c}
-- \varepsilon$)-approximation algorithm.
-\end{theorem}
+\fi %%%%% End removed
 
+
+\begin{lemma}
+If $k \geq \cmax$, then $\abs{M} \geq (\half + \inv{2\cmax}
+- \frac{\cmax(\cmax+1)}{2k}) \cdot \abs{M^*}$.
+\end{lemma}
 \begin{proof}
-Combine lemma~\ref{lemma:dec}, and lemma~\ref{lemma:r}, and observe
-that the maximum degree in $G^{M^*}_M$ is $(C + 1)^C$ to get the
-desire result.
+Consider a maximal (with respect to set inclusion) connected component
+of $H$ induced by the vertices in $\calT \subseteq \calS(M^*)$.
+%
+If $\abs{M \cap A(\calT)} \leq k$, then it must be that $\abs{M \cap
+A(\calT)} = \abs{M^* \cap A(\calT)}$, since otherwise $M \cap
+A(\calT)$ could be improved.
+
+It remains to consider a maximal component $\calT$ such that If
+$\abs{M \cap A(\calT)} > k$.  Observe that since the number of edges
+in $S \in \calS(M^*)$ is at most $\cmax$, it must be that
+$\abs{V(\calT)} > \frac{k}{\cmax}$.
+%
+Due to Lemma~\ref{lemma:dec} (with $\ell = \frac{k}{\cmax}$) we can
+partition $\calT$ into connected components each of which contains
+between $\frac{k}{\cmax^2(\cmax+1)}$ and $\frac{k}{\cmax}$ vertices.
+%
+Since each such vertex set $\calX$ is connected and contains at most
+$\frac{k}{\cmax}$ stars, it follows that $\abs{A(\calX)} \leq k$.
+%
+Due to Lemma~\ref{lemma:r} we have that
+\[
+\frac{\deg_M(V(\calX))}{\deg_{M^*}(V(\calX))} 
+\geq \half + \inv{2\cmax} - \frac{\cmax(\cmax+1)}{2k}
+~.
+\]
+Since $\deg_{M^*}(V(\calT)) = \sum_{\calX} \deg_{M^*}(V(\calX))$ and
+$\deg_M(V(\calT)) = \sum_{\calX} \deg_M(V(\calX))$, it follows that
+\[
+\frac{\deg_M(V(\calT))}{\deg_{M^*}(V(\calT))}
+\geq \half + \inv{2\cmax} - \frac{\cmax(\cmax+1)}{2k}
+~,
+\]
+and thus
+\[
+\abs{M \cap A(\calT)}
+\geq \paren{ \half + \inv{2\cmax} -
+             \frac{\cmax(\cmax+1)}{2k}} \abs{M^* \cap A(\calT)}
+~,
+\]
+and the lemma follows.
 \end{proof}
 
+By setting $k = \ceil{\cmax(\cmax+1)/2\eps}$, we get the following
+result.
 
-\dror{make sure that example is aligned with the conditions of the
-previous lemma}
+\begin{corollary}
+\label{cor:local}
+There exists a $(\half + \inv{2\cmax} - \eps)$-approximation algorithm
+for \carpool, for every $\eps>0$.
+\end{corollary}
 
 We now show that Corollary~\ref{cor:local} is tight.  Consider the
 example in Figure~\ref{fig:local search tight}, the example is for the
@@ -258,5 +285,3 @@ edges.}
 \end{center}
 \end{figure}
 
-
-\dror{Mention [7]}

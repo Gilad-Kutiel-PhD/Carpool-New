@@ -70,10 +70,10 @@ A$, such that every $v \in V$ satisfies:%
 \end{inparaenum}
 A feasible carpool matching $M$ partitions $V$ as follows:
 \begin{align*}
-P_M & \eqdf \set{v : \dout[M](v) = 1} \\
-D_M & \eqdf \set{v : \din[M](v) \geq 1} \\
+P_M & \eqdf \set{v : \dout[M](v) = 1} &
+D_M & \eqdf \set{v : \din[M](v) \geq 1} &
 Z_M & \eqdf \set{v : \dout[M](v) = \din[M](c) = 0}
-~.
+%~.
 \end{align*}
 where $P_M$ is the set of \emph{passengers}, $D_M$ is the set of
 \emph{active drivers}, and $Z_M$ is the set of \emph{solo drivers}.
@@ -145,7 +145,6 @@ Kutiel~\cite{kutiel2016} presented a $\frac{1}{3}$-approximation
 algorithm for \carpool and a $\half$-approximation algorithm for the
 unweighted variant of \carpool.
 
-
 Nguyen et al.~\cite{nguyen2008approximating} considered
 the \textsc{Spanning Star Forest} problem.  A \emph{star forest} is a
 graph consisting of node-disjoint star graphs.  In
@@ -153,7 +152,9 @@ the \textsc{Spanning Star Forest} problem, we are given an undirected
 graph $G$, and the goal is to find a spanning subgraph which is a star
 forest that maximizes the weight of edges that are covered by the star
 forest.  Notice that this problem is equivalent to \carpool on
-undirected and uncapacitated instances.
+undirected and uncapacitated instances.  We also note that if all
+weights leaving a node are the same, then the instance is referred to
+as node-weighted.
 %
 Nguyen et al.~\cite{nguyen2008approximating} provided a PTAS for
 unweighted planner graphs and a polynomial-time
@@ -161,21 +162,23 @@ $\frac{3}{5}$-approximation algorithm for unweighted graphs.  They
 gave an exact optimization algorithm for weighted trees, and used it
 on a maximum spanning tree of the input graph to obtain a
 $\frac{1}{2}$-approximation algorithm for weighted graphs.  They also
-shows that it is NP-hard to approximate problem \textsc{Spanning Star
-Forest} within a ratio of $\frac{259}{260}+\eps$, for any $\eps>0$.
+shows that it is NP-hard to approximate unweighted \textsc{Spanning
+Star Forest} within a ratio of $\frac{259}{260}+\eps$, for any
+$\eps>0$.
 %
 %They also showed how to apply the spanning star forest model to
 %aligning multiple genomic sequences over a tandem duplication region.
 %
-Chen et al.~\cite{CENRRS13} improved the approximation ratio for unweighted
-graphs from $\frac{3}{5}$ to $0.71$ and and gave a $0.64$-approximation
-algorithm for node weighted graphs.
-They also showed that the problem can not be approximated to within a factor of
-$\frac{31}{32} + \eps$, for any $\eps > 0$ assuming that
+Chen et al.~\cite{CENRRS13} improved the approximation ratio for
+unweighted graphs from $\frac{3}{5}$ to $0.71$ and gave a
+$0.64$-approximation algorithm for node weighted graphs.  They also
+showed that the edge- and node-weighted problem cannot be approximated
+to within a factor of $\frac{19}{20} + \eps$, and $\frac{31}{32}
++ \eps$, resp., for any $\eps > 0$, assuming that
 $\text{P} \neq \text{NP}$.
 %
-Chakrabarty and Goel~\cite{ChakrabartyGoel10} improved the lower bound
-to $\frac{10}{11} + \eps$.
+Chakrabarty and Goel~\cite{ChakrabartyGoel10} improved the lower bounds
+to $\frac{10}{11} + \eps$ and $\frac{13}{14}$.
 
 Athanassopoulos et al.~\cite{ACKK09} improve the ratio for the
 unweighted case to $\frac{193}{240} \approx 0.804$.
@@ -186,13 +189,16 @@ solution where all node are star centers.  Then, it repeatedly tries
 to turn $t \leq k$ from leaves to centers and $t+1$ centers to leaves.
 A change is made if it results in a feasible solution, namely if each
 leave is adjacent to at least one center.  The algorithm terminates
-when such changes are no longer possible.  Athanassopoulos et
-al.~\cite{ACKK09} showed that for any $k$ and $\varepsilon$ there exists an
-instance $G$ and a local optima $M$ such that 
-$\frac{|M|}{|OPT|} \leq \inv(2) + \varepsilon$, where $|OPT|$ is the number of
-edges in an optimal spanning star forest \footnote{Note that this lower bound
-does not contradict our result regarding approximation ratio of our local
-search algorithm where the maximum possible capacity is constant.}.
+when such changes are no longer possible.
+%
+Athanassopoulos et al.~\cite{ACKK09} showed that, for any $k$ and
+$\eps \in (0,\inv{2(k+2)}]$, there exists an instance $G$ and a local
+optima whose size is smaller than $(\half + \eps) \textsc{opt}$,
+where \textsc{opt} is the size of the optimal spanning star forest.
+We note that the construction of the above result requires that the
+maximum degree of $G$ is at least $2(k+2)$.  Hence, in graphs with
+maximum degree $\Delta$, the above ratio becomes $\half
++ \inv{\Delta}$.
 
 Arkin et al.~\cite{arkin2004approximations} considered
 the \textsc{Maximum Capacitated Star Packing} problem.  In this
@@ -265,9 +271,19 @@ $b \geq 3$.
 %
 In Section~\ref{sec:local} we consider the unweighted variant of the
 problem.  We provide a local search algorithm whose approximation
-ratio is $\half + \inv{2\cmax} - \eps$, for any $\eps>0$.
-
-\dror{Compare to [7]!}
+ratio is $\half + \inv{2\cmax} - \eps$, for any $\eps>0$.  Given a
+parameter $K$, our algorithm starts with the empty carpool matching.
+Then, it repeatedly tries to find a better matching by replacing
+$t \leq k$ arc in the current solution by $t+1$ arcs that are not in
+the solution.
+%
+We show that our analysis is tight.  We also note that our algorithm
+is a special case of the local search family that was defined
+in~\cite{ACKK09} with a parameter of $2k$.  On undirected and
+uncapaciated instances we have that $\cmax = \Delta$, where $\Delta$
+is the maximum degree, hence the approximation ratio of our algorithm
+is $\half + \inv{2\Delta} - \eps$ which is tight with respect
+to~\cite{ACKK09}.
 
 Finally, Section~\ref{sec:group} discusses the \gcp.  We first show that
 the unconstrained submodular maximization formulation for the \carpool
