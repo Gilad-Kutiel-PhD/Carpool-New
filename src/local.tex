@@ -35,8 +35,6 @@ $M \leftarrow \emptyset$								\\
 \label{alg:local}
 \end{algorithm}
 
-%\todo[inline]{fix running time paragraph}
-
 We claim that the local search algorithm halts in polynomial time.
 Observed that in every iteration the algorithm either improves the
 value of the solution by one or otherwise it terminates.  Thus, after
@@ -46,12 +44,12 @@ feasibility, both these operations can be done in polynomial time.
 
 Observe that a vertex $v \in D_M \cup Z_M$ is the center of
 a \emph{directed star} whose leaves are the passengers in the set
-$P_M(v) = \set{u : (u,v) \in M}$.  ($P_M(v) = \emptyset$, for $v \in
-Z_M$.)
+$P_M(v) = \set{u : (u,v) \in M}$
+($P_M(v) = \emptyset$, for $v \in Z_M$).
 %
 Given a carpool matching $M$, we define $\calS(M)$ to be the set of
 stars that are induced by $M$.  Denote by $V(S)$ the set of vertices
-of a star, i.e., if $v$ is the center $S$, then $V(S) = \{v\} \cup
+of a star, i.e., if $v$ is the center of $S$, then $V(S) = \{v\} \cup
 P_M(v)$.  Also, let $A(S)$ be the arcs of $S$.  For
 $\calT \subseteq \calS(M)$, define
 $V(\calT) \eqdf \bigcup_{S \in \calT} V(S)$ and
@@ -126,7 +124,7 @@ $H$.  If $\abs{A(\calT)} \leq k$, then
 \]
 \end{lemma}
 \begin{proof}
-Consider the solution $M'$ obtained from the $M$ by removing all the
+Consider the solution $M'$ obtained from $M$ by removing all the
 edges from $M$ that intersect $V(\calT)$ and adding all the edges from
 $M^*$ that intersect $V(\calT)$.  Observe that if an edge $(u,v)$ in
 $M^*$ intersects $V(\calT)$, then $\set{u,v} \in V(\calT)$ by the
@@ -160,11 +158,28 @@ as required.
 \begin{lemma}
 \label{lemma:dec}
 Let $G = (V,E)$ be an undirected connected graph with maximum degree
-$\Delta$, and let $\ell < \abs{V}/\Delta$.  Then $G$ can be decomposed
-into connected components of size at least $\ell$, and at most
-$\Delta \ell$.
+$\Delta$, and let $\ell < \abs{V}$.  
+Then $G$ can be decomposed into connected components of size at least $\ell$,
+and at most $\Delta \ell$.
 \end{lemma}
+
 \begin{proof}
+We give a constructive proof.
+If $\ell \leq |V| \leq \Delta \ell$ we are done.
+%
+Otherwise, remove (in any desired way) up to $\ell$ connected vertices $C =
+\{v_1,\ldots,v_m\}$ from $G$ until $G$ is disconnected.
+If $m = \ell$ then let $C_1 = \{v_1,\ldots,v_\ell\}$ and recursively decompose
+$G - C$.
+If, on the other hand, the above process disconnects $G$ then consider the
+connected components $\{C_1, \ldots, C_t\}$ of $G - C$.
+Join all the small components and $C$, i.e. $C \cup \bigcup_{i : |C_i| < \ell}$
+and decompose the other components recursively, 
+noting that $|C \cup \bigcup_{i : |C_i| < \ell}| \leq \Delta \ell$.
+If all the components are large, i.e. $\forall i |C_i| \geq \ell$ then join $C$
+to an arbitrary component and decompose the resulting components recursively.
+
+\iffalse
 Let $T$ be any spanning tree of $G$ and let $r$ be an arbitrary root.
 Starting with $r$, repeatedly choose a child whose subtree is strictly
 larger than $\frac{\Delta-1}{\Delta} \abs{V}$, until this is not
@@ -186,6 +201,7 @@ we obtain two connected subgraphs of size at least $\ell$.
 %
 We repeat this procedure recursively on any component of size
 strictly larger $\Delta\ell$.
+\fi
 \end{proof}
 
 \iffalse %%%%% Removed
