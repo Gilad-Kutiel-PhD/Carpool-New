@@ -1,13 +1,13 @@
 
-In this subsection we give a local improvement
-$(\half-\eps)$-approximation algorithm for \carpool.  This algorithm
-repeatedly checks whether the current carpool matching $M$ can be
-improved by means of a star centered at a vertex $v$.  The profit from
-this star is the total weight of the arcs in the star, and the cost is
-the total weight of lost arcs (e.g., arcs from passengers to drivers
-that became passengers of $v$).  If the profit is larger than the
-cost, then an improvement step is performed.  The algorithm terminates
-when such a step is not possible.
+In this subsection we give a local search $(\half-\eps)$-approximation
+algorithm for \carpool.  This algorithm repeatedly checks whether the
+current carpool matching $M$ can be improved by means of a star
+centered at a vertex $v$.  The profit from this star is the total
+weight of the arcs in the star, and the cost is the total weight of
+lost arcs (e.g., arcs from passengers to drivers that became
+passengers of $v$).  If the profit is larger than the cost, then an
+improvement step is performed.  The algorithm terminates when such a
+step is not possible.
 %
 We remind the reader that this algorithm will be extended to \gcp in
 Section~\ref{sec:group}.
@@ -21,7 +21,7 @@ Let $M$ be a feasible carpool matching.  The weight $w_M(v)$ of a
 vertex $v$ with respect to $M$ is the sum of the weights of the arcs
 in $M$ that are incident on $v$, namely
 \[
-\textstyle
+%\textstyle
 w_M(v)
 \eqdf w(M \cap \nin[]) + w(M \cap \nout[])
 =     \sum_{(u, v) \in M} w(u, v) + \sum_{(v, u) \in M} w(v, u)
@@ -40,6 +40,7 @@ $w_M(V) = 2 w(M)$.
 \end{observation}
 \begin{proof}
 \(
+\displaystyle
 \sum_{v \in V} w_M(v)
 = \sum_{v \in V} \sum_{(u, v) \in M} w(u, v) +
     \sum_{v \in V} \sum_{(v, u) \in M} w(v, u) 
@@ -63,8 +64,8 @@ formally,
 
 \begin{definition}
 A subset $S_v \subseteq A \cap (V \times \{v\})$ is
-an \emph{improvement} with respect to a carpool matching $M$, if the
-following conditions hold:%
+an \emph{improvement} with respect to a carpool matching $M$, if%
+%the following conditions hold:%
 \begin{inparaenum}[(i)]
 \item $\abs{S_v} \leq c(v)$, and
 \item $\delta_M(S_v) > w_M(v)$.
@@ -95,17 +96,19 @@ $\delta_M(2, 3) = 1$ and $\delta_M(6, 3) = 2$.  The set $\set{(2,3),
 \label{fig:defs}
 \end{figure}
 
-We are now ready to describe our local improvement algorithm
-(Algorithm~\ref{alg:grd}).  The algorithm starts with an empty carpool
-matching $M$, and in every iteration it looks for a vertex that can be
-improved.  If there exists such a vertex $v$, then the algorithm
-removes the arcs that are incident on it from $M$, and adds the arcs
-in $S_v$.  The algorithm terminates when no vertex can be improved.
-Figure~\ref{fig:improvement} depicts an improvement step.
+We are now ready to describe our local search algorithm, which is
+called \textbf{StarImprove} (Algorithm~\ref{alg:grd}).  It starts with
+an empty carpool matching $M$, and in every iteration it looks for a
+vertex that can be improved.  If there exists such a vertex $v$, then
+the algorithm removes the arcs that are incident on it from $M$, and
+adds the arcs in $S_v$.  The algorithm terminates when no vertex can
+be improved.  Figure~\ref{fig:improvement} depicts an improvement
+step.
 
 \begin{algorithm}
-\caption{Local Improvement}
+\caption{\textbf{StarImprove}$(G,c)$}
 \label{alg:grd}
+\begin{small}
 $M \gets \emptyset$ \\
 \Repeat{$\text{done}$}{
 	$\text{done} \leftarrow \textsc{True}$ \\
@@ -116,6 +119,7 @@ $M \gets \emptyset$ \\
 		}
 	}
 }
+\end{small}
 \end{algorithm}
 
 \begin{figure}
@@ -138,10 +142,9 @@ For a vertex $v$ and a set $S$ of edges entering $v$, let $\nin[S](v)
 
 \begin{lemma}
 \label{lm:no improve}
-Let $M$ be a matching computed by the local improvement algorithm.
-Let $v$ be a vertex with no improvement, and let
-$S \subseteq \nin(v)$, such that $\abs{S} \leq c(v)$, then $w(S) \leq
-w_M(v) + w_M(\nin[S](v))$.
+Let $M$ be a matching computed by \textbf{StarImprove}.  Let $v$ be a
+vertex with no improvement, and let $S \subseteq \nin(v)$, such that
+$\abs{S} \leq c(v)$, then $w(S) \leq w_M(v) + w_M(\nin[S](v))$.
 \end{lemma}
 \begin{proof}
 If no improvement exists, then we have that \\
@@ -158,8 +161,8 @@ To bound the approximation ratio of the algorithm, we use a charging
 scheme argument.
 
 \begin{lemma}
-If Algorithm~\ref{alg:grd} terminates, then the computed solution is a
-$\half$-approximation.
+If \textbf{StarImprove} terminates, then the computed solution is
+$\half$-approximate.
 \end{lemma}
 \begin{proof}
 Let $M$ be the matching produced by the algorithm, and let $M^*$ be an
@@ -183,9 +186,9 @@ worst}.
 \input{fig-2-tight}
 \caption[]{%
 Consider a path with $2n + 1$ arcs, and alternating arc weights (2 and
-1), if the local improvement algorithm selects all arcs of weight 1,
-then no further improvement can be done and the value of the matching
-is $n + 1$, while the optimal matching has value of $2n$.}
+1), if \textbf{StarImprove} selects all arcs of weight 1, then no
+further improvement can be done and the value of the matching is $n +
+1$, while the optimal matching has value of $2n$.}
 \label{fig:grd worst}
 \end{figure}
 
@@ -193,7 +196,7 @@ It remains to consider the running time of the algorithm.
 
 \begin{theorem}
 \label{thm:improve-bounded}
-Algorithm~\ref{alg:grd} is a $\half$-approximation algorithm
+Algorithm~\textbf{StarImprove} is a $\half$-approximation algorithm
 for \carpool, if edge weights are integral and polynomially bounded.
 \end{theorem}
 \begin{proof}
@@ -212,11 +215,9 @@ least one or otherwise it terminates.
 \end{proof}
 
 It remains to consider the case, where weight are not polynomially
-bounded.  In this case one can use scaling and rounding to ensure a
-polynomial running time in the cost of a $(1+\eps)$ factor in the
-approximation ratio.
-%
-The proof of the next theorem is given in the appendix.
+bounded.  In Appendix~\ref{sec:omitted} we prove that one can use
+standard scaling and rounding to ensure a polynomial running time in
+the cost of a $(1+\eps)$ factor in the approximation ratio.
 
 \begin{theorem}
 \label{thm:improve}

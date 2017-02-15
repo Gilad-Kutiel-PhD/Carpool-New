@@ -27,11 +27,10 @@ c(v)$ is replaced with $\sum_{u:(u,v) \in M} s(u) \leq c(v)$.
 We show that \carpool can be formulated as an unconstrained submodular
 maximization problem, thus it admits a $\frac{1}{2}$-approximation
 algorithm.  We show that the same formulation does not work for \gcp,
-nevertheless, we present a $(\frac{1}{2} - \eps)$-approximation
-algorithm for \gcp.
+nevertheless, we present a local search $(\frac{1}{2}
+- \eps)$-approximation algorithm for \gcp.
 %
 For the unweighted variant of both problems when the maximum possible
-capacity, $\cmax \eqdf \max_{v \in V} c(v)$, is bounded by a constant,
-we provide a $(\half + \inv{2\cmax} - \eps)$-approximation algorithm.
-We also show that the problem remains APX-hard, even if $\cmax \leq
-3$.
+capacity, $\cmax$, is bounded by a constant, we provide a local search
+$(\half + \inv{2\cmax} - \eps)$-approximation algorithm.  We also show
+that the problem APX-hard, even if $\cmax \leq 3$.

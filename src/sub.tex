@@ -41,6 +41,9 @@ To prove the lemma we construct two feasible carpool matchings $M_S$
 and $M_T$ such that $M_S \subseteq (V \setminus S) \times S$,
 $M_T \subseteq (V \setminus T) \times T$, and $M_S \cup M_T = M(S \cup
 T) \cup M(S \cap T)$.
+%
+The lemma follows, since $\barw(S) \geq w(M_S)$ and $\barw(T) \geq
+w(M_T)$.
 
 First, add all the edges in $M(S \cup T)$ entering $S \setminus T$ to
 $M_S$.  Similarly, add all the edges in $M(S \cup T)$ entering
@@ -48,7 +51,7 @@ $T \setminus S$ to $M_T$.  Observe that $\din[M_S](v) = \din[M(S \cup
 T)](v) \leq c(v)$, for every $v \in S \setminus T$ and that
 $\din[M_T](v) = \din[M(S \cup T)](v) \leq c(v)$, for every $v \in
 T \setminus S$.
-
+%
 Next, add the edges in $M(S \cap T)$ leaving $T \setminus S$ to $S$
 and add the edges in $M(S \cap T)$ leaving $S \setminus T$ to $T$.
 %
@@ -68,9 +71,9 @@ Then we add all duplicate edges in $M(S \cup T)$ to $M_T$.
 The remaining edges are distributed between $M_S$ and $M_T$ without
 violating capacities.  This can be done, since $\din[M(S \cup T)](v)
 + \din[M(S \cap T)](v) \leq 2c(v)$, for every $v \in S \cap T$.
-
-The lemma follows, since $\barw(S) \geq w(M_S)$ and $\barw(T) \geq
-w(M_T)$.
+%
+Figure~\ref{fig:sub} contains a graphical representation of the above
+edge distribution.
 \end{proof}
 
 Buchbinder et al.~\cite{BFNS15,buchbinder2016deterministic} presented
@@ -82,12 +85,3 @@ There exists a polynomial time $\half$-approximation algorithm
 for \carpool.
 \end{theorem}
 
-\begin{figure}
-\centering
-\input{fig-submodular}
-\caption[]{
-We show that the arcs from \subref{sub:cup} and \subref{sub:cap} can be
-redistributed over \subref{sub:s} and \subref{sub:s} 
-%\todo{write explanation}
-}
-\end{figure}

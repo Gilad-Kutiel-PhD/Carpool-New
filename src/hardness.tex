@@ -1,8 +1,8 @@
-As we mentioned in the introduction, the maximum spanning star forest
-can not be approximated within a factor of $\frac{31}{32} + \epsilon$
-for any $\epsilon > 0$, unless P$=$NP.  The proof, however, does not
-hold for the case when the maximum capacity is constant.  In this
-subsection we show that the problem remains APX-hard even in this
+As we mentioned earlier, \textsc{Spanning Star Forest} has a lower
+bound of $\frac{10}{11} + \eps$ for any $\eps > 0$, unless
+P$=$NP~\cite{ChakrabartyGoel10}, and this bound applies to \carpool.
+The result, however, does not hold for the case where $\cmax = O(1)$.
+In this section we show that the problem remains APX-hard even in this
 case.
 
 Formally, the (unweighted) \textsc{Minimum Dominating Set} problem is
@@ -63,12 +63,12 @@ Since $|D^*| \geq \frac{|V|}{b+1}$, it follows that
 %~,
 \),
 In addition, if $M$ is a carpool matching, we have that
-\[
-\abs{D_M \cup Z_M} - \abs{D*}
+\(
+\abs{D_M \cup Z_M} - \abs{D^*}
 = (\abs{V} - \abs{P_M}) - \abs{D^*}
 = \abs{P_{M^*}} - \abs{P_M}
-~.
-\]
+%~.
+\).
 Hence, there is an $L$-reduction from \textsc{Minimum Dominating
 Set-$b$} to unweighted and undirected \carpool with bounded capacity
 $b$.

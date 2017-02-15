@@ -101,15 +101,19 @@ unweigthed, and uncapacitated.
 \input{fig-carpool}
 \caption[]{
 \label{fig:carpool}
-A \carpool example: (\subref{carpool:input}) an instance containing a
-directed graph with capacities on the vertices and weights on the
-arcs.  (\subref{carpool:output}) a feasible matching with total weight
-of 23.  $P_M$ is the set of blue vertices, and $D_M$ is the set of
-red, dashed vertices, and $Z_M$ contains only the dotted, black
-vertex.  }
+A \carpool example.
+%(\subref{carpool:input}) an instance containing a
+%directed graph with capacities on the vertices and weights on the
+%arcs.  (\subref{carpool:output}) a feasible matching with total weight
+%of 23.  $P_M$ is the set of blue vertices, and $D_M$ is the set of
+%red, dashed vertices, and $Z_M$ contains only the dotted, black
+%vertex.
+}
 \end{figure}  
 
-In this paper we also consider an extension of \carpool, called \gcp,
+%In this paper
+%
+We also consider an extension of \carpool, called \gcp,
 in which each vertex represents a group of passengers, and each group
 might have a different size.  Such a group may be a family or two
 friends traveling together.  Formally, each vertex $u \in V$ has a
@@ -244,20 +248,16 @@ $\cmax = O(1)$.
 
 \subparagraph{Our contribution.}
 %
-In Sections~\ref{sec:approx} contains approximation algorithms
+Sections~\ref{sec:approx} contains approximation algorithms
 for \carpool.  First, in Section~\ref{sec:sub} we show that
 the \carpool can be formulated as unconstrained submodular
 maximization problem, thus it has a $\frac{1}{2}$-approximation
 algorithm due to~\cite{BFNS15,buchbinder2016deterministic}.
 %
-We show a local improvement algorithm for \carpool%
-\footnote{We use the term \emph{local improvement} to differentiate
-this algorithm from the local search algorithm that is given in
-Section~\ref{sec:local}.}.
-%
-This algorithm repeatedly checks whether the current carpool matching
-can be improved by means of a star centered at a vertex, and it
-terminates when such a step is not possible.
+We present a local search algorithm for \carpool which repeatedly
+checks whether the current carpool matching can be improved by means
+of a star centered at a vertex, and it terminates when such a step is
+not possible.
 %
 The approximation ratio of this algorithm is $\half$ if weights are
 polynomially bounded, and its ratio is $\half-\eps$ in general.
@@ -270,12 +270,12 @@ for undirected and unweighted instances with $\cmax \leq b$, for any
 $b \geq 3$.
 %
 In Section~\ref{sec:local} we consider the unweighted variant of the
-problem.  We provide a local search algorithm whose approximation
-ratio is $\half + \inv{2\cmax} - \eps$, for any $\eps>0$.  Given a
-parameter $K$, our algorithm starts with the empty carpool matching.
-Then, it repeatedly tries to find a better matching by replacing
-$t \leq k$ arc in the current solution by $t+1$ arcs that are not in
-the solution.
+problem.  We provide another local search algorithm whose
+approximation ratio is $\half + \inv{2\cmax} - \eps$, for any
+$\eps>0$.  Given a parameter $k$, our algorithm starts with the empty
+carpool matching.  Then, it repeatedly tries to find a better matching
+by replacing $t \leq k$ arc in the current solution by $t+1$ arcs that
+are not in the solution.
 %
 We show that our analysis is tight.  We also note that our algorithm
 is a special case of the local search family that was defined
@@ -285,10 +285,10 @@ is the maximum degree, hence the approximation ratio of our algorithm
 is $\half + \inv{2\Delta} - \eps$ which is tight with respect
 to~\cite{ACKK09}.
 
-Finally, Section~\ref{sec:group} discusses the \gcp.  We first show that
-the unconstrained submodular maximization formulation for the \carpool
-does not work for \gcp.  We show, however, that this problem still
-admits a $(\frac{1}{2} -\varepsilon)$-approximation algorithm by
-extending the local improvement algorithm.  In addition, we show that
-the local search algorithm generalizes to \gcp with the same
-approximation ratio.
+Finally, Section~\ref{sec:group} discusses the \gcp.  We first show
+that the unconstrained submodular maximization formulation for
+the \carpool does not work for \gcp.  We show, however, that this
+problem still admits a $(\frac{1}{2} -\varepsilon)$-approximation
+algorithm by extending our first the local search algorithm.  In
+addition, we show that the second local search algorithm generalizes
+to unweighted \gcp with the same approximation ratio.
