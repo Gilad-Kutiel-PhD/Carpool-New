@@ -1,12 +1,12 @@
 
 In this section we show that the \carpool problem can be formulated as
-unconstrained submodular maximization problem, and thus it has a
-$\frac{1}{2}$-approximation algorithm based on Buchbinder et
+an unconstrained submodular maximization problem, and thus it has a
+$\frac{1}{2}$-approximation algorithm due to Buchbinder et
 al.~\cite{BFNS15,buchbinder2016deterministic}.
 
 Given a \carpool instance $(G = (V,A), c, w)$, consider a subset
-$S \subseteq V$.  Let $M(S)$ be the maximum weight carpool matching
-that satisfies $D_{M(S)} \subseteq S \subseteq V \setminus P_{M(S)}$,
+$S \subseteq V$.  Let $M(S)$ be a maximum weight carpool matching
+satisfying $D_{M(S)} \subseteq S \subseteq V \setminus P_{M(S)}$,
 namely $M(S)$ is the best carpool matching whose drivers belong to $S$
 and whose passengers belong to $V \setminus S$.  In other words,
 $M(S)$ is the maximum weight carpool matching that is a subset of

@@ -72,31 +72,28 @@ $.
 Figure~\ref{fig:conflict} depicts a star graph.
 
 \begin{figure}[t]
-\centering
+%\centering
 %
 \begin{subfigure}[t]{.45\linewidth}
 \centering
-\caption{
-An optimal matching depicted by the dashed red edges,
-and another solution depicted by the solid green edges.
-The optimal stars are outlined.  
-}
 \input{fig-sub-graph}
+\caption{An optimal matching depicted by the dashed red edges,
+and another solution depicted by the solid green edges.
+The optimal stars are outlined.}
 \end{subfigure}
 %
 \hfill
 %
-\begin{subfigure}[t]{.53\linewidth}
+\begin{subfigure}[t]{.45\linewidth}
 \centering
-\caption{
-The star graph, each vertex corresponded to a star in the original graph. 
-The upper left vertex corresponds to the star that contains the vertices a,b,c.
-The numbers inside the vertices corresponds to $d_i$.   
-}
 \input{fig-sub-conflict}
+\caption{The star graph, each vertex corresponded to a star in the
+original graph.  The upper left vertex corresponds to the star that
+contains the vertices a,b,c.  The numbers inside the vertices
+corresponds to $d_i$.}
 \end{subfigure}
 %
-\caption{A \emph{Star Graph}}
+\caption{An example of a star graph.}
 \label{fig:conflict}
 \end{figure}  
 
@@ -256,18 +253,18 @@ Since each such vertex set $\calX$ is connected and contains at most
 $\frac{k}{\cmax}$ stars, it follows that $\abs{A(\calX)} \leq k$.
 %
 Due to Lemma~\ref{lemma:r} we have that
-\[
+\(
 \frac{\deg_M(V(\calX))}{\deg_{M^*}(V(\calX))} 
 \geq \half + \inv{2\cmax} - \frac{\cmax(\cmax+1)}{2k}
-~.
-\]
+%~.
+\).
 Since $\deg_{M^*}(V(\calT)) = \sum_{\calX} \deg_{M^*}(V(\calX))$ and
 $\deg_M(V(\calT)) = \sum_{\calX} \deg_M(V(\calX))$, it follows that
-\[
+\(
 \frac{\deg_M(V(\calT))}{\deg_{M^*}(V(\calT))}
 \geq \half + \inv{2\cmax} - \frac{\cmax(\cmax+1)}{2k}
-~,
-\]
+%~,
+\),
 and thus
 \(
 \abs{M \cap A(\calT)}

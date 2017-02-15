@@ -1,5 +1,5 @@
 
-In this subsection we give a local search $(\half-\eps)$-approximation
+In this section we give a local search $(\half-\eps)$-approximation
 algorithm for \carpool.  This algorithm repeatedly checks whether the
 current carpool matching $M$ can be improved by means of a star
 centered at a vertex $v$.  The profit from this star is the total
@@ -21,7 +21,7 @@ Let $M$ be a feasible carpool matching.  The weight $w_M(v)$ of a
 vertex $v$ with respect to $M$ is the sum of the weights of the arcs
 in $M$ that are incident on $v$, namely
 \[
-%\textstyle
+\textstyle
 w_M(v)
 \eqdf w(M \cap \nin[]) + w(M \cap \nout[])
 =     \sum_{(u, v) \in M} w(u, v) + \sum_{(v, u) \in M} w(v, u)
@@ -125,9 +125,8 @@ $M \gets \emptyset$ \\
 \begin{figure}
 \centering
 \input{fig-improvement}
-\caption[]{
+\caption[]{An improvement example.}
 \label{fig:improvement}
-}
 \end{figure}
 
 We proceed to bound the approximation ratio of the algorithm, assuming

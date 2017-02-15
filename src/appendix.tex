@@ -1,4 +1,34 @@
 
+%\newpage
+%\bigskip
+
+\section{Figure}
+%\label{sec:figures}
+
+\begin{figure}[h]
+\centering
+\input{fig-submodular}
+\caption[]{%
+Given the two solutions on the left, 
+\subref{sub:cup} and \subref{sub:cap}, we
+can construct the two solutions on the right side,
+\subref{sub:s} and \subref{sub:t}, with equal total weight.
+The edges of type 
+\inlineedge{e1}, 
+\inlineedge{e2}, 
+\inlineedge{e3}, 
+\inlineedge{e5}, 
+\inlineedge{e6}
+from the left side are ``naturally'' distributed over the two solutions on the
+right side and the edges of type \inlineedge{e4} can be distributed between the
+two solutions without violating the capacity constraints.
+}
+\label{fig:sub}
+\end{figure}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
 \section{Omitted Proofs}
 \label{sec:omitted}
 
@@ -18,6 +48,7 @@ w'(M^*)
 \]
 Since $w(M^*) \geq w_{\max}$, we have that 
 \[
+\textstyle
 w'(M^*)
 >    \frac{m}{2\eps w_{\max}} \cdot (w(M^*) - 2\eps w_{\max})
 \geq \frac{m}{2\eps w_{\max}} \cdot (1 - 2\eps) w(M^*)
@@ -29,6 +60,7 @@ matching satisfies $w'(M) \geq w'(M')/2$.  Furthermore, since
 $w'(M') \geq w'(M^*)$, it follows that $w'(M) \geq w'(M^*)/2$.
 Therefore
 \[
+\textstyle
 w(M)
 \geq \frac{2\eps w_{\max}}{m} w'(M) 
 \geq \frac{1}{2} \frac{2\eps w_{\max}}{m} w'(M^*)
@@ -71,35 +103,6 @@ Also, continue to augment $U$ in the graph $G[U \cup C]$.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\newpage
-
-\section{Figures}
-%\label{sec:figures}
-
-\begin{figure}[h]
-\centering
-\input{fig-submodular}
-\caption[]{%
-Given the two solutions on the left, 
-\subref{sub:cup} and \subref{sub:cap}, we
-can construct the two solutions on the right side,
-\subref{sub:s} and \subref{sub:t}, with equal total weight.
-The edges of type 
-\inlineedge{e1}, 
-\inlineedge{e2}, 
-\inlineedge{e3}, 
-\inlineedge{e5}, 
-\inlineedge{e6}
-from the left side are ``naturally'' distributed over the two solutions on the
-right side and the edges of type \inlineedge{e4} can be distrebuted between the
-two solutions without violating the capacity constraints.
-}
-\label{fig:sub}
-\end{figure}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\newpage
 
 \section{Tight Analysis}
 \label{sec:tight}

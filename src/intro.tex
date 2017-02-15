@@ -16,15 +16,19 @@ Moovit~\cite{moovit} and even Waze~\cite{waze} are matching passengers
 to drivers.
 
 The matching process of passengers to drivers entails more than
-matching the route.  Passenger satisfaction also need to be taken into
-account.
+matching the route.
 %
-Given several riding options (including taking their own car),
-passengers have preferences.  For example, a passenger may prefer to
-ride with a co-worker or a friend.  A passenger may have an opinion on
-a driver that she rode with in the past.  She may prefer a non-smoker,
-someone who shares her taste in music, or someone who is recommended
-by others.
+Passenger satisfaction also need to be taken into account.  Given
+several riding options (including taking their own car), passengers
+have preferences.  For example, a passenger may prefer to ride with a
+co-worker or a friend.  A passenger may have an opinion on a driver
+that she rode with in the past.  She may prefer a non-smoker, someone
+who shares her taste in music, or someone who is recommended by
+others.
+%
+Moreover, the matching process may take into account driver
+preferences.  For instance, we would like to minimize the extra
+distance that a driver has to take.
 %
 Preferences may also be computed using past information.  Knapen et
 al.~\cite{knapen2013estimating} described an automatic service to
@@ -37,25 +41,23 @@ is done based on personal information and feedback from users on past
 rides.
 
 %In this paper
-We assume that potential passenger satisfactions are given as input
-and the goal is to compute an assignment of passengers to driver so as
-to maximize the global satisfaction.
+We assume that potential passenger-driver satisfactions are given as
+input and the goal is to compute an assignment of passengers to
+drivers so as to maximize the global satisfaction.
 %
 More formally, we are given a directed graph $G = (V, A)$, where each
 vertex $v \in V$ corresponds to a user of the service, and an arc $(u,
 v)$ exists if the user corresponding to vertex $u$ is willing to
 commute with the user corresponding to vertex $v$.  We are given a
-capacity function $c: V \rightarrow \N$ which bound the number of
-passengers each user can drive if she was selected as a driver.  A
+capacity function $c: V \rightarrow \N$ which bounds the number of
+passengers each user can drive if she is selected as a driver.  A
 non-negative weight function $w : A \rightarrow \R^+$ is used to model
-the amount of satisfaction $w(u,v)$ that user $u$ gains when riding
-with user $v$.
+the amount of satisfaction $w(u,v)$ of assigning $u$ to $v$.
 %
-If $(u,v) \in A$ implies that $(v,u) \in A$ and $w(u,v) = w(v,u)$, we
-call the instance \emph{undirected}.  If $w(v,u) = 1$, for every
-$(v,u) \in A$, then we call the instance
-\emph{unweighted}.  If $c(v) = \infty$, for every $v$, then we
-call the instance \emph{uncapacitated}.
+If $(u,v) \in A$ implies that $(v,u) \in A$ and $w(u,v) = w(v,u)$, the
+instance is \emph{undirected}.  If $w(v,u) = 1$, for every $(v,u) \in
+A$, then the instance is \emph{unweighted}.  If $c(v) = \infty$, for
+every $v$, then the instance in \emph{uncapacitated}.
 
 Given a directed graph $G$ and a subset $M \subseteq A$, define
 $\din[M](v) \eqdf \abs{\set{u :(u,v) \in M}}$ and
@@ -269,21 +271,19 @@ In Section~\ref{sec:hardness} we show that \carpool is APX-hard even
 for undirected and unweighted instances with $\cmax \leq b$, for any
 $b \geq 3$.
 %
-In Section~\ref{sec:local} we consider the unweighted variant of the
-problem.  We provide another local search algorithm whose
-approximation ratio is $\half + \inv{2\cmax} - \eps$, for any
-$\eps>0$.  Given a parameter $k$, our algorithm starts with the empty
-carpool matching.  Then, it repeatedly tries to find a better matching
-by replacing $t \leq k$ arc in the current solution by $t+1$ arcs that
-are not in the solution.
+In Section~\ref{sec:local} we provide another local search algorithm,
+whose approximation ratio is $\half + \inv{2\cmax} - \eps$, for any
+$\eps>0$, for unweighted \carpool.  Given a parameter $k$, our
+algorithm starts with the empty carpool matching.  Then, it repeatedly
+tries to find a better matching by replacing $t \leq k$ arcs in the
+current solution by $t+1$ arcs that are not in the solution.
 %
 We show that our analysis is tight.  We also note that our algorithm
-is a special case of the local search family that was defined
-in~\cite{ACKK09} with a parameter of $2k$.  On undirected and
-uncapaciated instances we have that $\cmax = \Delta$, where $\Delta$
-is the maximum degree, hence the approximation ratio of our algorithm
-is $\half + \inv{2\Delta} - \eps$ which is tight with respect
-to~\cite{ACKK09}.
+falls within the local search family defined in~\cite{ACKK09} with a
+parameter of $2k$.  On undirected and uncapaciated instances we have
+that $\cmax = \Delta$, where $\Delta$ is the maximum degree, hence the
+approximation ratio of our algorithm is $\half + \inv{2\Delta} - \eps$
+which is nearly tight with respect to~\cite{ACKK09}.
 
 Finally, Section~\ref{sec:group} discusses the \gcp.  We first show
 that the unconstrained submodular maximization formulation for
