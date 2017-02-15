@@ -1,13 +1,14 @@
-\def \sst {\draw[cyan] (-2, -.5) -- (-.5, -.5);}
-\def \tst {\draw[green, loosely dash dot dot] (2, -.5) -- (.5, -.5);}
+\def \sst {\draw[e1] (-2, -.5) -- (-.5, -.5);}
+\def \tst {\draw[e2] (2, -.5) -- (.5, -.5);}
 
-\def \os {\draw[blue, loosely dotted] (-2, 1.5) -- (-2, .4);}
-\def \cupst {\draw[loosely dashed] (-.5, 1.5) -- (-.5, .4);}
-\def \capst {\draw[red, loosely dashed] (.5, 1.5) -- (.5, .4);}
-\def \ot {\draw[orange, loosely dash dot] (2, 1.5) -- (2, .4);}
+\def \os {\draw[e3] (-2, 1.5) -- (-2, .4);}
+\def \cupst {\draw[e4] (-.5, 1.5) -- (-.5, .4);}
+\def \capst {\draw[e5] (.5, 1.5) -- (.5, .4);}
+\def \ot {\draw[e6] (2, 1.5) -- (2, .4);}
 
 \begin{subfigure}{.48\linewidth}
-\caption{\label{sub:cup}}
+\caption{}
+\label{sub:cup}
 \centering
 \begin{tikzpicture}[very thick]
 
@@ -45,6 +46,46 @@
 \hfill
 %
 \begin{subfigure}{.48\linewidth}
+\caption{\label{sub:s}}
+\centering
+\begin{tikzpicture}[very thick]
+
+\begin{scope}[every node/.style={inner sep=.8cm}]
+\node(s) at(-2,0) {$S$};
+\node(st) at(0,0) {$S \cap T$};
+\node(t) at(2,0) {$T$};
+\end{scope}
+
+\draw 
+(s.west) to[out=90, in=172] 
+(st.north) to[out=-8, in=90] 
+(st.east) to[out=270, in=8]
+(st.south) to[out=188, in=270]
+(s.west)
+;
+
+\draw[outline] 
+(st.south) to[out=-8, in=270]
+(t.east) to[out=90, in=8] 
+(st.north) 
+;
+\draw 
+(st.north) to[out=188, in=90] 
+(st.west) to[out=270, in=172]
+(st.south)
+;
+
+\begin{scope}[->]
+\os
+\cupst
+\tst
+\end{scope}
+
+\end{tikzpicture}
+\end{subfigure}
+%
+%
+\begin{subfigure}{.48\linewidth}
 \caption{\label{sub:cap}}
 \centering
 \begin{tikzpicture}[very thick]
@@ -80,46 +121,6 @@
 \begin{scope}[->]
 \sst
 \capst
-\tst
-\end{scope}
-
-\end{tikzpicture}
-\end{subfigure}
-
-
-\begin{subfigure}{.48\linewidth}
-\caption{\label{sub:s}}
-\centering
-\begin{tikzpicture}[very thick]
-
-\begin{scope}[every node/.style={inner sep=.8cm}]
-\node(s) at(-2,0) {$S$};
-\node(st) at(0,0) {$S \cap T$};
-\node(t) at(2,0) {$T$};
-\end{scope}
-
-\draw 
-(s.west) to[out=90, in=172] 
-(st.north) to[out=-8, in=90] 
-(st.east) to[out=270, in=8]
-(st.south) to[out=188, in=270]
-(s.west)
-;
-
-\draw[outline] 
-(st.south) to[out=-8, in=270]
-(t.east) to[out=90, in=8] 
-(st.north) 
-;
-\draw 
-(st.north) to[out=188, in=90] 
-(st.west) to[out=270, in=172]
-(st.south)
-;
-
-\begin{scope}[->]
-\os
-\cupst
 \tst
 \end{scope}
 

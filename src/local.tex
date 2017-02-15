@@ -21,7 +21,6 @@ The algorithm halts when no improvement can be done.
 %\KwOut{$M$}
 $M \leftarrow \emptyset$								\\
 \Repeat{done}{
-\label{line:outerloop}
  	$done \leftarrow{}$ \True							\\
  	\ForAll{$M' \subseteq M : |M'| \leq k$}{
  		\ForAll{$A' \subseteq A \setminus M : |A'| = |M'| + 1$}{
@@ -73,29 +72,31 @@ $.
 Figure~\ref{fig:conflict} depicts a star graph.
 
 \begin{figure}[t]
+\centering
 %
-\begin{subfigure}[t]{.4\linewidth}
-\caption{\label{subfloat:graph}}
+\begin{subfigure}[t]{.45\linewidth}
+\centering
+\caption{
+An optimal matching depicted by the dashed red edges,
+and another solution depicted by the solid green edges.
+The optimal stars are outlined.  
+}
 \input{fig-sub-graph}
 \end{subfigure}
 %
 \hfill
 %
-\begin{subfigure}[t]{.4\linewidth}
-\caption{\label{subfloat:conflict}}
-\input{fig-sub-conflict}
-\end{subfigure}
-%
-\caption[]{
-\subref{subfloat:graph} 
-An optimal matching depicted by the dashed red edges,
-and another solution depicted by the solid green edges.
-The optimal stars are outlined.  
-\subref{subfloat:conflict}
+\begin{subfigure}[t]{.53\linewidth}
+\centering
+\caption{
 The star graph, each vertex corresponded to a star in the original graph. 
 The upper left vertex corresponds to the star that contains the vertices a,b,c.
 The numbers inside the vertices corresponds to $d_i$.   
 }
+\input{fig-sub-conflict}
+\end{subfigure}
+%
+\caption{A \emph{Star Graph}}
 \label{fig:conflict}
 \end{figure}  
 
