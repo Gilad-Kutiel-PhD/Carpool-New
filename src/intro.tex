@@ -223,11 +223,11 @@ non-negative edge weights, and the goal is to partition the graph into
 disjoint paths of length 2.  This problem is the special case of the
 undirected carpool matching where $c(v) = 2$, for every $v \in V$.
 They presented two approximation algorithms, one for the weighted case
-whose is ratio is $0.5833$, and another for the unweighted case whose
+whose ratio is $0.5833$, and another for the unweighted case whose
 ratio is $\frac{3}{4}$.
 
 Another related problem is the \textsc{$k$-Set Packing}, where one is
-given a collection of weighted sets, each containing as most $k$
+given a collection of weighted sets, each containing at most $k$
 elements, and the goal is to find a maximum weight subcollection of
 disjoint sets.  Chandra and Halld\'orsson~\cite{chandra2001greedy}
 presented a $\frac{3}{2(k+1)}$-approximation algorithm for this
@@ -262,7 +262,7 @@ not possible.
 The approximation ratio of this algorithm is $\half$ if weights are
 polynomially bounded, and its ratio is $\half-\eps$ in general.
 
-Section~\ref{sec:cmax} we consider \carpool with bounded maximum
+In Section~\ref{sec:cmax} we consider \carpool with bounded maximum
 capacity.   Define $\cmax \eqdf \max_{v \in V} c(v)$.
 %
 In Section~\ref{sec:hardness} we show that \carpool is APX-hard even
@@ -289,6 +289,6 @@ Finally, Section~\ref{sec:group} discusses the \gcp.  We first show
 that the unconstrained submodular maximization formulation for
 the \carpool does not work for \gcp.  We show, however, that this
 problem still admits a $(\frac{1}{2} -\varepsilon)$-approximation
-algorithm by extending our first the local search algorithm.  In
+algorithm by extending our first local search algorithm.  In
 addition, we show that the second local search algorithm generalizes
 to unweighted \gcp with the same approximation ratio.
