@@ -40,10 +40,9 @@ $a$ traveling in person's $b$ car will be satisfied by the trip.  This
 is done based on personal information and feedback from users on past
 rides.
 
-%In this paper
-We assume that potential passenger-driver satisfactions are given as
-input and the goal is to compute an assignment of passengers to
-drivers so as to maximize the global satisfaction.
+In this paper we assume that potential passenger-driver satisfactions
+are given as input and the goal is to compute an assignment of
+passengers to drivers so as to maximize the global satisfaction.
 %
 More formally, we are given a directed graph $G = (V, A)$, where each
 vertex $v \in V$ corresponds to a user of the service, and an arc $(u,
@@ -56,7 +55,7 @@ the amount of satisfaction $w(u,v)$ of assigning $u$ to $v$.
 %
 If $(u,v) \in A$ implies that $(v,u) \in A$ and $w(u,v) = w(v,u)$, the
 instance is \emph{undirected}.  If $w(v,u) = 1$, for every $(v,u) \in
-A$, then the instance is \emph{unweighted}.  If $c(v) = \infty$, for
+A$, then the instance is \emph{unweighted}.  If $c(v) = \deg(v)$, for
 every $v$, then the instance in \emph{uncapacitated}.
 
 Given a directed graph $G$ and a subset $M \subseteq A$, define
@@ -115,12 +114,12 @@ A \carpool example.
 
 %In this paper
 %
-We also consider an extension of \carpool, called \gcp,
-in which each vertex represents a group of passengers, and each group
-might have a different size.  Such a group may be a family or two
-friends traveling together.  Formally, each vertex $u \in V$ has a
-size $s(u) \in \N$, and the constraint $\din[M](v) \leq c(v)$ is
-replaced with the constraint $\sum_{u:(u,v) \in M} s(u) \leq c(v)$.
+We also consider an extension of \carpool, called \gcp, in which each
+vertex represents a group of passengers, and each group may have a
+different size.  Such a group may represent a family or two friends
+traveling together.  Formally, each vertex $u \in V$ has a size
+$s(u) \in \N$, and the constraint $\din[M](v) \leq c(v)$ is replaced
+with the constraint $\sum_{u:(u,v) \in M} s(u) \leq c(v)$.
 %
 Notice that \textsc{Knapsack} is the special case where only arcs
 directed at a single vertex have non-zero (integral) weights.
@@ -134,22 +133,25 @@ challenges that arise when developing technology to support
 ride-sharing and survey the related operations research models in the
 academic literature.
 %
-Hartman et al.~\cite{hartman2014theory} designed
-several heuristic algorithms for the \carpool problem and compared
-their performance on real data.  Other heuristic algorithms were
-developed as well~\cite{knapen2014exploiting}.
+Hartman et al.~\cite{hartman2014theory} designed several heuristic
+algorithms for the \carpool problem and compared their performance on
+real data.  Other heuristic algorithms were developed by Knapen et
+al.~\cite{knapen2014exploiting}.
 %
 Hartman~\cite{hartman2013optimal} proved that the \carpool problem is
 NP-hard even in the case where the weight function is binary and
 $c(v) \leq 2$ for every $v \in V$.  In addition, Hartman presented a
-natural integer linear programs and showed that if the set of drivers
+natural integer linear program and showed that if the set of drivers
 is known, then an optimal assignment of passengers to drivers can be
 found in polynomial time using a reduction to \textsc{Network Flow}
-(see also Kutiel~\cite{kutiel2016}.)
+(see also~\cite{kutiel2016}.)
 %
 Kutiel~\cite{kutiel2016} presented a $\frac{1}{3}$-approximation
-algorithm for \carpool and a $\half$-approximation algorithm for the
-unweighted variant of \carpool.
+algorithm for \carpool that is based on a \textsc{Minimum Cost Flow}
+computation and a local search $\half$-approximation algorithm for the
+unweighted variant of \carpool.  The latter starts with an empty
+matching and tries to improve the matching by turning a single
+passenger into a driver.
 
 Nguyen et al.~\cite{nguyen2008approximating} considered
 the \textsc{Spanning Star Forest} problem.  A \emph{star forest} is a
@@ -201,10 +203,9 @@ Athanassopoulos et al.~\cite{ACKK09} showed that, for any $k$ and
 $\eps \in (0,\inv{2(k+2)}]$, there exists an instance $G$ and a local
 optima whose size is smaller than $(\half + \eps) \textsc{opt}$,
 where \textsc{opt} is the size of the optimal spanning star forest.
-We note that the construction of the above result requires that the
-maximum degree of $G$ is at least $2(k+2)$.  Hence, in graphs with
-maximum degree $\Delta$, the above ratio becomes $\half
-+ \inv{\Delta}$.
+We note that, for a given $k$, the construction of the above result
+requires that the maximum degree of $G$ is at least $2(k+2)$.  Hence,
+this result does not hold in graphs with maximum degree $\Delta$.
 
 Arkin et al.~\cite{arkin2004approximations} considered
 the \textsc{Maximum Capacitated Star Packing} problem.  In this
@@ -250,11 +251,11 @@ $\cmax = O(1)$.
 
 \subparagraph{Our contribution.}
 %
-Sections~\ref{sec:approx} contains approximation algorithms
-for \carpool.  First, in Section~\ref{sec:sub} we show that
-the \carpool can be formulated as unconstrained submodular
-maximization problem, thus it has a $\frac{1}{2}$-approximation
-algorithm due to~\cite{BFNS15,buchbinder2016deterministic}.
+Section~\ref{sec:approx} contains approximation algorithms
+for \carpool.  First, in Section~\ref{sec:sub} we show that \carpool
+can be formulated as an unconstrained submodular maximization problem,
+thus it has a $\frac{1}{2}$-approximation algorithm due
+to~\cite{BFNS15,buchbinder2016deterministic}.
 %
 We present a local search algorithm for \carpool which repeatedly
 checks whether the current carpool matching can be improved by means
@@ -265,30 +266,31 @@ The approximation ratio of this algorithm is $\half$ if weights are
 polynomially bounded, and its ratio is $\half-\eps$ in general.
 
 In Section~\ref{sec:cmax} we consider \carpool with bounded maximum
-capacity.   Define $\cmax \eqdf \max_{v \in V} c(v)$.
+capacity.   
 %
 In Section~\ref{sec:hardness} we show that \carpool is APX-hard even
-for undirected and unweighted instances with $\cmax \leq b$, for any
+for undirected and unweighted instances with $\Delta \leq b$, for any
 $b \geq 3$.
 %
 In Section~\ref{sec:local} we provide another local search algorithm,
 whose approximation ratio is $\half + \inv{2\cmax} - \eps$, for any
-$\eps>0$, for unweighted \carpool.  Given a parameter $k$, our
-algorithm starts with the empty carpool matching.  Then, it repeatedly
-tries to find a better matching by replacing $t \leq k$ arcs in the
-current solution by $t+1$ arcs that are not in the solution.
+$\eps>0$, for unweighted \carpool, where $\cmax \eqdf \max_{v \in V}
+c(v)$.  Given a parameter $k$, our algorithm starts with the empty
+carpool matching.  Then, it repeatedly tries to find a better matching
+by replacing $t \leq k$ arcs in the current solution by $t+1$ arcs
+that are not in the solution.
 %
-We show that our analysis is tight.  We also note that our algorithm
-falls within the local search family defined in~\cite{ACKK09} with a
-parameter of $2k$.  On undirected and uncapaciated instances we have
-that $\cmax = \Delta$, where $\Delta$ is the maximum degree, hence the
-approximation ratio of our algorithm is $\half + \inv{2\Delta} - \eps$
-which is nearly tight with respect to~\cite{ACKK09}.
+We show that our analysis is tight.
+%
+We also note that our algorithm falls within the local search family
+defined in~\cite{ACKK09}.  However, on undirected and uncapaciated
+instances we have that $\cmax = \Delta$, and as mentioned above the
+result from~\cite{ACKK09} does not hold in bounded degree graphs.
 
-Finally, Section~\ref{sec:group} discusses the \gcp.  We first show
-that the unconstrained submodular maximization formulation for
-the \carpool does not work for \gcp.  We show, however, that this
-problem still admits a $(\frac{1}{2} -\varepsilon)$-approximation
-algorithm by extending our first local search algorithm.  In
-addition, we show that the second local search algorithm generalizes
-to unweighted \gcp with the same approximation ratio.
+Finally, Section~\ref{sec:group} discusses \gcp.  We show that the
+unconstrained submodular maximization formulation for \carpool does
+not work for \gcp.  We show, however, that this problem still admits a
+$(\frac{1}{2} -\varepsilon)$-approximation algorithm by extending our
+first local search algorithm.  In addition, we show that the second
+local search algorithm generalizes to unweighted \gcp with the same
+approximation ratio.

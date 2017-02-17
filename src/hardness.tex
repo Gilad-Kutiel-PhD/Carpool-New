@@ -1,9 +1,11 @@
+
 As we mentioned earlier, \textsc{Spanning Star Forest} has a lower
 bound of $\frac{10}{11} + \eps$ for any $\eps > 0$, unless
 P$=$NP~\cite{ChakrabartyGoel10}, and this bound applies to \carpool.
-The result, however, does not hold for the case where $\cmax = O(1)$.
-In this section we show that the problem remains APX-hard even in this
-case.
+%
+The result, however, does not hold for the case where $\Delta = O(1)$
+(and $\cmax = O(1)$).  In this section we show that the problem remains
+APX-hard even in this case.
 
 Formally, the (unweighted) \textsc{Minimum Dominating Set} problem is
 defined as follows.  The input is an undirected graph $G = (V,E)$, and
@@ -41,7 +43,7 @@ We use this duality to obtain a hardness result for \carpool.
 
 \begin{theorem}
 The \carpool problem is APX-hard, even for undirected and unweighted
-instances with maximum capacity bounded by $b$, for $b \geq 3$.
+instances with maximum degree bounded by $b$, for $b \geq 3$.
 \end{theorem}
 \begin{proof}
 We prove the theorem by presenting an $L$-reduction from

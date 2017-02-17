@@ -74,24 +74,25 @@ Figure~\ref{fig:conflict} depicts a star graph.
 \begin{figure}[t]
 %\centering
 %
-\begin{subfigure}[t]{.47\linewidth}
+\begin{subfigure}[b]{.47\linewidth}
 \centering
-\caption{An optimal matching depicted by the dashed red edges,
-and another solution depicted by the solid green edges.
+\input{fig/fig-sub-graph}
+\vspace{-20pt}
+\caption{$M^*$ is depicted by the dashed red edges,
+and $M$ is depicted by the solid green edges.
 The optimal stars are outlined.
 }
-\input{fig/fig-sub-graph}
 \end{subfigure}
 %
 \hfill
 %
-\begin{subfigure}[t]{.51\linewidth}
+\begin{subfigure}[b]{.51\linewidth}
 \centering
-\caption{The star graph, each vertex corresponded to a star in the
-original graph.  The upper left vertex corresponds to the star that
-contains the vertices a,b,c.  
-}
 \input{fig/fig-sub-conflict}
+\vspace{9pt}
+\caption{The star graph: each vertex corresponds to a star in $G$.
+The upper left vertex corresponds to the star that
+contains the vertices a,b,c.  }
 \end{subfigure}
 %
 \caption{An example of a star graph.}
@@ -285,4 +286,4 @@ There exists a $(\half + \inv{2\cmax} - \eps)$-approximation algorithm
 for unweighted \carpool, for every $\eps>0$.
 \end{corollary}
 
-In the Appendix~\ref{sec:tight} we show that our analysis is tight.
+In Appendix~\ref{sec:tight} we show that our analysis is tight.

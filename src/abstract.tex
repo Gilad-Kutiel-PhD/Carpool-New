@@ -1,9 +1,9 @@
 
-The \carpool problem is a star packing problem in directed graphs.
-Formally, given a directed graph $G = (V, A)$, a capacity function $c:
-V \rightarrow \N$, and a weight function $w: A \rightarrow \R^+$, a
-feasible \emph{carpool matching} is a subset of arcs, $M \subseteq A$,
-such that every $v \in V$ satisfies:%
+The \carpool problem is a \emph{star packing} problem in directed
+graphs.  Formally, given a directed graph $G = (V, A)$, a capacity
+function $c: V \rightarrow \N$, and a weight function $w:
+A \rightarrow \R^+$, a \emph{carpool matching} is a subset of arcs,
+$M \subseteq A$, such that every $v \in V$ satisfies:%
 \begin{inparaenum}[(i)]
 \item $\din[M](v) \cdot \dout[M](v) = 0$,
 \item $\din[M](v) \leq c(v)$, and 
@@ -12,12 +12,12 @@ such that every $v \in V$ satisfies:%
 A vertex $v$ for which $\dout[M](v) = 1$ is a \emph{passenger}, and a
 vertex for which $\dout[M](v) = 0$ is a \emph{driver} who has
 $\din[M](v)$ passengers.  In the \carpool problem the goal is to find
-a matching $M$ of maximum total weight.
+a carpool matching $M$ of maximum total weight.
 %
 The problem arises when designing an online carpool service, such as
-Zimride~\cite{zimride}, which tries to connect between passengers and
-drivers based on a similarity function.  The problem is known to be
-NP-hard, even for uniform weights and infinite capacities.
+Zimride~\cite{zimride}, which tries to connect between users based on
+a similarity function.  The problem is known to be NP-hard, even in
+the unweighted and uncapacitated case.
 %
 The \gcp problem, is an extension of the \carpool where each vertex
 represents an unsplittable group of passengers.  Formally, each vertex
@@ -33,4 +33,6 @@ nevertheless, we present a local search $(\frac{1}{2}
 For the unweighted variant of both problems when the maximum possible
 capacity, $\cmax$, is bounded by a constant, we provide a local search
 $(\half + \inv{2\cmax} - \eps)$-approximation algorithm.  We also show
-that the problem APX-hard, even if $\cmax \leq 3$.
+that the problem APX-hard, even if the maximum degree (and $\cmax$) is
+at most $3$.
+
