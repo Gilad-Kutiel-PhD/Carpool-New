@@ -14,33 +14,6 @@
 
 \newpage
 
-\begin{proof}[Proof of Lemma~\ref{lemma:dec}]
-We give a constructive proof.
-%
-First, if $\ell \leq |V| \leq \Delta \ell$, then we are done.
-%
-Otherwise, we partition the graph recursively as follows.  Let $U
-= \emptyset$.  As long as $\abs{U} < \ell$, choose an arbitrary vertex
-$u$ such that $U \cup \set{u}$ is connected and add $u$ to $U$.
-%
-If the graph $G[V \setminus U]$, which is induced by $V \setminus U$,
-is connected, then choose the next vertex.
-%
-However, if $G[V \setminus U]$ becomes disconnected, then consider the
-maximal connected components of $G[V \setminus U]$.  Add the vertices
-of any maximal component that contains less than $\ell$ vertices to
-$U$.  Observe that afterwards $\abs{U} < \ell + (\Delta-1) \ell
-= \Delta \ell$.
-%
-If $\abs{U} \geq \ell$, then recursively partition any component of
-$G[V \setminus U]$ that contains more than $\ell$ vertices.
-%
-If $\abs{U} < \ell$, then there must exist at least one maximal
-component $C$ of $G[V \setminus U]$ that contains more than $\ell$
-vertices.  In this case recursively partition any maximal component of
-$G[V \setminus (U \cup C)]$ that contains more than $\ell$ vertices.
-Also, continue to augment $U$ in the graph $G[U \cup C]$.
-\end{proof}
 
 
 
