@@ -314,4 +314,26 @@ There exists a $(\half + \inv{2\cmax} - \eps)$-approximation algorithm
 for unweighted \carpool, for every $\eps>0$.
 \end{corollary}
 
-In Appendix~\ref{sec:tight} we show that our analysis is tight.
+We now show that Corollary~\ref{cor:local} is tight.  
+Consider the
+example in Figure~\ref{fig:local search tight}, the example is for the
+special case when $k = 11$ and $\cmax = 2$ but this example can be
+generalized in a straightforward manner.  One can verify that as the
+graph in the example growth, the ratio between the optimal solution
+and the local search solution approaches $\frac{3}{4}$.
+
+\begin{figure}[h]
+\begin{center}
+\scalebox{.9}{
+\input{fig-local-tight}
+}
+\caption{A tight example for Corollary~\ref{cor:local}. 
+The optimal solution is given by the red solid arcs while the local
+search solution is given by the green, dashed arcs.  The solution can
+be improved by the local search algorithm only if it removes all the
+edges.}
+\label{fig:local search tight}
+\end{center}
+\end{figure}
+
+
