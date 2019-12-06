@@ -21,3 +21,5 @@
 /tmp/
 *.dvi
 *.cls
+carpool.fdb_latexmk
+carpool.fls

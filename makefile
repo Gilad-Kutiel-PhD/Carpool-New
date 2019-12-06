@@ -6,3 +6,6 @@ flat:
 
 clean:
 	git clean -dfx
+
+build:
+	latexmk --pdf -pvc carpool.tex

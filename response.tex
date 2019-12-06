@@ -1,0 +1,203 @@
+\documentclass[11pt]{article}
+
+\usepackage{amsmath,latexsym,amssymb} 
+\usepackage{fullpage,ifthen}
+\usepackage{color,soul,colordvi}
+\usepackage{mdwlist,paralist}
+
+%\renewcommand{\baselinestretch}{1.02}
+
+%\parskip=\smallskipamount
+
+\sloppy
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\abs}[1]{\left| #1 \right|}
+\newcommand{\ceil}[1]{\left\lceil {#1} \right\rceil}
+\newcommand{\floor}[1]{\left\lfloor {#1} \right\rfloor}
+\newcommand{\paren}[1]{\left( #1 \right)}
+\newcommand{\set}[1]{\left\{ #1 \right\}}
+
+\newcommand{\eps}{\varepsilon}
+
+\newcommand{\calC}{\mathcal{C}}
+\newcommand{\sigmad}{\sigma_{\$}}
+
+\newcommand{\ans}[1]{\begin{quotation}{\noindent \sl {#1}}\end{quotation}}
+
+
+\newcommand{\dror}[1]{\sethlcolor{yellow}\hl{Dror: #1}}
+\newcommand{\ben}[1]{\sethlcolor{green}\hl{Ben: #1}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+\title{\textbf{Local Search Algorithms for the \\ Maximum Carpool Matching
+  Problem} \\
+  {\Large Response to Reviewers: Submission ALGO-D-00287}}
+
+\author{Gilad Kutiel \and Dror Rawitz}
+
+\maketitle
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+We thank the referee for the time that was spent on reviewing our
+paper and for their thoughtful comments.  The paper was revised
+according to these comments.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\medskip
+
+\section*{Response to Review}
+
+\begin{enumerate}
+
+\item \textbf{Comment}: There are multiple graphs used throughout the
+  paper: a directed input graph, the related undirected graph
+  obtained by ignoring edge orientations, and a graph $H$ that relates
+  stars to one another. It would help the presentation if it were made
+  completely clear at each stage which graph is being discussed.
+  
+\item[] \textbf{Response}: We now use calligraphic letters in the
+  definition of the star graph, namely the star graph is denoted by
+  $\mathcal{H} = (\mathcal{S}(M^*),\mathcal{E})$.
+  
+\item \textbf{Comment}: In the proof of Lemma 1, I do not see how the
+  condition that $M_S \cup M_T = M(S \cup T) \cup M(S \cap T)$ is
+  sufficient to finish the proof when $M(S \cup T)$ and $M(S \cap T)$
+  are not disjoint. In that case the weights of elements in the
+  intersection will be counted only once. The later proof seems to
+  actually account for this.
+
+\item[] \textbf{Response}: We now use $M(S \cup T) \uplus M(S \cap
+  T)$.
+  
+\item \textbf{Comment}: In the proof of Lemma 8, what is meant by an
+  edge of $M$ ”intersecting” $V(\mathcal{T})$?  Presumably you mean an
+  edge of $M$ that is incident on one of the vertices of
+  $V(\mathcal{T})$?
+
+\item[] \textbf{Response}: We added a sentence about this issue in the
+  beginning of the proof of Lemma~8.
+
+\item \textbf{Comment}: It would be good to emphasize that the set of
+  stars induced by $M^*$ includes also all of the single-vertex
+  ``stars -- corresponding to $Z_M$.  This was not so clear to me on
+  the first reading.
+  
+\item[] \textbf{Response}: This is now emphasized in the paragraph
+  that defines $\mathcal{S}(M)$.
+
+\item \textbf{Comment}: In the proof of Lemma~9, please point out the
+  usage of Lemma~6, which bounds the degree of $H$, when you use Lemma~7.
+
+\item[] \textbf{Response}: Done.
+  
+\item \textbf{Comment}: In the proof of Lemma~9, you write ”Since each
+  such vertex set is connected and contains at most
+  $\frac{k}{c_{\max}}$ stars, it follows that $|A(\mathcal{X})| \leq
+  k$.''  However, I do not see how the vertex set being connected is
+  relevant for $|A(\mathcal{X})|$. I agree that it is used to apply
+  Lemma~8 later.
+
+\item[] \textbf{Response}: Corrected.
+
+\item \textbf{Comment}: In the tight example (Figure~7) it is stated
+  that the solution can be improved by local search only if removes
+  all of the edges.  This is not true; please see the last page of
+  this document for an improvement that does not remove every edge.
+  Probably one needs to rearrange the edges connecting leaves
+  appropriately.  The example given by Hurkens and Schrijver%
+%
+  \footnote{``On the size of systems of sets every $t$ of which have an
+    SDR, with an application to the worst-case ratio of heuristics for
+    packing problems'', SIAM J. Discrete Math., 2(1), 6872.}
+%
+  might be useable here instead.  In any case, please give some
+  details for a general construction or at least provide details of
+  how the example can be generalized.
+
+\item[] \textbf{Response}: We removed this figure from the paper.
+  
+\item \textbf{Comment}: Details should be given for the proofs of
+  Theorems~5, 6, and~7.  Since the group variant already generalizes
+  the standard setting why not just present proofs for the general
+  case?
+
+\item[] \textbf{Response}: We moved the material from Section 4 to
+  sections 2.1, 2.2 and 3.2, respectively.
+
+\end{enumerate}
+
+%%%%%
+
+\subsection*{Minor comments}
+
+\begin{enumerate}
+
+\item \textbf{Comment}: Page 3: The best known approximation for
+  weighted $k$-set packing is in fact $\frac{k+1}{2}$, due to Piotr Berman.%
+%
+\footnote{``A $d/2$ Approximation for Maximum Weight Independent Set
+  in $d$-Claw Free Graphs'' in SWAT 2000}
+
+\item[] \textbf{Response}: A reference was added, and the last
+  sentence of the paragraph was corrected accordingly.
+
+\item \textbf{Comment}: Page 5, line 56: $v$ is missing from the
+  definition of $N^{\text{in}}$ and $N^{\text{out}}$.
+
+\item[] \textbf{Response}: Corrected.
+  
+\item \textbf{Comment}: Page 6, line 33. Again, $v$ is missing from
+  $N^{\text{in}}$ and $N^{\text{out}}$.
+
+\item[] \textbf{Response}: Corrected.
+  
+\item \textbf{Comment}: Page 7, caption of Figure 3: it seems that the
+  last two edges listed in $\Gamma(2,3)$ are incorrect.
+
+\item[] \textbf{Response}: The example was correct.  We corrected the
+  definition of $\Gamma(u,v)$.
+
+\item \textbf{Comment}: Page 8, Figure 5: are the double arrows in
+  this figure intentional? If so, I do not understand what is meant by
+  selecting ``all arcs of length 1.''
+
+\item[] \textbf{Response}: The figure and caption were corrected.
+  
+\item \textbf{Comment}: Page 8, line 34: $N_{\overline{S}}$ is used
+  here instead of the previous notation $N^{\text{in}}_S(v)$.  Also,
+  it might be worthwhile to point out at the end that the vertices
+  will not be charged again \emph{because the stars are disjoint in
+    $M^*$}.
+
+\item[] \textbf{Response}: Corrected.
+
+\item \textbf{Comment}: Page 12, line 28: $\deg_M(u)$ should be
+  $\deg_M(v)$.
+  
+\item[] \textbf{Response}: Corrected.
+
+\item \textbf{Comment}: Page 12, line 39-41: Starting with ``Observe
+  that if an edge \ldots,'' I do not follow why this condition is
+  helpful or necessary for $M'$ to be a valid carpool matching.
+
+\item[] \textbf{Response}: It helps to explain the transition from
+  $\deg_M(V(\mathcal{T}))$ to $|M \cap A(\mathcal{T})|$.
+
+\item \textbf{Comment}: Page 13, line 30: at the end of the proof it
+  would be good remind that the sets $A(\mathcal{T})$ considered form
+  a partition of all the edges (and so also of the edges in both $M$
+  and $M^*$, and summing over them completes the proof.
+
+\item[] \textbf{Response}: Done.
+
+\end{enumerate}
+
+\end{document}
+
